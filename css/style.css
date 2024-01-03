@@ -1,0 +1,86 @@
+/* global css code Start */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,800;1,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  block-size: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* bg-color:#03121d */
+/* global css code End */
+
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: #02111c;
+  background-position: center;
+  background-size: cover;
+  padding: 0 8%;
+}
+#logo {
+  width: 150px;
+  padding: 20px 0;
+  cursor: pointer;
+}
+.content {
+  top: 50%;
+  position: absolute;
+  transform: translateY(-50%);
+  color: #fff;
+}
+
+.content h1 {
+  font-size: 65px;
+  font-weight: 600;
+}
+
+.content h1 span {
+  color: #78c7f1;
+}
+
+.content button {
+  background: transparent;
+  border: 2px solid #fff;
+  padding: 12px 25px;
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.content button a {
+  text-decoration: none;
+  color: #fff;
+}
+.rocket {
+  width: 250px;
+  position: absolute;
+  right: 10%;
+  bottom: 0;
+  animation: rocket 3s linear infinite;
+}
+
+@keyframes rocket {
+  0% {
+    bottom: 0;
+    opacity: 0;
+  }
+  100% {
+    bottom: 100%;
+    opacity: 1;
+  }
+}
+
+.lanch-time {
+  display: flex;
+}
+
+.lanch-time div {
+  flex-basis: 100px;
+}
+
+.lanch-time div p {
+  font-size: 60px;
+  margin-bottom: -14px;
+}
