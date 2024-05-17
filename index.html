@@ -1,54 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>CRCMZ -  Coming soon...</title>
-   <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
-
-   <!-- css start -->
-   <link rel="stylesheet" href="css/style.css">
-   <!-- css end -->
-
+    <meta charset="UTF-8">
+    <title>Fruit Catcher Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+        body {
+            background: #222;
+            margin: 0;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        canvas, button {
+            background: #000;
+            border: 1px solid #333;
+            box-sizing: border-box;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            image-rendering: pixelated;
+        }
+        div {
+            text-align: center;
+            margin-top: 10px;
+        }
+        button {
+            color: #999;
+            font-size: 16px;
+            font-weight: bold;
+            vertical-align: middle;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+    </style>
 </head>
-
 <body>
-   <section class="container">
-      <section class="logo">
-         <img src="./img/quick4.png" alt="logo" id="logo">
-      </section>
-      <section class="content">
-         <p>Website Under Maintenance</p>
-         <h1>We're <span>Launching </span>Soon </h1>
-         <section class="lanch-time">
-            <div>
-               <p id="days">00</p>
-               <span>Days</span>
-            </div>
-            <div>
-               <p id="hours">00</p>
-               <span>Hours</span>
-            </div>
-            <div>
-               <p id="minutes">00</p>
-               <span>Minutes</span>
-            </div>
-            <div>
-               <p id="seconds">00</p>
-               <span>Seconds</span>
-            </div>
-         </section>
-      </section>
-      <img src="./img/rocket.png" alt="rocket" class="rocket">
-   </section>
+    <canvas id="canvas" width="480" height="640"></canvas>
+    <div>
+        <button id="left" title="Move Left">&larr;</button>
+        <button id="right" title="Move Right">&rarr;</button>
+        <button id="start" title="Start Game">Start</button>
+    </div>
+    <script>
+        'use strict';
 
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const basketWidth = 50;
+        const basketHeight = 30;
+        const basketSpeed = 20;
+        const fruitSize = 20;
+        const fruits = [
+            { emoji: '🍎', points: 10, speed: 2 },
+            { emoji: '🍌', points: 20, speed: 3 },
+            { emoji: '🍒', points: 30, speed: 4 },
+            { emoji: '🍇', points: 40, speed: 5 }
+        ];
+        let basketX = (canvas.width - basketWidth) / 2;
+        let basketY = canvas.height - basketHeight - 10;
+        let fallingFruits = [];
+        let score = 0;
+        let lives = 3;
+        let level = 1;
+        let gameInterval;
+        let aCtx = null;
+        let compressor;
+        let muted = false;
+        const HIT_VOLUME = 1;
+        const HIT_DURATION = 0.125;
+        const BACKGROUND_VOLUME = 0.5;
 
+        document.getElementById('left').addEventListener('click', moveLeft);
+        document.getElementById('right').addEventListener('click', moveRight);
+        document.getElementById('start').addEventListener('click', startGame);
+        canvas.addEventListener('touchstart', handleTouch);
+        canvas.addEventListener('touchmove', handleTouch);
 
-   <!-- js start -->
-   <script src="js/index.js"></script>
-   <!-- js end -->
+        function startGame() {
+            score = 0;
+            lives = 3;
+            level = 1;
+            fallingFruits = [];
+            clearInterval(gameInterval);
+            gameInterval = setInterval(updateGame, 20);
+            initAudio();
+            playMusic();
+        }
 
+        function moveLeft() {
+            basketX = Math.max(basketX - basketSpeed, 0);
+        }
+
+        function moveRight() {
+            basketX = Math.min(basketX + basketSpeed, canvas.width - basketWidth);
+        }
+
+        function handleTouch(event) {
+            event.preventDefault();
+            const touch = event.touches[0];
+            const touchX = touch.clientX - canvas.getBoundingClientRect().left;
+            basketX = Math.min(Math.max(touchX - basketWidth / 2, 0), canvas.width - basketWidth);
+        }
+
+        function createFruit() {
+            const fruitType = fruits[Math.floor(Math.random() * fruits.length)];
+            const x = Math.random() * (canvas.width - fruitSize);
+            const y = -fruitSize;
+            fallingFruits.push({ ...fruitType, x, y });
+        }
+
+        function updateGame() {
+            if (Math.random() < 0.02 * level) createFruit();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBasket();
+            drawFruits();
+            drawScore();
+            drawLives();
+            checkGameOver();
+            if (score >= level * 100) {
+                level++;
+            }
+        }
+
+        function drawBasket() {
+            ctx.fillStyle = '#00f';
+            ctx.fillRect(basketX, basketY, basketWidth, basketHeight);
+        }
+
+        function drawFruits() {
+            for (let i = 0; i < fallingFruits.length; i++) {
+                const fruit = fallingFruits[i];
+                ctx.fillText(fruit.emoji, fruit.x, fruit.y);
+                fruit.y += fruit.speed;
+
+                if (fruit.y > canvas.height) {
+                    fallingFruits.splice(i, 1);
+                    i--;
+                    lives--;
+                    playSound('miss');
+                    continue;
+                }
+
+                if (fruit.y + fruitSize > basketY && fruit.x + fruitSize > basketX && fruit.x < basketX + basketWidth) {
+                    score += fruit.points;
+                    fallingFruits.splice(i, 1);
+                    i--;
+                    playSound('catch');
+                }
+            }
+        }
+
+        function drawScore() {
+            ctx.fillStyle = '#fff';
+            ctx.font = '20px Arial';
+            ctx.fillText('Score: ' + score, 10, 30);
+        }
+
+        function drawLives() {
+            ctx.fillStyle = '#fff';
+            ctx.font = '20px Arial';
+            ctx.fillText('Lives: ' + lives, canvas.width - 100, 30);
+        }
+
+        function checkGameOver() {
+            if (lives <= 0) {
+                clearInterval(gameInterval);
+                ctx.fillStyle = '#f00';
+                ctx.font = '40px Arial';
+                ctx.fillText('Game Over', canvas.width / 2 - 100, canvas.height / 2);
+                playSound('gameover');
+            }
+        }
+
+        function initAudio() {
+            if (aCtx !== null) {
+                return;
+            }
+            if (typeof window.AudioContext === 'undefined') {
+                window.AudioContext = window.webkitAudioContext;
+            }
+            aCtx = new window.AudioContext();
+            compressor = aCtx.createDynamicsCompressor();
+            compressor.connect(aCtx.destination);
+        }
+
+        function playMusic() {
+            const chords = [
+                [130.81, 164.81, 196.00, 261.63, 329.63], // C major
+                [174.61, 220.00, 261.63, 349.23, 440.00], // D major
+                [196.00, 246.94, 293.66, 392.00, 493.88], // E major
+                [220.00, 277.18, 329.63, 440.00, 554.37]  // A major
+            ];
+            const interval = 1 / bounded(level, 2, 12);
+            playChordProgression(chords, interval, BACKGROUND_VOLUME);
+
+            clearTimeout(aTimer);
+            aTimer = setTimeout(playMusic, chords.length * interval * 1000);
+        }
+
+        function playSound(type) {
+            let frequencies;
+            switch (type) {
+                case 'catch':
+                    frequencies = [261.63, 329.63, 392.00, 523.25, 659.25]; // C major chord
+                    break;
+                case 'miss':
+                    frequencies = [293.66, 349.23, 392.00]; // Minor chord
+                    break;
+                case 'gameover':
+                    frequencies = [261.63, 196.00, 130.81]; // Descending C major
+                    break;
+            }
+            playChord(frequencies, 0, HIT_DURATION, HIT_VOLUME);
+        }
+
+        function bounded(x, min, max) {
+            return Math.max(Math.min(x, max), min);
+        }
+
+        function playChordProgression(chords, duration, volume) {
+            for (let i = 0; i < chords.length; i++) {
+                playChord(chords[i], i * duration, duration, volume);
+            }
+        }
+
+        function playChord(frequencies, delay, duration, volume) {
+            if (aCtx.state === 'suspended') {
+                return;
+            }
+            const gain = aCtx.createGain();
+            const timeConstant = Math.min(duration, 0.200) / 3;
+            const beginTime = aCtx.currentTime + delay;
+            const endTime = beginTime + 10 * timeConstant;
+            gain.connect(compressor);
+            for (let i = 0; i < frequencies.length; i++) {
+                const oscillator = aCtx.createOscillator();
+                oscillator.frequency.value = frequencies[i];
+                gain.gain.setValueAtTime(muted ? 0 : volume, beginTime);
+                gain.gain.setTargetAtTime(0, beginTime, timeConstant);
+                oscillator.connect(gain);
+                oscillator.start(beginTime);
+                oscillator.stop(endTime);
+                setTimeout(function () {
+                    oscillator.disconnect();
+                    gain.disconnect();
+                }, (endTime + 1) * 1000);
+            }
+        }
+    </script>
 </body>
-
 </html>
+
