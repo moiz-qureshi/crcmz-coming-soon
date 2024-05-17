@@ -1,254 +1,658 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Fruit Catcher Game</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <style>
-        body {
-            background: #222;
-            margin: 0;
-            color: #fff;
-            font-family: Arial, sans-serif;
-        }
-        canvas, button {
-            background: #000;
-            border: 1px solid #333;
-            box-sizing: border-box;
-        }
-        canvas {
-            display: block;
-            margin: 0 auto;
-            image-rendering: pixelated;
-        }
-        div {
-            text-align: center;
-            margin-top: 10px;
-        }
-        button {
-            color: #999;
-            font-size: 16px;
-            font-weight: bold;
-            vertical-align: middle;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-    </style>
-</head>
-<body>
-    <canvas id="canvas" width="480" height="640"></canvas>
-    <div>
-        <button id="left" title="Move Left">&larr;</button>
-        <button id="right" title="Move Right">&rarr;</button>
-        <button id="start" title="Start Game">Start</button>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E5RP9SVYCH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E5RP9SVYCH');
+</script>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#000" />
+  <meta name="description"
+    content="CRCMZ | Quick. Clean. Gone." />
+  <meta name="keywords"
+    content="cod, call of duty, gaming, crew, earl morning clan, clan, live streaming, better than faze, TheMooseCompany, InterestingSoup, Epikiller, DarkSouls, killerx, asamad89" />
+  <meta name="author" content="CRCMZ" />
+  <meta property="og:image" content="https://www.crcmz.me/src/png/Preview-card-min.png" />
+  <meta property="og:title" content="CRCMZ | The Clan	" />
+  <meta property="og:description"
+    content="CRCMZ | Quick. Clean. Gone." />
+
+  <meta property="og:url" content="https://crcmz.me" />
+  <meta property="og:site_name" content="Vinod Jangid Portfolio" />
+
+  <meta name="twitter:image:src" content="https://www.crcmz.me/src/png/Preview-card-min.png" />
+  <meta name="twitter:site" content="@Portfolio" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="CRCMZ | Quick. Clean. Gone." />
+  <meta name="twitter:description"
+  content="CRCMZ | Quick. Clean. Gone." />
+  <title>CRCMZ | Quick. Clean. Gone.</title>
+  <link rel="icon" type="image/x-icon" href="src/png/main-favicon.png" />
+  <!-- aos cdn -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <!-- stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- google fonts-->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Passions+Conflict&family=Orbitron&family=Fira+Code&family=Six+Caps" />
+
+<body class="body">
+  <audio loop="" id="audioPlayer" style="display: none">
+    <source src="src/mp3/preloader.mp3" type="audio/mp3" />
+  </audio>
+  <div id="preloader"></div>
+  <noscript>Allow Javascript</noscript>
+
+  <header>
+    <div class="cursor-inner" id="cursor-inner"></div>
+    <div class="cursor-outer" id="cursor-outer"></div>
+
+    <div class="navbar" id="navbar">
+      <div class="hey">CRCMZ</div>
+      <div class="logo" tabindex="0" aria-label="crcmz logo">
+        <div class="logo-top">
+          <img src="src/png/nav-avatar.png" alt="animation-head" id="nav-avatar"/>
+        </div>
+      </div>
+      <div class="navbar-tabs" id="navbar-tabs">
+        <ul class="navbar-tabs-ul">
+          <li class="home activeThistab" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="100">
+            <a href="#home" tabindex="0" aria-label="Home menu button">
+              Home
+            </a>
+          </li>
+
+          <li class="about" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="300">
+            <a href="#about" aria-label="about menu button">
+              About Us
+            </a>
+          </li>
+
+          <li class="skills" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="500">
+            <a href="#projects" aria-label="skills menu button">
+              Clan Members
+            </a>
+          </li>
+
+        </ul>
+      </div>
+      <!-- navbar tabs ends -->
     </div>
-    <script>
-        'use strict';
+  </header>
+  <!-- header ends here -->
 
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        const basketWidth = 50;
-        const basketHeight = 30;
-        const basketSpeed = 20;
-        const fruitSize = 20;
-        const fruits = [
-            { emoji: '🍎', points: 10, speed: 2 },
-            { emoji: '🍌', points: 20, speed: 3 },
-            { emoji: '🍒', points: 30, speed: 4 },
-            { emoji: '🍇', points: 40, speed: 5 }
-        ];
-        let basketX = (canvas.width - basketWidth) / 2;
-        let basketY = canvas.height - basketHeight - 10;
-        let fallingFruits = [];
-        let score = 0;
-        let lives = 3;
-        let level = 1;
-        let gameInterval;
-        let aCtx = null;
-        let compressor;
-        let muted = false;
-        const HIT_VOLUME = 1;
-        const HIT_DURATION = 0.125;
-        const BACKGROUND_VOLUME = 0.5;
+  <main>
+    <!-- hamburger -->
+    <div class="hamburger" id="hamburger" data-aos="fade">
+      <div class="hamburgerbase">
+        <button id="hamburger-button" onclick="hamburgerMenu()" tabindex="0" aria-label="Menu Button">
+          <span class="burger-bar" id="burger-bar1"></span>
+          <span class="burger-bar" id="burger-bar2"></span>
+          <span class="burger-bar" id="burger-bar3"></span>
+        </button>
+      </div>
+    </div>
+    <!-- hamburger -->
+    <div class="mobiletogglemenu" id="mobiletogglemenu">
+      <ul class="mobile-navbar-tabs-ul" id="mobile-ul">
+        <li id="home-mobile-tab" class="mobile-navbar-tabs-li home activeThismobiletab" onclick="hidemenubyli()">
+          <a href="#home" tabindex="0" aria-label="Home menu button">
+            Home
+          </a>
+        </li>
 
-        document.getElementById('left').addEventListener('click', moveLeft);
-        document.getElementById('right').addEventListener('click', moveRight);
-        document.getElementById('start').addEventListener('click', startGame);
-        canvas.addEventListener('touchstart', handleTouch);
-        canvas.addEventListener('touchmove', handleTouch);
+        <li id="aboutme-mobile-tab" class="mobile-navbar-tabs-li about" onclick="hidemenubyli()">
+          <a href="#about" tabindex="0" aria-label="about menu button">
+           About Us
+          </a>
+        </li>
+        <li id="skills-mobile-tab" class="mobile-navbar-tabs-li skills" onclick="hidemenubyli()">
+          <a href="#projects" tabindex="0" aria-label="skills menu button">
+            Clan Members
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- mobile toggle menu ends -->
 
-        function startGame() {
-            score = 0;
-            lives = 3;
-            level = 1;
-            fallingFruits = [];
-            clearInterval(gameInterval);
-            gameInterval = setInterval(updateGame, 20);
-            initAudio();
-            playMusic();
-        }
+    <section class="landing-page-container" id="home">
+      <div class="blob"></div>
 
-        function moveLeft() {
-            basketX = Math.max(basketX - basketSpeed, 0);
-        }
+      <div class="text-content">
+        <article id="hello-friend" data-aos="fade-up" data-aos-delay="0">
+          <p class="jello">W</p>
+          <p class="jello">E</p>
+          <p class="jello">L</p>
+          <p class="jello">C</p>
+          <p class="jello">O</p>
+          <p class="jello">M</p>
+          <p class="jello">E</p>
+&nbsp
+          <p class="jello">T</p>
+          <p class="jello">O</p>
 
-        function moveRight() {
-            basketX = Math.min(basketX + basketSpeed, canvas.width - basketWidth);
-        }
+&nbsp
+        </article>
+        <article id="name" data-aos="fade-up" data-aos-delay="200">
+          <p class="jello">C</p>
+          <p class="jello">R</p>
+          <p class="jello">C</p>
+          <p class="jello">M</p>
+          <p class="jello">Z</p>
+          &nbsp;
+          <p class="jello">C</p>
+          <p class="jello">L</p>
+          <p class="jello">A</p>
+          <p class="jello">N</p>
+          <p class="jello">'</p>
+          <p class="jello">S</p>
+        </article>
 
-        function handleTouch(event) {
-            event.preventDefault();
-            const touch = event.touches[0];
-            const touchX = touch.clientX - canvas.getBoundingClientRect().left;
-            basketX = Math.min(Math.max(touchX - basketWidth / 2, 0), canvas.width - basketWidth);
-        }
+        <article id="work" data-aos="fade-up" data-aos-delay="400">
+          <div>
+            <p class="jello">O</p>
+            <p class="jello">f</p>
+            <p class="jello">f</p>
+            <p class="jello">i</p>
+            <p class="jello">c</p>
+            <p class="jello">i</p>
+            <p class="jello">a</p>
+            <p class="jello">l</p>
+          </div>
+          <div>
+            <p class="jello">w</p>
+            <p class="jello">e</p>
+            <p class="jello">b</p>
+            <p class="jello">s</p>
+            <p class="jello">i</p>
+            <p class="jello">t</p>
+            <p class="jello">e</p>
+          </div>
+          <div>
+            <p class="jello">&</p>
+          </div>
+          <div>
+            <p class="jello">s</p>
+            <p class="jello">h</p>
+            <p class="jello">i</p>
+            <p class="jello">t</p>
+            <p class="jello">.</p>
+            <p class="jello">.</p>
+            <p class="jello">.</p>
+          </div>
+        </article>
+        <p id="info-para" data-aos="fade-up" data-aos-delay="600">
+          Step into a world where brilliance meets ambition, and success is the norm. Our clan is a melting pot of talent, comprising individuals who not only excel in gaming but also in their fields across various industries.<br />
+        </p>
+        <div class="contact-btn-div" data-aos="fade-up" data-aos-delay="800">
+          <a href="mailto:contact@crcmz.me" tabindex="-1">
+            <button class="letsTalkBtn">
+              <p class="letsTalkBtn-text">Party Up!</p>
+              <span class="letsTalkBtn-BG"></span>
+            </button></a>
+          <div class="setting-container" id="setting-container">
+            <input type="checkbox" id="switchforsetting" onclick="settingtoggle()" />
 
-        function createFruit() {
-            const fruitType = fruits[Math.floor(Math.random() * fruits.length)];
-            const x = Math.random() * (canvas.width - fruitSize);
-            const y = -fruitSize;
-            fallingFruits.push({ ...fruitType, x, y });
-        }
+            <label for="switchforsetting" class="needtobeinvert" id="labelforsetting" tabindex="0"
+              aria-label="settings for sound and appearance"></label>
 
-        function updateGame() {
-            if (Math.random() < 0.02 * level) createFruit();
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawBasket();
-            drawFruits();
-            drawScore();
-            drawLives();
-            checkGameOver();
-            if (score >= level * 100) {
-                level++;
-            }
-        }
+            <div class="visualmodetogglebuttoncontainer" id="visualmodetogglebuttoncontainer">
+              <input type="checkbox" id="switchforvisualmode" onclick="visualmode()" />
+              <label for="switchforvisualmode" id="labelforvisualmode" tabindex="0"
+                aria-label="switch appearance"></label>
+            </div>
 
-        function drawBasket() {
-            ctx.fillStyle = '#00f';
-            ctx.fillRect(basketX, basketY, basketWidth, basketHeight);
-        }
+            <div class="soundtogglebuttoncontainer" id="soundtogglebuttoncontainer">
+              <input type="checkbox" id="switchforsound" onclick="playpause()" />
+              <label for="switchforsound" id="labelforsound" tabindex="0" aria-label="switch sound"
+                class="needtobeinvert"></label>
+            </div>
+          </div>
+          <!-- setting div ends -->
+        </div>
+        <!-- contact-btn-div -->
+      </div>
+     
+    </section>
+    <!-- landing page ends here -->
+    <section class="about-section-container" id="about" data-aos="fade-up">
+      <div class="about-section">
+        <div class="section-heading">
+          <h2 class="section-heading-article" tabindex="0" aria-label="About me heading">
+            About Us
+          </h2>
+          <p class="sectionHeadingP"></p>
+        </div>
 
-        function drawFruits() {
-            for (let i = 0; i < fallingFruits.length; i++) {
-                const fruit = fallingFruits[i];
-                ctx.fillText(fruit.emoji, fruit.x, fruit.y);
-                fruit.y += fruit.speed;
+        <div class="info-dp-section">
+          <div class="about-info">
+            <p tabindex="0">
+	Established in 2023 by visionary minds from both Canada and the United States, CRCMZ brings together individuals who share a passion for excellence and the thrill of precision. 🎮 🔪 🎯
+            </p>
+             <!-- Resume button -->
+      <button class="resume-btn" id="resume-btn" onclick="openURL()">
+        <div class="sign">
+          <svg viewBox="0 0 640 512">
+            <path
+              d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-167l80 80c9.4 9.4 24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-39 39V184c0-13.3-10.7-24-24-24s-24 10.7-24 24V318.1l-39-39c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9z" />
+          </svg>
+        </div>
 
-                if (fruit.y > canvas.height) {
-                    fallingFruits.splice(i, 1);
-                    i--;
-                    lives--;
-                    playSound('miss');
-                    continue;
-                }
+        <div class="text">Quick. Clean. Gone.</div>
+      </button>
+          </div>
 
-                if (fruit.y + fruitSize > basketY && fruit.x + fruitSize > basketX && fruit.x < basketX + basketWidth) {
-                    score += fruit.points;
-                    fallingFruits.splice(i, 1);
-                    i--;
-                    playSound('catch');
-                }
-            }
-        }
+          <div class="dp" data-aos="fade-up">
+            <img src="img/logo2.png" alt="CRCMZ" tabindex="0" aria-label="image of crcmz" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- about section ends  -->
 
-        function drawScore() {
-            ctx.fillStyle = '#fff';
-            ctx.font = '20px Arial';
-            ctx.fillText('Score: ' + score, 10, 30);
-        }
+    <section class="projects-section-container" id="projects">
+      <div class="projects-section-div">
+        <div class="section-heading" data-aos="fade-up">
+          <h2 class="section-heading-article" tabindex="0" aria-label="My projects starts from here">
+            Clan Members
+          </h2>
+          <p class="sectionHeadingP"></p>
+        </div>
+        <div class="project-boxes-div">
+          <div data-aos="fade-up" class="project-box-wrapper">
+            <div class="project-box project-box2" id="project-box2">
+              <div class="info-div">
+                <img src="src/webp/pexelicon-favicon.webp" alt="pexelicon website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">TheMooseCompany</article>
+                <p class="ProjectDescription">
+                  The originator.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://interestingsoup.com/vinodjangid07/Pexelicons" target="_blank" class="interestingsoup-redirect"
+                    aria-label="Visit Pexelicons on GitHub">
+                    <img src="src/svg/interestingsoup.svg" alt="interestingsoup redirect button" />
+                  </a>
+                  <a href="https://crcmz.me/Pexelicons/" target="_blank" class="cta"
+                    aria-label="Visit Pexelicons Live">
+                    <span>Live view</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/webp/Group 76.webp" alt="Pexelicon website preview image" />
+              </div>
+            </div>
+          </div>
 
-        function drawLives() {
-            ctx.fillStyle = '#fff';
-            ctx.font = '20px Arial';
-            ctx.fillText('Lives: ' + lives, canvas.width - 100, 30);
-        }
+          <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box5" id="project-box5">
+              <div class="info-div">
+                <img src="src/webp/cropped-1086600-192x192.webp" alt="comickaze website favicon"
+                  class="faviconforProject" />
+                <article class="ProjectHeading">Deception</article>
+                <p class="ProjectDescription">
+                  The finisher.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://comickaze.in" target="_blank" class="cta" aria-label="Visit Comickaze live">
+                    <span>Live view</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/webp/comickaze-preview.webp" alt="comickaze website preview image" />
+              </div>
+            </div>
+          </div>
 
-        function checkGameOver() {
-            if (lives <= 0) {
-                clearInterval(gameInterval);
-                ctx.fillStyle = '#f00';
-                ctx.font = '40px Arial';
-                ctx.fillText('Game Over', canvas.width / 2 - 100, canvas.height / 2);
-                playSound('gameover');
-            }
-        }
+          <!-- ---------------------- -->
+          <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box2" id="project-box2">
+              <div class="info-div">
+                <img src="src/svg/aquaregia-favicon.svg" alt="Aquaregia website favicon"
+                  class="faviconforProjectAquaregia" />
+                <article class="ProjectHeading">DarkSouls</article>
+                <p class="ProjectDescription">
+                  The sleeper.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://interestingsoup.com/vinodjangid07/Aquaregia" target="_blank" class="interestingsoup-redirect"
+                    aria-label="Visit Aquaregia on GitHub">
+                    <img src="src/svg/interestingsoup.svg" alt="interestingsoup redirect button" />
+                  </a>
+                  <a href="https://crcmz.me/Aquaregia/" target="_blank" class="cta"
+                    aria-label="Visit Aquaregia Live">
+                    <span>Live view</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/webp/Aquaregia-project.webp" alt="Aquaregia website preview image" />
+              </div>
+            </div>
+          </div>
+          <!-- ---------------------- -->
+          <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box4" id="project-box4">
+              <div class="info-div">
+                <img src="src/webp/qr-favicon.webp" alt="Qr generator website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">Killerx</article>
+                <p class="ProjectDescription">
+                  The shreaker.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://interestingsoup.com/vinodjangid07/QR-Generator" target="_blank" class="interestingsoup-redirect"
+                    aria-label="Visit qr generator on interestingsoup">
+                    <img src="src/svg/interestingsoup.svg" alt="interestingsoup redirect button" />
+                  </a>
+                  <a href="https://crcmz.me/QR-Generator/" target="_blank" class="cta"
+                    aria-label="Visit qr generator live">
+                    <span>Live view</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/webp/QRgeneratorProject.webp" alt="qr generator website preview image" />
+              </div>
+            </div>
+          </div>
 
-        function initAudio() {
-            if (aCtx !== null) {
-                return;
-            }
-            if (typeof window.AudioContext === 'undefined') {
-                window.AudioContext = window.webkitAudioContext;
-            }
-            aCtx = new window.AudioContext();
-            compressor = aCtx.createDynamicsCompressor();
-            compressor.connect(aCtx.destination);
-        }
+          <!-- ---------------------- -->
+          <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box3" id="project-box3">
+              <div class="info-div">
+                <img src="src/ico/netflixfavicon.ico" alt="netflix website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">Asamad89</article>
+                <p class="ProjectDescription">
+                  The confused.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://interestingsoup.com/vinodjangid07/Netflix-clone" target="_blank" class="interestingsoup-redirect"
+                    aria-label="Visit Netflix clone on GitHub">
+                    <img src="src/svg/interestingsoup.svg" alt="interestingsoup redirect button" />
+                  </a>
+                  <a href="https://react-project-20.netlify.app/" target="_blank" class="cta"
+                    aria-label="Visit netflix clone live">
+                    <span>Live view</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
 
-        function playMusic() {
-            const chords = [
-                [130.81, 164.81, 196.00, 261.63, 329.63], // C major
-                [174.61, 220.00, 261.63, 349.23, 440.00], // D major
-                [196.00, 246.94, 293.66, 392.00, 493.88], // E major
-                [220.00, 277.18, 329.63, 440.00, 554.37]  // A major
-            ];
-            const interval = 1 / bounded(level, 2, 12);
-            playChordProgression(chords, interval, BACKGROUND_VOLUME);
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/webp/NetflixCloneProject.webp" alt="netflix clone website preview image" />
+              </div>
+            </div>
+          </div>
 
-            clearTimeout(aTimer);
-            aTimer = setTimeout(playMusic, chords.length * interval * 1000);
-        }
+          <!-- ---------------------- -->
 
-        function playSound(type) {
-            let frequencies;
-            switch (type) {
-                case 'catch':
-                    frequencies = [261.63, 329.63, 392.00, 523.25, 659.25]; // C major chord
-                    break;
-                case 'miss':
-                    frequencies = [293.66, 349.23, 392.00]; // Minor chord
-                    break;
-                case 'gameover':
-                    frequencies = [261.63, 196.00, 130.81]; // Descending C major
-                    break;
-            }
-            playChord(frequencies, 0, HIT_DURATION, HIT_VOLUME);
-        }
+          <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box1" id="project-box1">
+              <div class="info-div">
+                <img src="src/webp/axocean-favicon.webp" alt="Axocean website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">Kaptaan</article>
+                <p class="ProjectDescription">
+                  The camper.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://interestingsoup.com/vinodjangid07/AXOCEAN" target="_blank" class="interestingsoup-redirect"
+                    aria-label="Visit axocean on GitHub">
+                    <img src="src/svg/interestingsoup.svg" alt="interestingsoup redirect button" />
+                  </a>
+                  <a href="https://www.crcmz.me/AXOCEAN/" target="_blank" class="cta"
+                    aria-label="Visit axocean live">
+                    <span>Live view</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/webp/AXOCEAN-project.webp" alt="Axocean website preview image" />
+              </div>
+            </div>
+          </div>	
 
-        function bounded(x, min, max) {
-            return Math.max(Math.min(x, max), min);
-        }
+   <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box1" id="project-box1">
+              <div class="info-div">
+                <img src="src/webp/axocean-favicon.webp" alt="Axocean website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">InterestingSoup</article>
+                <p class="ProjectDescription">
+                  The hit and a misser.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://interestingsoup.com/vinodjangid07/AXOCEAN" target="_blank" class="interestingsoup-redirect"
+                    aria-label="Visit axocean on GitHub">
+                    <img src="src/svg/interestingsoup.svg" alt="interestingsoup redirect button" />
+                  </a>
+                  <a href="https://www.crcmz.me/AXOCEAN/" target="_blank" class="cta"
+                    aria-label="Visit axocean live">
+                    <span>Live view</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/webp/AXOCEAN-project.webp" alt="Axocean website preview image" />
+              </div>
+            </div>
+          </div>
 
-        function playChordProgression(chords, duration, volume) {
-            for (let i = 0; i < chords.length; i++) {
-                playChord(chords[i], i * duration, duration, volume);
-            }
-        }
+   <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box1" id="project-box1">
+              <div class="info-div">
+                <img src="src/webp/axocean-favicon.webp" alt="Axocean website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">Epikiller</article>
+                <p class="ProjectDescription">
+                  The suspect one..
+                </p>
+                <div class="project-buttons">
+                  <a href="https://interestingsoup.com/vinodjangid07/AXOCEAN" target="_blank" class="interestingsoup-redirect"
+                    aria-label="Visit axocean on GitHub">
+                    <img src="src/svg/interestingsoup.svg" alt="interestingsoup redirect button" />
+                  </a>
+                  <a href="https://www.crcmz.me/AXOCEAN/" target="_blank" class="cta"
+                    aria-label="Visit axocean live">
+                    <span>Live view</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/webp/AXOCEAN-project.webp" alt="Axocean website preview image" />
+              </div>
+            </div>
+          </div>
 
-        function playChord(frequencies, delay, duration, volume) {
-            if (aCtx.state === 'suspended') {
-                return;
-            }
-            const gain = aCtx.createGain();
-            const timeConstant = Math.min(duration, 0.200) / 3;
-            const beginTime = aCtx.currentTime + delay;
-            const endTime = beginTime + 10 * timeConstant;
-            gain.connect(compressor);
-            for (let i = 0; i < frequencies.length; i++) {
-                const oscillator = aCtx.createOscillator();
-                oscillator.frequency.value = frequencies[i];
-                gain.gain.setValueAtTime(muted ? 0 : volume, beginTime);
-                gain.gain.setTargetAtTime(0, beginTime, timeConstant);
-                oscillator.connect(gain);
-                oscillator.start(beginTime);
-                oscillator.stop(endTime);
-                setTimeout(function () {
-                    oscillator.disconnect();
-                    gain.disconnect();
-                }, (endTime + 1) * 1000);
-            }
-        }
-    </script>
+   <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box1" id="project-box1">
+              <div class="info-div">
+                <img src="src/webp/axocean-favicon.webp" alt="Axocean website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">AlphaQ</article>
+                <p class="ProjectDescription">
+                  The absent one.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://interestingsoup.com/vinodjangid07/AXOCEAN" target="_blank" class="interestingsoup-redirect"
+                    aria-label="Visit axocean on GitHub">
+                    <img src="src/svg/interestingsoup.svg" alt="interestingsoup redirect button" />
+                  </a>
+                  <a href="https://www.crcmz.me/AXOCEAN/" target="_blank" class="cta"
+                    aria-label="Visit axocean live">
+                    <span>Live view</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/webp/AXOCEAN-project.webp" alt="Axocean website preview image" />
+              </div>
+            </div>
+          </div>
+          <!-- ---------------------- -->
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- main ends here -->
+
+  <footer id="footer">
+    <button class="fas" id="backtotopbutton" onclick="scrolltoTopfunction()">
+      <article aria-label="Back to top">&#8592;BACK TO TOP</article>
+    </button>
+    <div class="footer-background">
+      <div class="footer-blob"></div>
+    </div>
+    <div class="footer-foreground">
+      <div class="footercontainer">
+        <div class="two-words">
+          <article tabindex="0" aria-label="Quick. Clean. Gone.">
+            "Quick. Clean. Gone."
+          </article>
+        </div>
+        <div class="social-media-container">
+          <div class="getintouch-heading">
+            <article>Party Up!</article>
+          </div>
+          <div class="logos">
+            <a href="https://www.instagram.com/pexel_ui/" target="_blank" tabindex="0"
+              aria-label="My instagram"><svg viewBox="0 0 448 512" class="SocialHandle">
+                <path
+                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+              </svg></a>
+
+            <a href="https://www.interestingsoup.com/in/vinod-jangid-b401111a1?original_referer=" target="_blank"
+              aria-label="My Linkdin"><svg class="SocialHandle" viewBox="0 0 448 512">
+                <path
+                  d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+              </svg></a>
+
+            <a href="https://interestingsoup.com/vinodjangid07" target="_blank" aria-label="My interestingsoup"><svg viewBox="0 0 496 512"
+                class="SocialHandle">
+                <path
+                  d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
+              </svg></a>
+
+            <a href="mailto:infovinodjangid@gmail.com" target="_blank" aria-label="My G mail"><svg id="GmailLogo"
+                viewBox="0 0 512 512">
+                <path
+                  d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
+              </svg></a>
+          </div>
+        </div>
+        <div class="footer-avatar-container">
+          <img src="src/png/footer-avatar-vinod.png" alt="animation-head" class="footer-avatar-img" id="footer-wala-avatar"/>
+          <div class="footer-avatar-face">
+            <div class="footer-avatar-eye footer-left-eye">
+              <div class="footer-pupil"></div>
+            </div>
+            <div class="footer-avatar-eye footer-right-eye">
+              <div class="footer-pupil"></div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <article>
+            CRCMZ
+            &#169; 2024
+          </article>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- footer ends here -->
+
+  <script src="main.js"></script>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+  <script>
+    function openURL() {
+      var url = "src/pdf/Vinod Jangid Resume.pdf";
+
+      window.open(url, "_blank");
+    }
+  </script>
+
+  <script>
+    const cursorInner = document.getElementById("cursor-inner");
+    const cursorOuter = document.getElementById("cursor-outer");
+    const links = document.querySelectorAll("a,label,button");
+
+    document.addEventListener("mousemove", function (e) {
+      const posX = e.clientX;
+      const posY = e.clientY;
+
+      cursorInner.style.left = `${posX}px`;
+      cursorInner.style.top = `${posY}px`;
+
+      // cursorOuter.style.left = `${posX}px`;
+      // cursorOuter.style.top = `${posY}px`;
+
+      cursorOuter.animate(
+        {
+          left: `${posX}px`,
+          top: `${posY}px`,
+        },
+        { duration: 500, fill: "forwards" }
+      );
+
+      links.forEach((link) => {
+        link.addEventListener("mouseenter", () => {
+          cursorInner.classList.add("hover");
+          cursorOuter.classList.add("hover");
+        });
+        link.addEventListener("mouseleave", () => {
+          cursorInner.classList.remove("hover");
+          cursorOuter.classList.remove("hover");
+        });
+      });
+    });
+  </script>
+  <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="interestingsoup" data-description="Support me on Buy me a coffee!" data-message="" data-color="#BD5FFF" data-position="left" data-x_margin="18" data-y_margin="18"></script>
 </body>
-</html>
 
+</html>
