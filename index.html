@@ -28,7 +28,7 @@
     content="CRCMZ | Quick. Clean. Gone." />
 
   <meta property="og:url" content="https://crcmz.me" />
-  <meta property="og:site_name" content="Vinod Jangid Portfolio" />
+  <meta property="og:site_name" content="CRCMZ" />
 
   <meta name="twitter:image:src" content="https://www.crcmz.me/src/png/Preview-card-min.png" />
   <meta name="twitter:site" content="@Portfolio" />
@@ -208,21 +208,76 @@
         <p id="info-para" data-aos="fade-up" data-aos-delay="600">
           Step into a world where brilliance meets ambition, and success is the norm. Our clan is a melting pot of talent, comprising individuals who not only excel in gaming but also in their fields across various industries.<br />
         </p>
-        <div class="contact-btn-div" data-aos="fade-up" data-aos-delay="800">
-          <a href="https://clips.crcmz.me" tabindex="-1">
-            <button class="letsTalkBtn">
-              <p class="letsTalkBtn-text">Enter Social Area!</p>
-              <span class="letsTalkBtn-BG"></span>
-            </button></a>
-        <div class="setting-container soundtogglebuttoncontainer soundmodeshow" id="soundtogglebuttoncontainer">
-              <input type="checkbox" id="switchforsound" onclick="playpause()">
-              <label for="switchforsound" id="labelforsound" tabindex="0" aria-label="switch sound" class="needtobeinvert"></label>
-            </div>
-          <!-- setting div ends -->
-        </div>
-        <!-- contact-btn-div -->
-      </div>
      
+<style>
+  /* Responsive button layout */
+  .contact-btn-div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start; /* left-align on desktop */
+  }
+
+  @media (max-width: 768px) {
+    .contact-btn-div {
+      justify-content: center; /* center-align on mobile */
+    }
+  }
+</style>
+
+<div class="contact-btn-div" data-aos="fade-up" data-aos-delay="800">
+  <!-- Enter Social Area (First button) -->
+  <a href="https://clips.crcmz.me" tabindex="-1">
+    <button class="letsTalkBtn">
+      <p class="letsTalkBtn-text">Enter Social Area!</p>
+      <span class="letsTalkBtn-BG"></span>
+    </button>
+  </a>
+
+  <!-- Join Clan (Second button) -->
+  <button class="letsTalkBtn" id="join-clan-btn">
+    <p class="letsTalkBtn-text">Join Clan</p>
+    <span class="letsTalkBtn-BG"></span>
+  </button>
+</div>
+
+<!-- Popup Container -->
+<div id="typebot-popup" style="
+  display: none;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 700px;
+  height: 600px;
+  background: white;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+">
+  <div style="text-align: right; padding: 5px;">
+    <button onclick="document.getElementById('typebot-popup').style.display='none'" style="background: none; border: none; font-size: 18px; cursor: pointer;">✖</button>
+  </div>
+  <iframe
+    src="https://bot.crcmz.me/join"
+    style="border: none; width: 100%; height: 95%"
+  ></iframe>
+</div>
+
+<!-- Script to Show Popup -->
+<script>
+  document.getElementById("join-clan-btn").addEventListener("click", function () {
+    document.getElementById("typebot-popup").style.display = "block";
+  });
+</script>
+
+<div class="setting-container soundtogglebuttoncontainer soundmodeshow" id="soundtogglebuttoncontainer">
+  <input type="checkbox" id="switchforsound" onclick="playpause()">
+  <label for="switchforsound" id="labelforsound" tabindex="0" aria-label="switch sound" class="needtobeinvert"></label>
+</div>
+
     </section>
 
 <section class="projects-section-container" id="projects">
