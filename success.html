@@ -6,17 +6,22 @@
   <title>Payment Successful</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
       padding: 0;
       font-family: 'Inter Tight', sans-serif;
       background-color: #f5f7fa;
+    }
+
+    body {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100dvh;
       overflow: hidden;
     }
+
     .container {
       background: white;
       border-radius: 16px;
@@ -26,19 +31,23 @@
       max-width: 400px;
       position: relative;
     }
+
     .icon svg {
       width: 64px;
       height: 64px;
       color: #27ae60;
     }
+
     h1 {
       font-size: 28px;
       margin: 20px 0 10px;
     }
+
     p {
       font-size: 16px;
       color: #555;
     }
+
     .button {
       margin-top: 20px;
       display: inline-block;
@@ -49,9 +58,11 @@
       border-radius: 8px;
       transition: background 0.3s;
     }
+
     .button:hover {
       background: #155ab6;
     }
+
     #confetti {
       position: absolute;
       top: 0;
