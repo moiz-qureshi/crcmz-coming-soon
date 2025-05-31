@@ -226,17 +226,15 @@
 </style>
 
 <div class="contact-btn-div" data-aos="fade-up" data-aos-delay="800">
-  <!-- Enter Social Area (First button)
-  <a href="https://clips.crcmz.me" tabindex="-1">
-    <button class="letsTalkBtn">
-      <p class="letsTalkBtn-text">Enter Social Area!</p>
-      <span class="letsTalkBtn-BG"></span>
-    </button>
-  </a>
--->
-  <!-- Join Clan (Second button) -->
+  <!-- Join Clan Button -->
   <button class="letsTalkBtn" id="join-clan-btn">
     <p class="letsTalkBtn-text">Join Clan</p>
+    <span class="letsTalkBtn-BG"></span>
+  </button>
+  <br><br>
+  <!-- VIP Member Button -->
+  <button class="letsTalkBtn vip-style" id="vip-clan-btn">
+    <p class="letsTalkBtn-text">Become VIP Member</p>
     <span class="letsTalkBtn-BG"></span>
   </button>
 </div>
@@ -260,18 +258,22 @@
   <div style="text-align: right; padding: 5px;">
     <button onclick="document.getElementById('typebot-popup').style.display='none'" style="background: none; border: none; font-size: 18px; cursor: pointer;">✖</button>
   </div>
-  <iframe
-    src="https://bot.crcmz.me/join"
-    style="border: none; width: 100%; height: 95%"
-  ></iframe>
+  <iframe id="typebot-frame" style="border: none; width: 100%; height: 95%"></iframe>
 </div>
 
 <!-- Script to Show Popup -->
 <script>
   document.getElementById("join-clan-btn").addEventListener("click", function () {
+    document.getElementById("typebot-frame").src = "https://bot.crcmz.me/join";
+    document.getElementById("typebot-popup").style.display = "block";
+  });
+
+  document.getElementById("vip-clan-btn").addEventListener("click", function () {
+    document.getElementById("typebot-frame").src = "https://bot.crcmz.me/vip";
     document.getElementById("typebot-popup").style.display = "block";
   });
 </script>
+
 
 <div class="setting-container soundtogglebuttoncontainer soundmodeshow" id="soundtogglebuttoncontainer">
   <input type="checkbox" id="switchforsound" onclick="playpause()">
