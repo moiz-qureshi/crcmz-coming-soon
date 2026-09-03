@@ -523,6 +523,120 @@
     padding: 4px 12px;
   }
 
+  /* PSN Chat Board card */
+  .loadout-card-featured.chat-board::before {
+    background: linear-gradient(135deg, #003087, #8000ff, #cf59e6);
+  }
+  .loadout-card-featured.chat-board:hover {
+    box-shadow: 0 12px 50px rgba(128, 0, 255, 0.18), 0 12px 50px rgba(0, 48, 135, 0.1);
+  }
+  .featured-content-tag.purple { color: #cf59e6; }
+  .chat-screen {
+    flex-shrink: 0;
+    width: 220px;
+    background: #0d0d1e;
+    border: 1px solid #2a2a40;
+    border-radius: 16px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.2rem;
+  }
+  .chat-screen-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #1e1e30;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+  .chat-dot { width: 8px; height: 8px; border-radius: 50%; background: #8000ff; animation: pulse-dot 1.8s ease-in-out infinite; }
+  .chat-msg {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .chat-msg-bubble {
+    padding: 7px 10px;
+    border-radius: 10px;
+    color: #ccc;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    width: fit-content;
+    max-width: 90%;
+  }
+  .chat-msg-bubble.them { background: #1a1a2e; align-self: flex-start; }
+  .chat-msg-bubble.me   { background: linear-gradient(135deg, #2d1060, #8000ff); color: #fff; align-self: flex-end; }
+  .chat-msg-name { font-size: 1rem; color: #555; padding: 0 4px; }
+  .chat-msg-name.right { text-align: right; }
+
+  /* Slaptastic card */
+  .loadout-card-featured.slaptastic::before {
+    background: linear-gradient(135deg, #ff4500, #ff6b35, #ffd700, #ff4500);
+  }
+  .loadout-card-featured.slaptastic:hover {
+    box-shadow: 0 12px 50px rgba(255, 69, 0, 0.18), 0 12px 50px rgba(255, 215, 0, 0.08);
+  }
+  .featured-content-tag.orange { color: #ff6b35; }
+  .slap-visual {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .slap-disc {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: conic-gradient(#ff4500, #ffd700, #ff6b35, #ff4500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spin-disc 4s linear infinite;
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.4);
+  }
+  .slap-disc-inner {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #0d0d1a;
+  }
+  @keyframes spin-disc {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .slap-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    height: 30px;
+  }
+  .slap-bar {
+    width: 5px;
+    border-radius: 3px;
+    background: linear-gradient(to top, #ff4500, #ffd700);
+    animation: bar-bounce 1s ease-in-out infinite alternate;
+  }
+  .slap-bar:nth-child(1) { height: 40%; animation-delay: 0s; }
+  .slap-bar:nth-child(2) { height: 80%; animation-delay: 0.15s; }
+  .slap-bar:nth-child(3) { height: 60%; animation-delay: 0.3s; }
+  .slap-bar:nth-child(4) { height: 100%; animation-delay: 0.1s; }
+  .slap-bar:nth-child(5) { height: 50%; animation-delay: 0.25s; }
+  .slap-bar:nth-child(6) { height: 70%; animation-delay: 0.05s; }
+  @keyframes bar-bounce {
+    from { transform: scaleY(0.4); }
+    to   { transform: scaleY(1); }
+  }
+
+  @media screen and (max-width: 998px) {
+    .chat-screen { width: 100%; }
+    .slap-visual { flex-direction: row; }
+  }
+
   @media screen and (max-width: 998px) {
     .loadout-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -611,6 +725,72 @@
               <span class="featured-chip">No app switching</span>
               <span class="featured-chip">Real-time delivery</span>
               <span class="featured-chip">VIP only</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PSN Chat Board -->
+      <div class="loadout-card-featured chat-board" data-aos="fade-up" data-aos-delay="110">
+        <span class="featured-badge" style="background: linear-gradient(90deg, #003087, #8000ff);">Live Tool</span>
+        <div class="featured-inner">
+          <div class="chat-screen">
+            <div class="chat-screen-bar">
+              <div class="chat-dot"></div>
+              CRCMZ Party
+            </div>
+            <div class="chat-msg">
+              <span class="chat-msg-name">TheMoose</span>
+              <div class="chat-msg-bubble them">yo who's hopping on? 👀</div>
+            </div>
+            <div class="chat-msg">
+              <span class="chat-msg-name">killerx</span>
+              <div class="chat-msg-bubble them">bro that last kill LMAO 💀</div>
+            </div>
+            <div class="chat-msg">
+              <span class="chat-msg-name right">you</span>
+              <div class="chat-msg-bubble me">sending invite rn 🎮</div>
+            </div>
+          </div>
+          <div class="featured-content">
+            <div class="featured-content-tag purple">PSN Chat Board</div>
+            <div class="featured-content-title">The whole clan,<br>one screen.</div>
+            <div class="featured-content-desc">Head to <strong style="color:#cf59e6;">psn.qureshi.io</strong> during any game and drop into the clan board — party up, call for backup, or just send the funniest message mid-match. No app install. Just open it and go.</div>
+            <div class="featured-chips">
+              <span class="featured-chip">Group messaging</span>
+              <span class="featured-chip">Party up fast</span>
+              <span class="featured-chip">Works mid-game</span>
+              <span class="featured-chip">psn.qureshi.io</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slaptastic -->
+      <div class="loadout-card-featured slaptastic" data-aos="fade-up" data-aos-delay="120">
+        <span class="featured-badge" style="background: linear-gradient(90deg, #ff4500, #ffd700); color: #000;">Shared Music</span>
+        <div class="featured-inner">
+          <div class="slap-visual">
+            <div class="slap-disc">
+              <div class="slap-disc-inner"></div>
+            </div>
+            <div class="slap-bars">
+              <div class="slap-bar"></div>
+              <div class="slap-bar"></div>
+              <div class="slap-bar"></div>
+              <div class="slap-bar"></div>
+              <div class="slap-bar"></div>
+              <div class="slap-bar"></div>
+            </div>
+          </div>
+          <div class="featured-content">
+            <div class="featured-content-tag orange">Slaptastic</div>
+            <div class="featured-content-title">One playlist.<br>Whole squad vibing.</div>
+            <div class="featured-content-desc">Slaptastic is the clan's shared music space. Drop tracks, share what's bumping, and keep the whole squad on the same frequency — whether you're grinding ranked or just chilling in a lobby.</div>
+            <div class="featured-chips">
+              <span class="featured-chip">Shared playlists</span>
+              <span class="featured-chip">Drop tracks anytime</span>
+              <span class="featured-chip">Clan-only access</span>
             </div>
           </div>
         </div>
