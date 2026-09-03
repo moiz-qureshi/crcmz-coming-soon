@@ -538,52 +538,43 @@
     padding: 5px 14px;
   }
 
-  /* PSN → multi-platform fan layout */
+  /* PSN → trio triangle fan */
   .psn-multi-flow {
     display: flex;
     align-items: center;
-    gap: 0;
+    gap: 16px;
     flex-shrink: 0;
   }
-  .psn-fan {
+  .psn-source {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
-    margin-left: 0;
-  }
-  .psn-fan-row {
-    display: flex;
-    align-items: center;
-    gap: 0;
-  }
-  .psn-fan-mid {
-    /* centre row aligns with PSN logo */
-  }
-  .psn-fan-line {
-    width: 52px;
-    height: 1.5px;
-    background: linear-gradient(90deg, rgba(0,48,135,0.6), rgba(107,197,248,0.5));
-    position: relative;
     flex-shrink: 0;
   }
-  .psn-fan-line::after {
-    content: "";
-    position: absolute;
-    right: -1px;
-    top: -3.5px;
-    border-left: 6px solid rgba(107,197,248,0.7);
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
+  .psn-fan-container {
+    position: relative;
+    width: 148px;
+    height: 126px;
+    flex-shrink: 0;
   }
-  .psn-fan-dest {
+  .psn-fan-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .psn-trio-icon {
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
   }
   .psn-dest-logo {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -591,8 +582,8 @@
     flex-shrink: 0;
   }
   .psn-dest-name {
-    font-size: 1rem;
-    color: #888;
+    font-size: 0.85rem;
+    color: #6a6a88;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -1101,45 +1092,76 @@
         <span class="featured-badge">Exclusive</span>
         <div class="featured-inner">
 
-          <!-- PSN → 3 destinations -->
+          <!-- PSN → trio triangle -->
           <div class="psn-multi-flow">
-            <div class="featured-platform">
+            <div class="psn-source">
               <div class="featured-platform-logo psn">
                 <img src="src/webp/psn-icon.png" alt="PSN" style="width:42px;height:42px;object-fit:contain;" />
               </div>
               <span class="featured-platform-name">PSN</span>
             </div>
 
-            <div class="psn-fan">
-              <!-- top: WhatsApp -->
-              <div class="psn-fan-row">
-                <div class="psn-fan-line"></div>
-                <div class="psn-fan-dest">
-                  <div class="psn-dest-logo" style="background:linear-gradient(135deg,#128c7e,#25d366);box-shadow:0 4px 14px rgba(37,211,102,0.35);">
-                    <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><path d="M50 14C30.1 14 14 30.1 14 50c0 6.4 1.7 12.4 4.7 17.6L14 86l19-4.6C37.8 84.3 43.8 86 50 86c19.9 0 36-16.1 36-36S69.9 14 50 14z" fill="white"/><path d="M36 38c0-1.5 1-2.5 2-2.5s5 4 5.5 5.5c.5 1.5-2 3.5-2 5s5 9 11 11c1.5.5 3.5-2 5-2s5.5 4 5.5 5.5-2 3.5-4 4.5c-2 1-15-4-19-12C36.5 47 36 39.5 36 38z" fill="#25d366"/></svg>
-                  </div>
-                  <span class="psn-dest-name">WhatsApp</span>
+            <div class="psn-fan-container" aria-hidden="true">
+              <!-- SVG branching lines -->
+              <svg class="psn-fan-svg" viewBox="0 0 148 126" fill="none">
+                <defs>
+                  <!-- animated dash marker per branch colour -->
+                  <marker id="arr-wa" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                    <path d="M0,0 L6,3 L0,6 Z" fill="rgba(37,211,102,0.8)"/>
+                  </marker>
+                  <marker id="arr-dc" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                    <path d="M0,0 L6,3 L0,6 Z" fill="rgba(88,101,242,0.8)"/>
+                  </marker>
+                  <marker id="arr-mm" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                    <path d="M0,0 L6,3 L0,6 Z" fill="rgba(30,144,214,0.8)"/>
+                  </marker>
+                </defs>
+                <!-- stem from PSN -->
+                <line x1="0" y1="63" x2="28" y2="63" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+                <!-- split dot -->
+                <circle cx="28" cy="63" r="3" fill="rgba(255,255,255,0.22)"/>
+                <!-- branch to WhatsApp (top-center ~74,20) -->
+                <line x1="28" y1="63" x2="74" y2="22"
+                  stroke="rgba(37,211,102,0.55)" stroke-width="1.5"
+                  stroke-dasharray="4 3" marker-end="url(#arr-wa)">
+                  <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="1.2s" repeatCount="indefinite"/>
+                </line>
+                <!-- branch to Discord (bottom-left ~20,88) -->
+                <line x1="28" y1="63" x2="22" y2="88"
+                  stroke="rgba(88,101,242,0.55)" stroke-width="1.5"
+                  stroke-dasharray="4 3" marker-end="url(#arr-dc)">
+                  <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="1.4s" repeatCount="indefinite"/>
+                </line>
+                <!-- branch to Mattermost (bottom-right ~126,88) -->
+                <line x1="28" y1="63" x2="122" y2="88"
+                  stroke="rgba(30,144,214,0.55)" stroke-width="1.5"
+                  stroke-dasharray="4 3" marker-end="url(#arr-mm)">
+                  <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="1.6s" repeatCount="indefinite"/>
+                </line>
+              </svg>
+
+              <!-- WhatsApp — top centre -->
+              <div class="psn-trio-icon" style="top:0;left:50%;transform:translateX(-50%)">
+                <div class="psn-dest-logo" style="background:linear-gradient(135deg,#128c7e,#25d366);box-shadow:0 4px 14px rgba(37,211,102,0.35);">
+                  <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><path d="M50 14C30.1 14 14 30.1 14 50c0 6.4 1.7 12.4 4.7 17.6L14 86l19-4.6C37.8 84.3 43.8 86 50 86c19.9 0 36-16.1 36-36S69.9 14 50 14z" fill="white"/><path d="M36 38c0-1.5 1-2.5 2-2.5s5 4 5.5 5.5c.5 1.5-2 3.5-2 5s5 9 11 11c1.5.5 3.5-2 5-2s5.5 4 5.5 5.5-2 3.5-4 4.5c-2 1-15-4-19-12C36.5 47 36 39.5 36 38z" fill="#25d366"/></svg>
                 </div>
+                <span class="psn-dest-name">WhatsApp</span>
               </div>
-              <!-- middle: Discord -->
-              <div class="psn-fan-row psn-fan-mid">
-                <div class="psn-fan-line"></div>
-                <div class="psn-fan-dest">
-                  <div class="psn-dest-logo" style="background:linear-gradient(135deg,#4752c4,#5865f2);box-shadow:0 4px 14px rgba(88,101,242,0.4);">
-                    <svg width="22" height="22" viewBox="0 0 127.14 96.36" fill="white"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-                  </div>
-                  <span class="psn-dest-name">Discord</span>
+
+              <!-- Discord — bottom left -->
+              <div class="psn-trio-icon" style="bottom:0;left:0">
+                <div class="psn-dest-logo" style="background:linear-gradient(135deg,#4752c4,#5865f2);box-shadow:0 4px 14px rgba(88,101,242,0.4);">
+                  <svg width="22" height="22" viewBox="0 0 127.14 96.36" fill="white"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
                 </div>
+                <span class="psn-dest-name">Discord</span>
               </div>
-              <!-- bottom: Mattermost -->
-              <div class="psn-fan-row">
-                <div class="psn-fan-line"></div>
-                <div class="psn-fan-dest">
-                  <div class="psn-dest-logo" style="background:linear-gradient(135deg,#1c4f9c,#1e90d6);box-shadow:0 4px 14px rgba(30,144,214,0.35);">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.08 13.981l-2.99-.935c-.648-.204-.657-.648.136-.961l11.676-4.503c.54-.194 1.013.131.992.639z"/></svg>
-                  </div>
-                  <span class="psn-dest-name">Mattermost</span>
+
+              <!-- Mattermost — bottom right -->
+              <div class="psn-trio-icon" style="bottom:0;right:0">
+                <div class="psn-dest-logo" style="background:linear-gradient(135deg,#1c4f9c,#1e90d6);box-shadow:0 4px 14px rgba(30,144,214,0.35);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.08 13.981l-2.99-.935c-.648-.204-.657-.648.136-.961l11.676-4.503c.54-.194 1.013.131.992.639z"/></svg>
                 </div>
+                <span class="psn-dest-name">Mattermost</span>
               </div>
             </div>
           </div>
