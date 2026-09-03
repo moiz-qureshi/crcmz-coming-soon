@@ -732,32 +732,37 @@
   }
   .featured-content-tag.gold { color: #ffd700; }
   .more-inner {
-    display: flex;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "left  grid"
+      "cta   grid";
     padding: 36px 40px;
-    gap: 50px;
-    align-items: center;
+    column-gap: 50px;
+    row-gap: 20px;
+    align-items: start;
   }
   .more-left {
-    flex-shrink: 0;
-    width: 260px;
+    grid-area: left;
     display: flex;
     flex-direction: column;
     gap: 16px;
+  }
+  .more-cta-inline {
+    grid-area: cta;
+  }
+  .more-perks-grid {
+    grid-area: grid;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
   }
   .more-left .featured-content-title { margin-bottom: 0; }
   .more-left .featured-content-desc {
     font-size: 1.4rem;
     color: #777;
     line-height: 1.6;
-  }
-  .more-cta-inline {
-    margin-top: 8px;
-  }
-  .more-perks-grid {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
   }
   .more-perk-item {
     display: flex;
@@ -781,8 +786,15 @@
   @media screen and (max-width: 998px) {
     .psn-dash-preview { width: 100%; }
     .slap-visual { flex-direction: row; }
-    .more-inner { flex-direction: column; padding: 28px 22px; gap: 28px; }
-    .more-left { width: 100%; }
+    .more-inner {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "left"
+        "grid"
+        "cta";
+      padding: 28px 22px;
+      row-gap: 22px;
+    }
     .more-perks-grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media screen and (max-width: 500px) {
@@ -845,7 +857,7 @@
           <div class="featured-flow">
             <div class="featured-platform">
               <div class="featured-platform-logo psn">
-                <img src="src/webp/psn.png" alt="PSN" style="width:42px;height:42px;object-fit:contain;border-radius:4px;" />
+                <img src="https://www.pngfind.com/pngs/m/586-5864072_sony-logo-sony-logo-white-playstation-logo-png.png" alt="PSN" style="width:42px;height:42px;object-fit:contain;" />
               </div>
               <span class="featured-platform-name">PSN</span>
             </div>
@@ -974,12 +986,6 @@
             <div class="featured-content-tag gold">And so much more.</div>
             <div class="featured-content-title" style="font-size:2.2rem;">Every perk,<br>day one.</div>
             <div class="more-left featured-content-desc">Go VIP and unlock the full package — instantly. No grinding, no waiting.</div>
-            <div class="more-cta-inline">
-              <button class="letsTalkBtn vip-style" id="vip-loadout-btn">
-                <p class="letsTalkBtn-text">Unlock VIP Access</p>
-                <span class="letsTalkBtn-BG"></span>
-              </button>
-            </div>
           </div>
           <div class="more-perks-grid">
             <div class="more-perk-item">
@@ -1038,6 +1044,12 @@
                 <div class="more-perk-desc">Join the clan's private comms hub — channels, threads, and squad chats all in one place.</div>
               </div>
             </div>
+          </div>
+          <div class="more-cta-inline">
+            <button class="letsTalkBtn vip-style" id="vip-loadout-btn">
+              <p class="letsTalkBtn-text">Unlock VIP Access</p>
+              <span class="letsTalkBtn-BG"></span>
+            </button>
           </div>
         </div>
       </div>
