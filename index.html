@@ -358,12 +358,188 @@
     margin-top: 55px;
     text-align: center;
   }
+
+  /* ── Featured PSN × WhatsApp card ── */
+  .loadout-card-featured {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #0d0d1a 0%, #111122 60%, #0a0a14 100%);
+    border-radius: 24px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .loadout-card-featured::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, #003087, #6bc5f8, #25d366, #128c7e);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .loadout-card-featured:hover::before {
+    opacity: 1;
+  }
+  .loadout-card-featured:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 50px rgba(37, 211, 102, 0.12), 0 12px 50px rgba(0, 48, 135, 0.12);
+  }
+  .featured-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(90deg, #003087, #25d366);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 5px 14px;
+    border-radius: 50px;
+    text-transform: uppercase;
+  }
+  .featured-inner {
+    display: flex;
+    align-items: center;
+    padding: 36px 40px;
+    gap: 50px;
+  }
+  .featured-flow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  .featured-platform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .featured-platform-logo {
+    width: 62px;
+    height: 62px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.2rem;
+  }
+  .featured-platform-logo.psn {
+    background: linear-gradient(135deg, #003087, #0070cc);
+    box-shadow: 0 4px 20px rgba(0, 48, 135, 0.5);
+  }
+  .featured-platform-logo.wa {
+    background: linear-gradient(135deg, #128c7e, #25d366);
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  }
+  .featured-platform-name {
+    font-size: 1.1rem;
+    color: #666;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .featured-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .featured-arrow-line {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #003087, #25d366);
+    position: relative;
+    border-radius: 2px;
+  }
+  .featured-arrow-line::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: -4px;
+    border-left: 8px solid #25d366;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+  .featured-arrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6bc5f8, #25d366);
+    animation: pulse-dot 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.6); }
+  }
+  .featured-arrow-label {
+    font-size: 1rem;
+    color: #555;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .featured-content {
+    flex: 1;
+  }
+  .featured-content-tag {
+    font-size: 1.1rem;
+    color: #25d366;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .featured-content-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 14px;
+  }
+  .featured-content-desc {
+    font-size: 1.5rem;
+    color: #888;
+    line-height: 1.7;
+    max-width: 520px;
+  }
+  .featured-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .featured-chip {
+    font-size: 1.2rem;
+    color: #aaa;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid #2a2a3a;
+    border-radius: 50px;
+    padding: 4px 12px;
+  }
+
   @media screen and (max-width: 998px) {
     .loadout-grid {
       grid-template-columns: repeat(2, 1fr);
     }
     .loadout-section-div {
       width: 80%;
+    }
+    .featured-inner {
+      flex-direction: column;
+      padding: 30px 25px;
+      gap: 30px;
+    }
+    .featured-flow {
+      justify-content: center;
+    }
+    .featured-content-title {
+      font-size: 2rem;
     }
   }
   @media screen and (max-width: 600px) {
@@ -372,6 +548,15 @@
     }
     .loadout-section-div {
       width: 85%;
+    }
+    .featured-arrow-line {
+      width: 40px;
+    }
+    .featured-content-title {
+      font-size: 1.9rem;
+    }
+    .featured-content-desc {
+      font-size: 1.35rem;
     }
   }
 </style>
@@ -386,6 +571,50 @@
     </div>
     <p class="loadout-subtext" data-aos="fade-up" data-aos-delay="100">Everything you unlock as a VIP member.</p>
     <div class="loadout-grid">
+
+      <!-- PSN × WhatsApp Featured Card -->
+      <div class="loadout-card-featured" data-aos="fade-up" data-aos-delay="80">
+        <span class="featured-badge">Exclusive</span>
+        <div class="featured-inner">
+          <div class="featured-flow">
+            <div class="featured-platform">
+              <div class="featured-platform-logo psn">
+                <svg width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M38 72V28l8 2.5V65s18 5.5 18-8c0-13-10-17-18-19.5V30C54 33 68 37 68 57c0 22-30 17-30 15z" fill="white"/>
+                  <path d="M62 75l-16 5.5v-8l16-5.5V75z" fill="#00439c"/>
+                  <path d="M72 70l-10 3.5v-8L72 62v8z" fill="white" opacity="0.7"/>
+                </svg>
+              </div>
+              <span class="featured-platform-name">PSN</span>
+            </div>
+            <div class="featured-arrow">
+              <div class="featured-arrow-dot"></div>
+              <div class="featured-arrow-line"></div>
+              <span class="featured-arrow-label">auto-sends</span>
+            </div>
+            <div class="featured-platform">
+              <div class="featured-platform-logo wa">
+                <svg width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M50 14C30.1 14 14 30.1 14 50c0 6.4 1.7 12.4 4.7 17.6L14 86l19-4.6C37.8 84.3 43.8 86 50 86c19.9 0 36-16.1 36-36S69.9 14 50 14z" fill="white"/>
+                  <path d="M36 38c0-1.5 1-2.5 2-2.5s5 4 5.5 5.5c.5 1.5-2 3.5-2 5s5 9 11 11c1.5.5 3.5-2 5-2s5.5 4 5.5 5.5-2 3.5-4 4.5c-2 1-15-4-19-12C36.5 47 36 39.5 36 38z" fill="#25d366"/>
+                </svg>
+              </div>
+              <span class="featured-platform-name">WhatsApp</span>
+            </div>
+          </div>
+          <div class="featured-content">
+            <div class="featured-content-tag">PSN Messenger</div>
+            <div class="featured-content-title">Clips on PSN.<br>Seen on WhatsApp.</div>
+            <div class="featured-content-desc">Videos and clips shared on PlayStation automatically forward to your clan's WhatsApp. No saving, no uploading, no switching apps — your highlights hit the group the second you share them on console.</div>
+            <div class="featured-chips">
+              <span class="featured-chip">Auto-forwarding</span>
+              <span class="featured-chip">No app switching</span>
+              <span class="featured-chip">Real-time delivery</span>
+              <span class="featured-chip">VIP only</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="loadout-card" data-aos="fade-up" data-aos-delay="100">
         <div class="loadout-card-icon">⚡</div>
