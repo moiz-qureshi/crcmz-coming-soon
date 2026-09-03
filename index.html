@@ -79,6 +79,12 @@
             </a>
           </li>
 
+          <li class="loadout" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="400">
+            <a href="#loadout" aria-label="the loadout menu button">
+              The Loadout
+            </a>
+          </li>
+
           <li class="skills" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="500">
             <a href="#projects" aria-label="skills menu button">
               Clan Members
@@ -121,6 +127,11 @@
         <li id="aboutme-mobile-tab" class="mobile-navbar-tabs-li about" onclick="hidemenubyli()">
           <a href="#about" tabindex="0" aria-label="about menu button">
            About Us
+          </a>
+        </li>
+        <li id="loadout-mobile-tab" class="mobile-navbar-tabs-li loadout" onclick="hidemenubyli()">
+          <a href="#loadout" tabindex="0" aria-label="the loadout menu button">
+            The Loadout
           </a>
         </li>
         <li id="skills-mobile-tab" class="mobile-navbar-tabs-li skills" onclick="hidemenubyli()">
@@ -282,28 +293,158 @@
 
     </section>
 
-<section class="projects-section-container" id="projects">
-      <div class="projects-section-div">
-        <div class="section-heading" data-aos="fade-up">
-          <h2 class="section-heading-article" tabindex="0" aria-label="My projects starts from here">
-            Featured Clip
-          </h2>
-          <p class="sectionHeadingP"></p>
-        </div>
-        <div class="project-boxes-div">
-          <div data-aos="fade-up" class="project-box-wrapper">
-            <div class="project-box project-box2" id="project-box2">
-              <div class="info-div">
-<iframe title="[CRCMZ] EPIC THROWING KNIFE MONTAGE!" width="100%" height="100%" src="https://clips.crcmz.me/videos/embed/dea5497b-3189-426c-a2aa-89320262ab9c?start=23s&amp;stop=1m&amp;autoplay=1&amp;muted=1&amp;warningTitle=0" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups allow-forms" style="position: absolute; inset: 0px;"></iframe>
 
+<style>
+  .loadout-section-container {
+    padding: 100px 0 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .loadout-section-div {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .loadout-subtext {
+    font-size: 1.8rem;
+    color: #888;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  .loadout-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .loadout-card {
+    background: linear-gradient(to bottom right, #1a1a29, rgba(27, 27, 40, 0));
+    border: 1px solid #292929;
+    border-radius: 20px;
+    padding: 28px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .loadout-card:hover {
+    border-color: #8000ff;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(128, 0, 255, 0.15);
+  }
+  .loadout-card-icon {
+    font-size: 2.8rem;
+    line-height: 1;
+  }
+  .loadout-card-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+  }
+  .loadout-card-desc {
+    font-size: 1.35rem;
+    color: #888;
+    line-height: 1.7;
+  }
+  .loadout-cta-div {
+    margin-top: 55px;
+    text-align: center;
+  }
+  @media screen and (max-width: 998px) {
+    .loadout-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .loadout-section-div {
+      width: 80%;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .loadout-grid {
+      grid-template-columns: 1fr;
+    }
+    .loadout-section-div {
+      width: 85%;
+    }
+  }
+</style>
 
-              </div>
-            </div>
-          </div>
-	</div>
-	</div>
-	</section>
+<section class="loadout-section-container" id="loadout">
+  <div class="loadout-section-div">
+    <div class="section-heading" data-aos="fade-up">
+      <h2 class="section-heading-article" tabindex="0" aria-label="VIP member perks">
+        The Loadout
+      </h2>
+      <p class="sectionHeadingP"></p>
+    </div>
+    <p class="loadout-subtext" data-aos="fade-up" data-aos-delay="100">Everything you unlock as a VIP member.</p>
+    <div class="loadout-grid">
 
+      <div class="loadout-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="loadout-card-icon">⚡</div>
+        <div class="loadout-card-title">Instant Clan Member</div>
+        <div class="loadout-card-desc">Skip the tryout process entirely. Get accepted straight into CRCMZ — no waiting, no gatekeeping.</div>
+      </div>
+
+      <div class="loadout-card" data-aos="fade-up" data-aos-delay="150">
+        <div class="loadout-card-icon">❇️</div>
+        <div class="loadout-card-title">VIP Clan Role</div>
+        <div class="loadout-card-desc">Unlock exclusive private Discord channels only accessible to VIP members.</div>
+      </div>
+
+      <div class="loadout-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="loadout-card-icon">🌐</div>
+        <div class="loadout-card-title">Website Recognition</div>
+        <div class="loadout-card-desc">Get listed on crcmz.me with your username, platform, and a custom AI-generated avatar.</div>
+      </div>
+
+      <div class="loadout-card" data-aos="fade-up" data-aos-delay="250">
+        <div class="loadout-card-icon">🧠</div>
+        <div class="loadout-card-title">Lobby Priority & Voting Rights</div>
+        <div class="loadout-card-desc">Shape clan decisions. Influence match strategies and team compositions with real voting power.</div>
+      </div>
+
+      <div class="loadout-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="loadout-card-icon">🔔</div>
+        <div class="loadout-card-title">Online Status Highlights</div>
+        <div class="loadout-card-desc">Auto-broadcast your presence to the clan with a unique AI status image whenever you're online.</div>
+      </div>
+
+      <div class="loadout-card" data-aos="fade-up" data-aos-delay="350">
+        <div class="loadout-card-icon">🤖</div>
+        <div class="loadout-card-title">Meta Loadout Tools</div>
+        <div class="loadout-card-desc">Access bots that instantly serve top-tier loadouts and identify the best guns in the current meta.</div>
+      </div>
+
+      <div class="loadout-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="loadout-card-icon">🎁</div>
+        <div class="loadout-card-title">Monthly Giveaways</div>
+        <div class="loadout-card-desc">Auto-entered every month to win COD skins, digital loot, and exclusive in-game rewards.</div>
+      </div>
+
+    </div>
+    <div class="loadout-cta-div" data-aos="fade-up" data-aos-delay="450">
+      <button class="letsTalkBtn vip-style" id="vip-loadout-btn">
+        <p class="letsTalkBtn-text">Unlock VIP Access</p>
+        <span class="letsTalkBtn-BG"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById("vip-loadout-btn").addEventListener("click", function () {
+    document.getElementById("typebot-frame").src = "https://bot.crcmz.me/vip";
+    document.getElementById("typebot-popup").style.display = "block";
+  });
+</script>
 
     <!-- landing page ends here -->
     <section class="about-section-container" id="about" data-aos="fade-up">
