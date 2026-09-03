@@ -632,9 +632,77 @@
     to   { transform: scaleY(1); }
   }
 
+  /* And More card */
+  .loadout-card-featured.and-more::before {
+    background: linear-gradient(135deg, #8000ff, #6bc5f8, #25d366, #ffd700, #ff4500, #8000ff);
+    background-size: 300% 300%;
+    animation: border-shift 6s linear infinite;
+  }
+  @keyframes border-shift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .loadout-card-featured.and-more:hover {
+    box-shadow: 0 12px 60px rgba(128, 0, 255, 0.15), 0 12px 60px rgba(107, 197, 248, 0.08);
+  }
+  .featured-content-tag.gold { color: #ffd700; }
+  .more-inner {
+    display: flex;
+    padding: 36px 40px;
+    gap: 50px;
+    align-items: center;
+  }
+  .more-left {
+    flex-shrink: 0;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .more-left .featured-content-title { margin-bottom: 0; }
+  .more-left .featured-content-desc {
+    font-size: 1.4rem;
+    color: #777;
+    line-height: 1.6;
+  }
+  .more-cta-inline {
+    margin-top: 8px;
+  }
+  .more-perks-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .more-perk-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid #1e1e2e;
+    border-radius: 14px;
+    padding: 14px 16px;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .more-perk-item:hover {
+    border-color: #3a3a5a;
+    background: rgba(255,255,255,0.05);
+  }
+  .more-perk-icon { font-size: 2rem; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+  .more-perk-text { display: flex; flex-direction: column; gap: 3px; }
+  .more-perk-title { font-size: 1.4rem; font-weight: 700; color: #fff; line-height: 1.2; }
+  .more-perk-desc  { font-size: 1.2rem; color: #666; line-height: 1.5; }
+
   @media screen and (max-width: 998px) {
     .chat-screen { width: 100%; }
     .slap-visual { flex-direction: row; }
+    .more-inner { flex-direction: column; padding: 28px 22px; gap: 28px; }
+    .more-left { width: 100%; }
+    .more-perks-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media screen and (max-width: 500px) {
+    .more-perks-grid { grid-template-columns: 1fr; }
   }
 
   @media screen and (max-width: 998px) {
@@ -796,54 +864,75 @@
         </div>
       </div>
 
-      <div class="loadout-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="loadout-card-icon">⚡</div>
-        <div class="loadout-card-title">Instant Clan Member</div>
-        <div class="loadout-card-desc">Skip the tryout process entirely. Get accepted straight into CRCMZ — no waiting, no gatekeeping.</div>
+      <!-- And More -->
+      <div class="loadout-card-featured and-more" data-aos="fade-up" data-aos-delay="130">
+        <span class="featured-badge" style="background: linear-gradient(90deg, #8000ff, #6bc5f8);">VIP Membership</span>
+        <div class="more-inner">
+          <div class="more-left">
+            <div class="featured-content-tag gold">And so much more.</div>
+            <div class="featured-content-title" style="font-size:2.2rem;">Every perk,<br>day one.</div>
+            <div class="more-left featured-content-desc">Go VIP and unlock the full package — instantly. No grinding, no waiting.</div>
+            <div class="more-cta-inline">
+              <button class="letsTalkBtn vip-style" id="vip-loadout-btn">
+                <p class="letsTalkBtn-text">Unlock VIP Access</p>
+                <span class="letsTalkBtn-BG"></span>
+              </button>
+            </div>
+          </div>
+          <div class="more-perks-grid">
+            <div class="more-perk-item">
+              <div class="more-perk-icon">⚡</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">Instant Clan Member</div>
+                <div class="more-perk-desc">Skip tryouts. Get in immediately.</div>
+              </div>
+            </div>
+            <div class="more-perk-item">
+              <div class="more-perk-icon">❇️</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">VIP Clan Role</div>
+                <div class="more-perk-desc">Access exclusive Discord channels.</div>
+              </div>
+            </div>
+            <div class="more-perk-item">
+              <div class="more-perk-icon">🌐</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">Website Recognition</div>
+                <div class="more-perk-desc">Listed on crcmz.me with a custom AI avatar.</div>
+              </div>
+            </div>
+            <div class="more-perk-item">
+              <div class="more-perk-icon">🧠</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">Lobby Priority & Voting</div>
+                <div class="more-perk-desc">Influence strategies and team decisions.</div>
+              </div>
+            </div>
+            <div class="more-perk-item">
+              <div class="more-perk-icon">🔔</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">Online Status Highlights</div>
+                <div class="more-perk-desc">Auto-broadcast presence with a unique AI image.</div>
+              </div>
+            </div>
+            <div class="more-perk-item">
+              <div class="more-perk-icon">🤖</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">Meta Loadout Tools</div>
+                <div class="more-perk-desc">Bots that serve the best guns and builds instantly.</div>
+              </div>
+            </div>
+            <div class="more-perk-item">
+              <div class="more-perk-icon">🎁</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">Monthly Giveaways</div>
+                <div class="more-perk-desc">Auto-entered to win COD skins and digital loot.</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="loadout-card" data-aos="fade-up" data-aos-delay="150">
-        <div class="loadout-card-icon">❇️</div>
-        <div class="loadout-card-title">VIP Clan Role</div>
-        <div class="loadout-card-desc">Unlock exclusive private Discord channels only accessible to VIP members.</div>
-      </div>
-
-      <div class="loadout-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="loadout-card-icon">🌐</div>
-        <div class="loadout-card-title">Website Recognition</div>
-        <div class="loadout-card-desc">Get listed on crcmz.me with your username, platform, and a custom AI-generated avatar.</div>
-      </div>
-
-      <div class="loadout-card" data-aos="fade-up" data-aos-delay="250">
-        <div class="loadout-card-icon">🧠</div>
-        <div class="loadout-card-title">Lobby Priority & Voting Rights</div>
-        <div class="loadout-card-desc">Shape clan decisions. Influence match strategies and team compositions with real voting power.</div>
-      </div>
-
-      <div class="loadout-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="loadout-card-icon">🔔</div>
-        <div class="loadout-card-title">Online Status Highlights</div>
-        <div class="loadout-card-desc">Auto-broadcast your presence to the clan with a unique AI status image whenever you're online.</div>
-      </div>
-
-      <div class="loadout-card" data-aos="fade-up" data-aos-delay="350">
-        <div class="loadout-card-icon">🤖</div>
-        <div class="loadout-card-title">Meta Loadout Tools</div>
-        <div class="loadout-card-desc">Access bots that instantly serve top-tier loadouts and identify the best guns in the current meta.</div>
-      </div>
-
-      <div class="loadout-card" data-aos="fade-up" data-aos-delay="400">
-        <div class="loadout-card-icon">🎁</div>
-        <div class="loadout-card-title">Monthly Giveaways</div>
-        <div class="loadout-card-desc">Auto-entered every month to win COD skins, digital loot, and exclusive in-game rewards.</div>
-      </div>
-
-    </div>
-    <div class="loadout-cta-div" data-aos="fade-up" data-aos-delay="450">
-      <button class="letsTalkBtn vip-style" id="vip-loadout-btn">
-        <p class="letsTalkBtn-text">Unlock VIP Access</p>
-        <span class="letsTalkBtn-BG"></span>
-      </button>
     </div>
   </div>
 </section>
