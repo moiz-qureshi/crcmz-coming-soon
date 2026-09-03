@@ -293,8 +293,67 @@
 
     </section>
 
+<div class="section-divider"></div>
+
+<section class="clan-story-strip">
+  <div class="clan-story-inner" data-aos="fade-up">
+    <div class="clan-story-line"></div>
+    <p class="clan-story-text">We built CRCMZ because good squads deserve better tools. Not just a Discord server — a real home base. Everything here exists because we wanted it for ourselves first.</p>
+    <div class="clan-story-line"></div>
+  </div>
+</section>
 
 <style>
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(128,0,255,0.3) 30%, rgba(107,197,248,0.4) 50%, rgba(128,0,255,0.3) 70%, transparent 100%);
+    position: relative;
+  }
+  .section-divider::after {
+    content: "";
+    position: absolute;
+    inset: -3px 20%;
+    background: linear-gradient(90deg, transparent, rgba(128,0,255,0.08), rgba(107,197,248,0.1), rgba(128,0,255,0.08), transparent);
+    filter: blur(6px);
+  }
+  .clan-story-strip {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 60px 0 0;
+  }
+  .clan-story-inner {
+    width: 52%;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .clan-story-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1));
+  }
+  .clan-story-inner .clan-story-line:last-child {
+    background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+  }
+  .clan-story-text {
+    font-size: 1.55rem;
+    color: #8888a8;
+    text-align: center;
+    line-height: 1.8;
+    font-style: italic;
+    flex-shrink: 0;
+    width: 60%;
+  }
+  @media screen and (max-width: 998px) {
+    .clan-story-inner { width: 80%; }
+    .clan-story-text { font-size: 1.4rem; width: 80%; }
+  }
+  @media screen and (max-width: 600px) {
+    .clan-story-inner { width: 88%; gap: 16px; }
+    .clan-story-text { font-size: 1.35rem; }
+  }
   .loadout-section-container {
     padding: 160px 0 90px;
     display: flex;
@@ -942,6 +1001,26 @@
   }
 
   /* And More card */
+  .loadout-card-featured.and-more { overflow: hidden; }
+  .more-aurora {
+    position: absolute;
+    inset: -30%;
+    z-index: 0;
+    background:
+      radial-gradient(40% 35% at 20% 20%, rgba(128,0,255,0.22), transparent 65%),
+      radial-gradient(35% 30% at 80% 15%, rgba(107,197,248,0.18), transparent 60%),
+      radial-gradient(38% 32% at 50% 85%, rgba(255,215,0,0.12), transparent 62%),
+      radial-gradient(30% 28% at 75% 70%, rgba(37,211,102,0.1), transparent 58%);
+    filter: blur(22px);
+    pointer-events: none;
+    animation: aurora-drift 8s ease-in-out infinite alternate;
+  }
+  @keyframes aurora-drift {
+    0%   { transform: translate(0,0) scale(1); }
+    33%  { transform: translate(2%,1%) scale(1.02); }
+    66%  { transform: translate(-1%,2%) scale(0.99); }
+    100% { transform: translate(1%,-1%) scale(1.01); }
+  }
   .loadout-card-featured.and-more::before {
     background: linear-gradient(135deg, #8000ff, #6bc5f8, #25d366, #ffd700, #ff4500, #8000ff);
     background-size: 300% 300%;
@@ -1261,6 +1340,7 @@
 
       <!-- And More -->
       <div class="loadout-card-featured and-more" data-aos="fade-up" data-aos-delay="130">
+        <div class="more-aurora" aria-hidden="true"></div>
         <span class="featured-badge" style="background: linear-gradient(90deg, #8000ff, #6bc5f8);">VIP Membership</span>
         <div class="more-inner">
           <div class="more-left">
@@ -1347,6 +1427,7 @@
 </script>
 
     <!-- landing page ends here -->
+    <div class="section-divider"></div>
     <section class="about-section-container" id="about" data-aos="fade-up">
       <div class="about-section">
         <div class="section-heading">
@@ -1381,7 +1462,7 @@
       </div>
     </section>
     <!-- about section ends  -->
-
+    <div class="section-divider"></div>
     <section class="projects-section-container" id="projects">
       <div class="projects-section-div">
         <div class="section-heading" data-aos="fade-up">
