@@ -319,17 +319,33 @@
     position: relative;
   }
   .loadout-subtext {
-    font-size: 2.4rem;
+    display: inline-block;
+    font-size: 1.5rem;
     font-weight: 700;
-    background: linear-gradient(90deg, #b0f3f1, #cf59e6, #6bc5f8);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-top: 16px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 48px;
     margin-bottom: 60px;
+    padding: 10px 28px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, rgba(176,243,241,0.1), rgba(207,89,230,0.15), rgba(107,197,248,0.1));
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    position: relative;
     text-align: center;
-    letter-spacing: 0.02em;
-    line-height: 1.4;
+  }
+  .loadout-subtext::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    padding: 1px;
+    background: linear-gradient(135deg, #b0f3f1, #cf59e6, #6bc5f8);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.6;
   }
   .loadout-grid {
     width: 100%;
