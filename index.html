@@ -516,6 +516,138 @@
     padding: 5px 14px;
   }
 
+  /* AI Gameplay Coach — coming soon card */
+  .loadout-card-featured.ai-coach::before {
+    background: linear-gradient(135deg, #7c3aed, #a78bfa, #f59e0b, #7c3aed);
+    background-size: 300% 300%;
+    animation: border-shift 5s linear infinite;
+    opacity: 0.6;
+  }
+  .loadout-card-featured.ai-coach:hover::before { opacity: 1; }
+  .loadout-card-featured.ai-coach:hover {
+    box-shadow: 0 16px 60px rgba(124, 58, 237, 0.18), 0 16px 60px rgba(245, 158, 11, 0.1);
+  }
+
+  /* Mini game-analysis preview */
+  .ai-preview {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 220px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(167, 139, 250, 0.25);
+    background: #08050f;
+  }
+  .ai-preview-screen {
+    position: relative;
+    width: 100%;
+    height: 130px;
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 40%, rgba(124,58,237,0.22), transparent 65%),
+      radial-gradient(ellipse 60% 50% at 75% 70%, rgba(245,158,11,0.14), transparent 60%),
+      linear-gradient(160deg, #0d0818 0%, #110d1f 100%);
+    overflow: hidden;
+  }
+  /* scrolling scan line */
+  .ai-scan-line {
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(167,139,250,0.6), transparent);
+    animation: ai-scan 2.4s linear infinite;
+    z-index: 3;
+  }
+  @keyframes ai-scan {
+    0%   { top: -2px; opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+  /* detection bounding boxes */
+  .ai-detect-box {
+    position: absolute;
+    border: 1.5px solid;
+    border-radius: 3px;
+    animation: ai-box-pulse 2s ease-in-out infinite alternate;
+    z-index: 2;
+  }
+  @keyframes ai-box-pulse {
+    from { opacity: 0.55; }
+    to   { opacity: 1; }
+  }
+  .ai-detect-label {
+    position: absolute;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    z-index: 2;
+    font-family: system-ui, monospace;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+  /* centre crosshair */
+  .ai-crosshair {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px; height: 18px;
+    border: 1.5px solid rgba(167,139,250,0.4);
+    border-radius: 50%;
+    z-index: 2;
+  }
+  .ai-crosshair::before, .ai-crosshair::after {
+    content: "";
+    position: absolute;
+    background: rgba(167,139,250,0.4);
+  }
+  .ai-crosshair::before { width: 1px; height: 10px; left: 50%; top: -6px; transform: translateX(-50%); }
+  .ai-crosshair::after  { height: 1px; width: 10px; top: 50%; left: -6px; transform: translateY(-50%); }
+  /* corner brackets */
+  .ai-corner {
+    position: absolute;
+    width: 10px; height: 10px;
+    z-index: 2;
+    border-color: rgba(167,139,250,0.5);
+    border-style: solid;
+  }
+  .ai-corner-tl { top: 6px; left: 6px; border-width: 1.5px 0 0 1.5px; }
+  .ai-corner-tr { top: 6px; right: 6px; border-width: 1.5px 1.5px 0 0; }
+  .ai-corner-bl { bottom: 6px; left: 6px; border-width: 0 0 1.5px 1.5px; }
+  .ai-corner-br { bottom: 6px; right: 6px; border-width: 0 1.5px 1.5px 0; }
+  /* stat row below the screen */
+  .ai-stats-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.03);
+    border-top: 1px solid rgba(167,139,250,0.12);
+  }
+  .ai-stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .ai-stat-val { font-size: 1.4rem; font-weight: 800; line-height: 1; font-family: system-ui, monospace; }
+  .ai-stat-lbl { font-size: 0.85rem; color: #7070a0; letter-spacing: 0.04em; }
+  .ai-stat-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.08); }
+  /* analyzing footer */
+  .ai-analyzing {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    font-size: 1.1rem;
+    color: #8888b0;
+    font-family: system-ui, monospace;
+    letter-spacing: 0.04em;
+    border-top: 1px solid rgba(167,139,250,0.08);
+  }
+  .ai-analyzing-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #a78bfa;
+    box-shadow: 0 0 8px #a78bfa;
+    animation: pulse-dot 1.4s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
   /* PSN Chat Board card — matches the actual neon arcade palette */
   .loadout-card-featured.chat-board::before {
     background: linear-gradient(135deg, #ff2fd6, #22e6ff, #9d5cff, #ff2fd6);
@@ -824,6 +956,62 @@
     </div>
     <p class="loadout-subtext" data-aos="fade-up" data-aos-delay="100">Everything you unlock as a VIP member.</p>
     <div class="loadout-grid">
+
+      <!-- AI Gameplay Coach — Coming Soon -->
+      <div class="loadout-card-featured ai-coach" data-aos="fade-up" data-aos-delay="60">
+        <span class="featured-badge" style="background: linear-gradient(90deg, #7c3aed, #f59e0b);">Coming Soon</span>
+        <div class="featured-inner">
+
+          <!-- Mini analysis preview -->
+          <div class="ai-preview" aria-hidden="true">
+            <div class="ai-preview-screen">
+              <div class="ai-scan-line"></div>
+              <div class="ai-detect-box" style="top:18%;left:14%;width:28%;height:26%;border-color:#a78bfa;"></div>
+              <div class="ai-detect-label" style="top:15%;left:14%;color:#a78bfa;">Player ×2</div>
+              <div class="ai-detect-box" style="top:52%;left:54%;width:22%;height:30%;border-color:#f59e0b;"></div>
+              <div class="ai-detect-label" style="top:49%;left:54%;color:#f59e0b;">Target</div>
+              <div class="ai-crosshair"></div>
+              <div class="ai-corner ai-corner-tl"></div>
+              <div class="ai-corner ai-corner-tr"></div>
+              <div class="ai-corner ai-corner-bl"></div>
+              <div class="ai-corner ai-corner-br"></div>
+            </div>
+            <div class="ai-stats-row">
+              <div class="ai-stat">
+                <span class="ai-stat-val" style="color:#a78bfa;">87%</span>
+                <span class="ai-stat-lbl">Accuracy</span>
+              </div>
+              <div class="ai-stat-divider"></div>
+              <div class="ai-stat">
+                <span class="ai-stat-val" style="color:#f59e0b;">2.4</span>
+                <span class="ai-stat-lbl">K/D</span>
+              </div>
+              <div class="ai-stat-divider"></div>
+              <div class="ai-stat">
+                <span class="ai-stat-val" style="color:#34d399;">71%</span>
+                <span class="ai-stat-lbl">Win Rate</span>
+              </div>
+            </div>
+            <div class="ai-analyzing">
+              <div class="ai-analyzing-dot"></div>
+              <span>Analyzing clip…</span>
+            </div>
+          </div>
+
+          <div class="featured-content">
+            <div class="featured-content-tag" style="color:#a78bfa;">AI Gameplay Coach</div>
+            <div class="featured-content-title">Drop a clip.<br>Get smarter.</div>
+            <div class="featured-content-desc">Share a clip or go live and our AI breaks down your gameplay — positioning, aim, decision-making — tailored to the specific game you're playing. No generic tips. Just your mistakes, your patterns, your edge.</div>
+            <div class="featured-chips">
+              <span class="featured-chip">Clip analysis</span>
+              <span class="featured-chip">Live stream review</span>
+              <span class="featured-chip">Per-game coaching</span>
+              <span class="featured-chip">VIP early access</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
 
       <!-- PSN × WhatsApp Featured Card -->
       <div class="loadout-card-featured" data-aos="fade-up" data-aos-delay="80">
