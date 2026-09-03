@@ -541,15 +541,16 @@
   /* PSN orbit */
   .psn-orbit-container {
     position: relative;
-    width: 164px;
-    height: 164px;
+    width: 190px;
+    height: 190px;
     flex-shrink: 0;
+    overflow: visible;
   }
   .psn-orbit-ring {
     position: absolute;
-    inset: 20px;
+    inset: 12px;
     border-radius: 50%;
-    border: 1px dashed rgba(255,255,255,0.08);
+    border: 1px dashed rgba(255,255,255,0.1);
     pointer-events: none;
   }
   .psn-orbit-center {
@@ -585,8 +586,8 @@
   .psn-orb-spoke {
     position: absolute;
     width: 1.5px;
-    height: 58px;
-    top: -58px;
+    height: 83px;
+    top: -83px;
     left: -0.75px;
     border-radius: 1px;
   }
@@ -596,7 +597,7 @@
   /* icon counter-rotates to stay upright */
   .psn-orb-icon {
     position: absolute;
-    top: -58px;
+    top: -102px;
     left: -19px;
   }
   .psn-orb-wa .psn-orb-icon { animation: psn-counter 13s linear infinite 0s; }
