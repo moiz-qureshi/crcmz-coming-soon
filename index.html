@@ -523,55 +523,138 @@
     padding: 4px 12px;
   }
 
-  /* PSN Chat Board card */
+  /* PSN Chat Board card — matches the actual neon arcade palette */
   .loadout-card-featured.chat-board::before {
-    background: linear-gradient(135deg, #003087, #8000ff, #cf59e6);
+    background: linear-gradient(135deg, #ff2fd6, #22e6ff, #9d5cff, #ff2fd6);
   }
   .loadout-card-featured.chat-board:hover {
-    box-shadow: 0 12px 50px rgba(128, 0, 255, 0.18), 0 12px 50px rgba(0, 48, 135, 0.1);
+    box-shadow: 0 12px 50px rgba(255, 47, 214, 0.18), 0 12px 50px rgba(34, 230, 255, 0.1);
   }
   .featured-content-tag.purple { color: #cf59e6; }
-  .chat-screen {
+
+  /* Mini dashboard preview */
+  .psn-dash-preview {
     flex-shrink: 0;
-    width: 220px;
-    background: #0d0d1e;
-    border: 1px solid #2a2a40;
+    width: 230px;
+    background: #05030f;
+    border: 1px solid rgba(255, 47, 214, 0.3);
     border-radius: 16px;
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-size: 1.2rem;
+    overflow: hidden;
+    position: relative;
+    font-family: system-ui, sans-serif;
   }
-  .chat-screen-bar {
+  .psn-dash-aurora {
+    position: absolute;
+    inset: -20%;
+    z-index: 0;
+    background:
+      radial-gradient(38% 40% at 18% 12%, rgba(255,47,214,.3), transparent 60%),
+      radial-gradient(40% 40% at 84% 18%, rgba(34,230,255,.25), transparent 60%),
+      radial-gradient(46% 42% at 55% 96%, rgba(157,92,255,.22), transparent 62%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+  .psn-dash-scanlines {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.4;
+    background-image:
+      linear-gradient(rgba(34,230,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,47,214,.025) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .psn-dash-inner { position: relative; z-index: 2; padding: 12px; }
+  .psn-dash-top {
     display: flex;
     align-items: center;
     gap: 8px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #1e1e30;
+    border-bottom: 1px solid rgba(255, 47, 214, 0.18);
+    margin-bottom: 10px;
+  }
+  .psn-dash-logo {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: linear-gradient(135deg, #ff2fd6, #9d5cff);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0;
+    box-shadow: 0 0 14px rgba(255, 47, 214, 0.6);
+  }
+  .psn-dash-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.05rem; font-weight: 900; letter-spacing: 1px;
+    background: linear-gradient(90deg, #22e6ff, #ff2fd6);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .psn-dash-sub { font-size: 0.9rem; color: #6650a0; letter-spacing: 0.5px; margin-top: 1px; }
+  .psn-dash-live {
+    margin-left: auto; display: flex; align-items: center; gap: 4px;
+    font-size: 0.85rem; font-weight: 700; color: #8cff2b; letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(140, 255, 43, 0.6);
+  }
+  .psn-live-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #8cff2b;
+    box-shadow: 0 0 8px #8cff2b;
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+
+  .psn-dash-row {
+    display: flex; align-items: center; gap: 9px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.05);
+  }
+  .psn-dash-row:last-of-type { border-bottom: none; }
+  .psn-dash-av {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: linear-gradient(135deg, #1a0830, #2a1050);
+    flex-shrink: 0; position: relative;
+    border: 1px solid rgba(140, 255, 43, 0.5);
+    box-shadow: 0 0 10px rgba(140, 255, 43, 0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .psn-av-online {
+    position: absolute; bottom: -3px; right: -3px;
+    width: 9px; height: 9px; border-radius: 50%; background: #8cff2b;
+    border: 2px solid #05030f; box-shadow: 0 0 6px #8cff2b;
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+  .psn-dash-who { flex: 1; min-width: 0; }
+  .psn-dash-name {
+    font-size: 1.2rem; font-weight: 700; color: #eaffd4; letter-spacing: 0.2px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .psn-dash-state { font-size: 1rem; color: #8cff2b; margin-top: 1px; font-weight: 600;
+    text-shadow: 0 0 6px rgba(140,255,43,.4); }
+  .psn-dash-offline .psn-dash-av { border-color: rgba(255,255,255,.1); box-shadow: none; }
+  .psn-dash-offline .psn-dash-name { color: #9d8fc4; }
+  .psn-dash-offline .psn-dash-state { color: #5a4e7a; }
+
+  .psn-dash-board {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid rgba(255, 47, 214, 0.15);
+  }
+  .psn-snd {
+    border-radius: 8px; padding: 7px 4px; font-size: 0.85rem; font-weight: 700;
+    cursor: default; text-align: center; line-height: 1.2; border: 1px solid;
     color: #fff;
-    font-weight: 700;
-    font-size: 1.15rem;
   }
-  .chat-dot { width: 8px; height: 8px; border-radius: 50%; background: #8000ff; animation: pulse-dot 1.8s ease-in-out infinite; }
-  .chat-msg {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  .psn-snd.c1 {
+    background: linear-gradient(135deg,rgba(34,230,255,.16),rgba(34,230,255,.04));
+    border-color: rgba(34,230,255,.5); color: #c8fbff;
+    box-shadow: 0 0 8px rgba(34,230,255,.2);
   }
-  .chat-msg-bubble {
-    padding: 7px 10px;
-    border-radius: 10px;
-    color: #ccc;
-    font-size: 1.15rem;
-    line-height: 1.4;
-    width: fit-content;
-    max-width: 90%;
+  .psn-snd.c2 {
+    background: linear-gradient(135deg,rgba(255,47,214,.16),rgba(255,47,214,.04));
+    border-color: rgba(255,47,214,.5); color: #ffd6f6;
+    box-shadow: 0 0 8px rgba(255,47,214,.2);
   }
-  .chat-msg-bubble.them { background: #1a1a2e; align-self: flex-start; }
-  .chat-msg-bubble.me   { background: linear-gradient(135deg, #2d1060, #8000ff); color: #fff; align-self: flex-end; }
-  .chat-msg-name { font-size: 1rem; color: #555; padding: 0 4px; }
-  .chat-msg-name.right { text-align: right; }
+  .psn-snd.c4 {
+    background: linear-gradient(135deg,rgba(140,255,43,.15),rgba(140,255,43,.04));
+    border-color: rgba(140,255,43,.45); color: #e0ffc0;
+    box-shadow: 0 0 8px rgba(140,255,43,.18);
+  }
 
   /* Slaptastic card */
   .loadout-card-featured.slaptastic::before {
@@ -695,7 +778,7 @@
   .more-perk-desc  { font-size: 1.2rem; color: #666; line-height: 1.5; }
 
   @media screen and (max-width: 998px) {
-    .chat-screen { width: 100%; }
+    .psn-dash-preview { width: 100%; }
     .slap-visual { flex-direction: row; }
     .more-inner { flex-direction: column; padding: 28px 22px; gap: 28px; }
     .more-left { width: 100%; }
@@ -800,24 +883,46 @@
 
       <!-- PSN Chat Board -->
       <div class="loadout-card-featured chat-board" data-aos="fade-up" data-aos-delay="110">
-        <span class="featured-badge" style="background: linear-gradient(90deg, #003087, #8000ff);">Live Tool</span>
+        <span class="featured-badge" style="background: linear-gradient(90deg, #ff2fd6, #9d5cff);">Live Tool</span>
         <div class="featured-inner">
-          <div class="chat-screen">
-            <div class="chat-screen-bar">
-              <div class="chat-dot"></div>
-              CRCMZ Party
-            </div>
-            <div class="chat-msg">
-              <span class="chat-msg-name">TheMoose</span>
-              <div class="chat-msg-bubble them">yo who's hopping on? 👀</div>
-            </div>
-            <div class="chat-msg">
-              <span class="chat-msg-name">killerx</span>
-              <div class="chat-msg-bubble them">bro that last kill LMAO 💀</div>
-            </div>
-            <div class="chat-msg">
-              <span class="chat-msg-name right">you</span>
-              <div class="chat-msg-bubble me">sending invite rn 🎮</div>
+          <div class="psn-dash-preview">
+            <div class="psn-dash-aurora"></div>
+            <div class="psn-dash-scanlines"></div>
+            <div class="psn-dash-inner">
+              <div class="psn-dash-top">
+                <div class="psn-dash-logo">🎮</div>
+                <div>
+                  <div class="psn-dash-title">THE SQUAD</div>
+                  <div class="psn-dash-sub">psn.qureshi.io</div>
+                </div>
+                <div class="psn-dash-live"><div class="psn-live-dot"></div>LIVE</div>
+              </div>
+              <div class="psn-dash-row">
+                <div class="psn-dash-av">🐦<div class="psn-av-online"></div></div>
+                <div class="psn-dash-who">
+                  <div class="psn-dash-name">TheMoose</div>
+                  <div class="psn-dash-state">Call of Duty</div>
+                </div>
+              </div>
+              <div class="psn-dash-row">
+                <div class="psn-dash-av" style="font-size:1.1rem;">💀<div class="psn-av-online"></div></div>
+                <div class="psn-dash-who">
+                  <div class="psn-dash-name">killerx096</div>
+                  <div class="psn-dash-state">Call of Duty</div>
+                </div>
+              </div>
+              <div class="psn-dash-row psn-dash-offline">
+                <div class="psn-dash-av" style="border-color:rgba(255,255,255,.1);box-shadow:none;font-size:1.1rem;">😴</div>
+                <div class="psn-dash-who">
+                  <div class="psn-dash-name" style="color:#9d8fc4;">Asamad89</div>
+                  <div class="psn-dash-state" style="color:#5a4e7a;">Offline</div>
+                </div>
+              </div>
+              <div class="psn-dash-board">
+                <div class="psn-snd c1">👉👌 Have you ever?</div>
+                <div class="psn-snd c2">🎬 Clip It!</div>
+                <div class="psn-snd c4">🎮 Squad Up</div>
+              </div>
             </div>
           </div>
           <div class="featured-content">
