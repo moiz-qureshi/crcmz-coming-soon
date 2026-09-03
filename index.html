@@ -296,7 +296,7 @@
 
 <style>
   .loadout-section-container {
-    padding: 120px 0 90px;
+    padding: 130px 0 130px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -307,11 +307,18 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 70% 50% at 50% 40%, rgba(128,0,255,0.06), transparent 70%);
+    background: radial-gradient(ellipse 80% 55% at 50% 35%, rgba(128,0,255,0.09), transparent 70%);
     pointer-events: none;
   }
+  /* Override the global section heading size for this section */
+  .loadout-section-container .section-heading-article {
+    font-size: 5rem !important;
+  }
+  .loadout-section-container .sectionHeadingP {
+    width: 420px;
+  }
   .loadout-section-div {
-    width: 68%;
+    width: 76%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -319,17 +326,18 @@
     position: relative;
   }
   .loadout-subtext {
-    font-size: 1.9rem;
-    color: #a0a0b8;
-    margin-top: 12px;
-    margin-bottom: 55px;
+    font-size: 2.1rem;
+    color: #b0b0c8;
+    margin-top: 16px;
+    margin-bottom: 65px;
     text-align: center;
+    font-weight: 400;
   }
   .loadout-grid {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 34px;
   }
   .loadout-card {
     background: linear-gradient(to bottom right, #1a1a29, rgba(27, 27, 40, 0));
@@ -356,8 +364,8 @@
   /* ── Featured cards ── */
   .loadout-card-featured {
     grid-column: 1 / -1;
-    background: linear-gradient(140deg, #0e0e1c 0%, #12122a 55%, #0a0a16 100%);
-    border-radius: 26px;
+    background: linear-gradient(140deg, #13132a 0%, #171735 55%, #0f0f24 100%);
+    border-radius: 28px;
     padding: 0;
     overflow: hidden;
     position: relative;
@@ -399,8 +407,8 @@
   .featured-inner {
     display: flex;
     align-items: center;
-    padding: 42px 50px;
-    gap: 56px;
+    padding: 50px 60px;
+    gap: 60px;
     position: relative;
     z-index: 1;
   }
@@ -481,39 +489,40 @@
   }
   .featured-content { flex: 1; }
   .featured-content-tag {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     color: #25d366;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   .featured-content-title {
-    font-size: 2.8rem;
+    font-size: 3.2rem;
     font-weight: 800;
     color: #fff;
-    line-height: 1.2;
-    margin-bottom: 16px;
+    line-height: 1.18;
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
   }
   .featured-content-desc {
-    font-size: 1.55rem;
-    color: #a0a0b8;
-    line-height: 1.75;
-    max-width: 520px;
+    font-size: 1.6rem;
+    color: #a8a8c4;
+    line-height: 1.8;
+    max-width: 540px;
   }
   .featured-chips {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 22px;
+    margin-top: 24px;
   }
   .featured-chip {
-    font-size: 1.25rem;
-    color: #c8c8e0;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
+    font-size: 1.3rem;
+    color: #d0d0e8;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
     border-radius: 50px;
-    padding: 5px 14px;
+    padding: 6px 16px;
   }
 
   /* AI Gameplay Coach — coming soon card */
@@ -862,9 +871,9 @@
     grid-template-areas:
       "left  grid"
       "cta   grid";
-    padding: 44px 52px;
-    column-gap: 52px;
-    row-gap: 24px;
+    padding: 50px 60px;
+    column-gap: 56px;
+    row-gap: 28px;
     align-items: start;
     position: relative;
     z-index: 1;
@@ -918,27 +927,33 @@
         "left"
         "grid"
         "cta";
-      padding: 32px 28px;
-      row-gap: 26px;
+      padding: 36px 32px;
+      row-gap: 28px;
     }
     .more-perks-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .loadout-grid { grid-template-columns: 1fr; }
-    .loadout-section-div { width: 82%; }
+    .loadout-grid { grid-template-columns: 1fr; gap: 28px; }
+    .loadout-section-div { width: 86%; }
+    .loadout-section-container .section-heading-article { font-size: 4rem !important; }
+    .loadout-section-container .sectionHeadingP { width: 300px; }
+    .loadout-subtext { font-size: 1.9rem; margin-bottom: 50px; }
     .featured-inner {
       flex-direction: column;
-      padding: 34px 30px;
-      gap: 30px;
+      padding: 38px 32px;
+      gap: 32px;
     }
     .featured-flow { justify-content: center; }
-    .featured-content-title { font-size: 2.2rem; }
+    .featured-content-title { font-size: 2.6rem; }
   }
   @media screen and (max-width: 600px) {
-    .loadout-section-div { width: 88%; }
-    .featured-inner { padding: 28px 22px; gap: 26px; }
+    .loadout-section-container { padding: 90px 0 90px; }
+    .loadout-section-div { width: 90%; }
+    .loadout-section-container .section-heading-article { font-size: 3.4rem !important; }
+    .loadout-subtext { font-size: 1.8rem; margin-bottom: 44px; }
+    .featured-inner { padding: 30px 24px; gap: 26px; }
     .featured-arrow-line { width: 42px; }
-    .featured-content-title { font-size: 1.95rem; }
-    .featured-content-desc { font-size: 1.4rem; }
-    .more-inner { padding: 26px 20px; row-gap: 22px; }
+    .featured-content-title { font-size: 2.2rem; }
+    .featured-content-desc { font-size: 1.5rem; }
+    .more-inner { padding: 28px 22px; row-gap: 24px; }
   }
   @media screen and (max-width: 500px) {
     .more-perks-grid { grid-template-columns: 1fr; }
