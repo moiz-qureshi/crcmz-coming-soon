@@ -538,6 +538,67 @@
     padding: 5px 14px;
   }
 
+  /* PSN → multi-platform fan layout */
+  .psn-multi-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+  }
+  .psn-fan {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 0;
+  }
+  .psn-fan-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .psn-fan-mid {
+    /* centre row aligns with PSN logo */
+  }
+  .psn-fan-line {
+    width: 52px;
+    height: 1.5px;
+    background: linear-gradient(90deg, rgba(0,48,135,0.6), rgba(107,197,248,0.5));
+    position: relative;
+    flex-shrink: 0;
+  }
+  .psn-fan-line::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: -3.5px;
+    border-left: 6px solid rgba(107,197,248,0.7);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+  .psn-fan-dest {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .psn-dest-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .psn-dest-name {
+    font-size: 1rem;
+    color: #888;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
   /* AI Gameplay Coach — coming soon card */
   .loadout-card-featured.ai-coach::before {
     background: linear-gradient(135deg, #7c3aed, #a78bfa, #f59e0b, #7c3aed);
@@ -1035,39 +1096,61 @@
         </div>
       </div>
 
-      <!-- PSN × WhatsApp Featured Card -->
+      <!-- PSN Messenger Featured Card -->
       <div class="loadout-card-featured" data-aos="fade-up" data-aos-delay="80">
         <span class="featured-badge">Exclusive</span>
         <div class="featured-inner">
-          <div class="featured-flow">
+
+          <!-- PSN → 3 destinations -->
+          <div class="psn-multi-flow">
             <div class="featured-platform">
               <div class="featured-platform-logo psn">
                 <img src="src/webp/psn-icon.png" alt="PSN" style="width:42px;height:42px;object-fit:contain;" />
               </div>
               <span class="featured-platform-name">PSN</span>
             </div>
-            <div class="featured-arrow">
-              <div class="featured-arrow-dot"></div>
-              <div class="featured-arrow-line"></div>
-              <span class="featured-arrow-label">auto-sends</span>
-            </div>
-            <div class="featured-platform">
-              <div class="featured-platform-logo wa">
-                <svg width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M50 14C30.1 14 14 30.1 14 50c0 6.4 1.7 12.4 4.7 17.6L14 86l19-4.6C37.8 84.3 43.8 86 50 86c19.9 0 36-16.1 36-36S69.9 14 50 14z" fill="white"/>
-                  <path d="M36 38c0-1.5 1-2.5 2-2.5s5 4 5.5 5.5c.5 1.5-2 3.5-2 5s5 9 11 11c1.5.5 3.5-2 5-2s5.5 4 5.5 5.5-2 3.5-4 4.5c-2 1-15-4-19-12C36.5 47 36 39.5 36 38z" fill="#25d366"/>
-                </svg>
+
+            <div class="psn-fan">
+              <!-- top: WhatsApp -->
+              <div class="psn-fan-row">
+                <div class="psn-fan-line"></div>
+                <div class="psn-fan-dest">
+                  <div class="psn-dest-logo" style="background:linear-gradient(135deg,#128c7e,#25d366);box-shadow:0 4px 14px rgba(37,211,102,0.35);">
+                    <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><path d="M50 14C30.1 14 14 30.1 14 50c0 6.4 1.7 12.4 4.7 17.6L14 86l19-4.6C37.8 84.3 43.8 86 50 86c19.9 0 36-16.1 36-36S69.9 14 50 14z" fill="white"/><path d="M36 38c0-1.5 1-2.5 2-2.5s5 4 5.5 5.5c.5 1.5-2 3.5-2 5s5 9 11 11c1.5.5 3.5-2 5-2s5.5 4 5.5 5.5-2 3.5-4 4.5c-2 1-15-4-19-12C36.5 47 36 39.5 36 38z" fill="#25d366"/></svg>
+                  </div>
+                  <span class="psn-dest-name">WhatsApp</span>
+                </div>
               </div>
-              <span class="featured-platform-name">WhatsApp</span>
+              <!-- middle: Discord -->
+              <div class="psn-fan-row psn-fan-mid">
+                <div class="psn-fan-line"></div>
+                <div class="psn-fan-dest">
+                  <div class="psn-dest-logo" style="background:linear-gradient(135deg,#4752c4,#5865f2);box-shadow:0 4px 14px rgba(88,101,242,0.4);">
+                    <svg width="22" height="22" viewBox="0 0 127.14 96.36" fill="white"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+                  </div>
+                  <span class="psn-dest-name">Discord</span>
+                </div>
+              </div>
+              <!-- bottom: Mattermost -->
+              <div class="psn-fan-row">
+                <div class="psn-fan-line"></div>
+                <div class="psn-fan-dest">
+                  <div class="psn-dest-logo" style="background:linear-gradient(135deg,#1c4f9c,#1e90d6);box-shadow:0 4px 14px rgba(30,144,214,0.35);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.08 13.981l-2.99-.935c-.648-.204-.657-.648.136-.961l11.676-4.503c.54-.194 1.013.131.992.639z"/></svg>
+                  </div>
+                  <span class="psn-dest-name">Mattermost</span>
+                </div>
+              </div>
             </div>
           </div>
+
           <div class="featured-content">
             <div class="featured-content-tag">PSN Messenger</div>
-            <div class="featured-content-title">Clips on PSN.<br>Seen on WhatsApp.</div>
-            <div class="featured-content-desc">Videos and clips shared on PlayStation automatically forward to your clan's WhatsApp. No saving, no uploading, no switching apps — your highlights hit the group the second you share them on console.</div>
+            <div class="featured-content-title">Share on PSN.<br>Lands everywhere.</div>
+            <div class="featured-content-desc">Videos and clips shared on PlayStation automatically forward to your clan's WhatsApp, Discord, and Mattermost. One share on console — the whole squad sees it instantly, wherever they're hanging.</div>
             <div class="featured-chips">
               <span class="featured-chip">Auto-forwarding</span>
-              <span class="featured-chip">No app switching</span>
+              <span class="featured-chip">WhatsApp · Discord · Mattermost</span>
               <span class="featured-chip">Real-time delivery</span>
               <span class="featured-chip">VIP only</span>
             </div>
