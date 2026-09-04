@@ -909,6 +909,25 @@
     box-shadow: 0 0 8px rgba(140,255,43,.18);
   }
 
+  .psn-dash-msgbar {
+    display: flex; align-items: center; gap: 6px;
+    margin-top: 8px; padding-top: 8px;
+    border-top: 1px solid rgba(255,47,214,.12);
+  }
+  .psn-dash-msginput {
+    flex: 1; padding: 7px 10px; border-radius: 10px; font-size: 0.78rem;
+    border: 1px solid rgba(34,230,255,.28); background: rgba(6,4,18,.8);
+    color: rgba(243,236,255,.5); pointer-events: none;
+    font-family: inherit; outline: none;
+  }
+  .psn-dash-sendbtn {
+    flex: none; width: 32px; height: 32px; border-radius: 10px; border: none;
+    display: grid; place-items: center; cursor: default;
+    background: linear-gradient(135deg, #22e6ff, #ff2fd6);
+    box-shadow: 0 0 10px rgba(255,47,214,.4);
+    color: #fff;
+  }
+
   /* Slaptastic card */
   .loadout-card-featured.slaptastic::before {
     background: linear-gradient(135deg, #ff4500, #ff6b35, #ffd700, #ff4500);
@@ -1236,7 +1255,7 @@
               <div class="psn-dash-row">
                 <div class="psn-dash-av">🐦<div class="psn-av-online"></div></div>
                 <div class="psn-dash-who">
-                  <div class="psn-dash-name">TheMoose</div>
+                  <div class="psn-dash-name">TheMooseCompany</div>
                   <div class="psn-dash-state">Call of Duty</div>
                 </div>
               </div>
@@ -1255,9 +1274,15 @@
                 </div>
               </div>
               <div class="psn-dash-board">
-                <div class="psn-snd c1">👉👌 Have you ever?</div>
+                <div class="psn-snd c1">💀 Clutch or Kick</div>
                 <div class="psn-snd c2">🎬 Clip It!</div>
                 <div class="psn-snd c4">🎮 Squad Up</div>
+              </div>
+              <div class="psn-dash-msgbar">
+                <input class="psn-dash-msginput" type="text" placeholder="Send a message…" readonly>
+                <button class="psn-dash-sendbtn" tabindex="-1">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
               </div>
             </div>
           </div>
