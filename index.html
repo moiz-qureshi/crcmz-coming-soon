@@ -928,6 +928,173 @@
     color: #fff;
   }
 
+  /* Watch Party card — mirrors the Watch tab on psn.crcmz.me */
+  .loadout-card-featured.watch-party::before {
+    background: linear-gradient(135deg, #9d5cff, #22e6ff, #ff2fd6, #9d5cff);
+  }
+  .loadout-card-featured.watch-party:hover {
+    box-shadow: 0 12px 50px rgba(157, 92, 255, 0.2), 0 12px 50px rgba(34, 230, 255, 0.1);
+  }
+  .featured-content-tag.violet { color: #b98cff; }
+
+  /* Mini watch-party preview */
+  .wp-preview {
+    flex-shrink: 0;
+    width: 230px;
+    background: #05030f;
+    border: 1px solid rgba(157, 92, 255, 0.32);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    font-family: system-ui, sans-serif;
+  }
+  .wp-prev-aurora {
+    position: absolute;
+    inset: -20%;
+    z-index: 0;
+    background:
+      radial-gradient(40% 40% at 20% 10%, rgba(157,92,255,.32), transparent 60%),
+      radial-gradient(38% 40% at 86% 22%, rgba(34,230,255,.22), transparent 60%),
+      radial-gradient(44% 40% at 55% 98%, rgba(255,47,214,.18), transparent 62%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+  .wp-prev-inner { position: relative; z-index: 2; padding: 12px; }
+  .wp-prev-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(157, 92, 255, 0.2);
+    margin-bottom: 10px;
+  }
+  .wp-prev-logo {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: linear-gradient(135deg, #9d5cff, #22e6ff);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0;
+    box-shadow: 0 0 14px rgba(157, 92, 255, 0.6);
+  }
+  .wp-prev-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.05rem; font-weight: 900; letter-spacing: 1px;
+    background: linear-gradient(90deg, #b98cff, #22e6ff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .wp-prev-sub { font-size: 0.9rem; color: #6650a0; letter-spacing: 0.5px; margin-top: 1px; }
+  .wp-prev-count {
+    margin-left: auto; display: flex; align-items: center; gap: 5px;
+    font-size: 0.85rem; font-weight: 700; color: #c8fbff; letter-spacing: 0.5px;
+    background: rgba(34, 230, 255, 0.1);
+    border: 1px solid rgba(34, 230, 255, 0.35);
+    border-radius: 50px; padding: 3px 9px;
+  }
+  .wp-prev-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #22e6ff;
+    box-shadow: 0 0 8px #22e6ff;
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+  /* 16:9 stage, same shape as the real player */
+  .wp-prev-stage {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(157, 92, 255, 0.28);
+    background:
+      radial-gradient(60% 70% at 50% 45%, rgba(157,92,255,.22), transparent 70%),
+      linear-gradient(160deg, #0b0618, #05030f);
+    display: grid;
+    place-items: center;
+  }
+  .wp-prev-scan {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, transparent 40%, rgba(34,230,255,.14) 50%, transparent 60%);
+    animation: wp-sweep 4.5s ease-in-out infinite;
+  }
+  @keyframes wp-sweep {
+    0%   { transform: translateX(-100%); }
+    60%, 100% { transform: translateX(100%); }
+  }
+  .wp-prev-play {
+    position: relative;
+    width: 34px; height: 34px; border-radius: 50%;
+    display: grid; place-items: center;
+    color: #fff;
+    background: linear-gradient(135deg, #9d5cff, #22e6ff);
+    box-shadow: 0 0 18px rgba(157, 92, 255, 0.65);
+    animation: wp-glow 2.6s ease-in-out infinite;
+  }
+  @keyframes wp-glow {
+    0%, 100% { box-shadow: 0 0 14px rgba(157, 92, 255, 0.5); transform: scale(1); }
+    50%      { box-shadow: 0 0 26px rgba(34, 230, 255, 0.7); transform: scale(1.06); }
+  }
+  .wp-prev-sync {
+    position: absolute;
+    bottom: 7px; left: 8px;
+    display: flex; align-items: center; gap: 4px;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 1px;
+    color: #8cff2b;
+    text-shadow: 0 0 8px rgba(140, 255, 43, 0.6);
+  }
+  .wp-prev-sync-dot {
+    width: 5px; height: 5px; border-radius: 50%; background: #8cff2b;
+    box-shadow: 0 0 6px #8cff2b;
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+  .wp-prev-nowplaying {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .wp-prev-np-title {
+    font-size: 0.9rem; font-weight: 700; color: #e6d9ff;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .wp-prev-np-time {
+    margin-left: auto; flex-shrink: 0;
+    font-size: 0.85rem; color: #6650a0; letter-spacing: 0.5px;
+  }
+  .wp-prev-scrub {
+    height: 4px;
+    border-radius: 3px;
+    margin-top: 7px;
+    background: rgba(255,255,255,.08);
+    overflow: hidden;
+  }
+  .wp-prev-scrub-fill {
+    height: 100%;
+    width: 42%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #9d5cff, #22e6ff);
+    box-shadow: 0 0 8px rgba(34, 230, 255, 0.5);
+    animation: wp-progress 7s ease-in-out infinite alternate;
+  }
+  @keyframes wp-progress {
+    from { width: 22%; }
+    to   { width: 72%; }
+  }
+  .wp-prev-viewers {
+    display: flex; flex-wrap: wrap; gap: 5px;
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid rgba(157, 92, 255, 0.15);
+  }
+  .wp-prev-viewer {
+    font-size: 0.85rem; font-weight: 700;
+    color: #e6d9ff;
+    background: rgba(157, 92, 255, 0.12);
+    border: 1px solid rgba(157, 92, 255, 0.35);
+    border-radius: 50px;
+    padding: 4px 9px;
+  }
+  .wp-prev-viewer.me {
+    color: #c8fbff;
+    background: rgba(34, 230, 255, 0.1);
+    border-color: rgba(34, 230, 255, 0.4);
+  }
+
   /* Slaptastic card */
   .loadout-card-featured.slaptastic::before {
     background: linear-gradient(135deg, #ff4500, #ff6b35, #ffd700, #ff4500);
@@ -1078,6 +1245,7 @@
 
   @media screen and (max-width: 998px) {
     .psn-dash-preview { width: 100%; }
+    .wp-preview { width: 100%; }
     .slap-visual { flex-direction: row; }
     .more-inner {
       grid-template-columns: 1fr;
@@ -1295,6 +1463,60 @@
               <span class="featured-chip">Party up fast</span>
               <span class="featured-chip">Works mid-game</span>
               <span class="featured-chip">psn.crcmz.me</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Watch Party -->
+      <div class="loadout-card-featured watch-party" data-aos="fade-up" data-aos-delay="115">
+        <span class="featured-badge" style="background: linear-gradient(90deg, #9d5cff, #22e6ff);">Now Live</span>
+        <div class="featured-inner">
+          <div class="wp-preview" aria-hidden="true">
+            <div class="wp-prev-aurora"></div>
+            <div class="wp-prev-inner">
+              <div class="wp-prev-top">
+                <div class="wp-prev-logo">🍿</div>
+                <div>
+                  <div class="wp-prev-title">WATCH PARTY</div>
+                  <div class="wp-prev-sub">psn.crcmz.me</div>
+                </div>
+                <div class="wp-prev-count">
+                  <div class="wp-prev-dot"></div>3
+                </div>
+              </div>
+              <div class="wp-prev-stage">
+                <div class="wp-prev-scan"></div>
+                <div class="wp-prev-play">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="wp-prev-sync">
+                  <div class="wp-prev-sync-dot"></div>IN SYNC
+                </div>
+              </div>
+              <div class="wp-prev-nowplaying">
+                <div class="wp-prev-np-title">Squad Wipe</div>
+                <div class="wp-prev-np-time">02:14 / 05:08</div>
+              </div>
+              <div class="wp-prev-scrub">
+                <div class="wp-prev-scrub-fill"></div>
+              </div>
+              <div class="wp-prev-viewers">
+                <span class="wp-prev-viewer">TheMoose</span>
+                <span class="wp-prev-viewer">killerx096</span>
+                <span class="wp-prev-viewer me">You</span>
+              </div>
+            </div>
+          </div>
+          <div class="featured-content">
+            <div class="featured-content-tag violet">Watch Party</div>
+            <div class="featured-content-title">One play button.<br>Everybody's screen.</div>
+            <div class="featured-content-desc">Drop a link on <strong style="color:#b98cff;">psn.crcmz.me</strong> and the whole clan watches together. Play, pause and skip stay locked in sync for everyone in the room — trailers, clan clips, full match VODs, whatever's on. Chat runs right next to it, and you're already signed in, so there's nothing new to install or log into.</div>
+            <div class="featured-chips">
+              <span class="featured-chip">Synced play, pause &amp; skip</span>
+              <span class="featured-chip">Chat while you watch</span>
+              <span class="featured-chip">See who's watching</span>
+              <span class="featured-chip">No extra login</span>
             </div>
           </div>
         </div>
