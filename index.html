@@ -928,6 +928,116 @@
     color: #fff;
   }
 
+  /* CRCMZ Bot card — the assistant that answers on all three surfaces */
+  .loadout-card-featured.crcmz-bot::before {
+    background: linear-gradient(135deg, #8cff2b, #22e6ff, #ff2fd6, #8cff2b);
+  }
+  .loadout-card-featured.crcmz-bot:hover {
+    box-shadow: 0 12px 50px rgba(140, 255, 43, 0.16), 0 12px 50px rgba(34, 230, 255, 0.12);
+  }
+  .featured-content-tag.lime { color: #b6ff6b; }
+
+  .bot-preview {
+    flex-shrink: 0;
+    width: 230px;
+    background: #05030f;
+    border: 1px solid rgba(140, 255, 43, 0.28);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    font-family: system-ui, sans-serif;
+  }
+  .bot-prev-aurora {
+    position: absolute;
+    inset: -20%;
+    z-index: 0;
+    background:
+      radial-gradient(40% 40% at 18% 8%, rgba(140,255,43,.20), transparent 60%),
+      radial-gradient(38% 40% at 88% 24%, rgba(34,230,255,.22), transparent 60%),
+      radial-gradient(44% 40% at 55% 98%, rgba(255,47,214,.16), transparent 62%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+  .bot-prev-inner { position: relative; z-index: 2; padding: 12px; }
+  .bot-prev-top {
+    display: flex; align-items: center; gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(140, 255, 43, 0.18);
+    margin-bottom: 10px;
+  }
+  .bot-prev-logo {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: linear-gradient(135deg, #8cff2b, #22e6ff);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+    box-shadow: 0 0 14px rgba(140, 255, 43, 0.45);
+  }
+  .bot-prev-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.05rem; font-weight: 900; letter-spacing: 1px;
+    background: linear-gradient(90deg, #b6ff6b, #22e6ff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .bot-prev-sub { font-size: 0.9rem; color: #6650a0; letter-spacing: 0.5px; margin-top: 1px; }
+  .bot-prev-live {
+    margin-left: auto; display: flex; align-items: center; gap: 5px;
+    font-size: 0.8rem; font-weight: 700; color: #d8ffc0; letter-spacing: 0.5px;
+    background: rgba(140, 255, 43, 0.1);
+    border: 1px solid rgba(140, 255, 43, 0.3);
+    border-radius: 50px; padding: 3px 9px;
+  }
+  .bot-prev-live-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #8cff2b;
+    box-shadow: 0 0 8px #8cff2b;
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+  /* the three places you can talk to it */
+  .bot-prev-tabs { display: flex; gap: 5px; margin-bottom: 10px; }
+  .bot-prev-tab {
+    flex: 1; text-align: center; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.4px; padding: 4px 2px; border-radius: 7px;
+    color: #6650a0; border: 1px solid rgba(255,255,255,0.07);
+  }
+  .bot-prev-tab.on {
+    color: #0b0f14; border-color: transparent;
+    background: linear-gradient(135deg, #8cff2b, #22e6ff);
+  }
+  .bot-prev-chat { display: flex; flex-direction: column; gap: 7px; }
+  .bot-prev-msg {
+    max-width: 84%; padding: 7px 9px; border-radius: 11px;
+    font-size: 0.86rem; line-height: 1.4;
+  }
+  .bot-prev-msg.them {
+    align-self: flex-start; color: #eae2ff;
+    background: rgba(255, 47, 214, 0.1);
+    border: 1px solid rgba(255, 47, 214, 0.28);
+    border-bottom-left-radius: 4px;
+  }
+  .bot-prev-msg.bot {
+    align-self: flex-end; color: #e9ffe0;
+    background: rgba(140, 255, 43, 0.09);
+    border: 1px solid rgba(140, 255, 43, 0.3);
+    border-bottom-right-radius: 4px;
+  }
+  .bot-prev-who {
+    display: block; font-size: 0.68rem; letter-spacing: 0.8px;
+    text-transform: uppercase; color: #6650a0; margin-bottom: 2px;
+  }
+  .bot-prev-typing {
+    align-self: flex-end; display: flex; gap: 3px; padding: 6px 9px;
+    border-radius: 11px; background: rgba(140, 255, 43, 0.07);
+    border: 1px solid rgba(140, 255, 43, 0.2);
+  }
+  .bot-prev-typing span {
+    width: 4px; height: 4px; border-radius: 50%; background: #8cff2b;
+    animation: pulse-dot 1.2s ease-in-out infinite;
+  }
+  .bot-prev-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .bot-prev-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @media (max-width: 900px) {
+    .bot-preview { width: 100%; }
+  }
+
   /* Watch Party card — mirrors the Watch tab on app.crcmz.me */
   .loadout-card-featured.watch-party::before {
     background: linear-gradient(135deg, #9d5cff, #22e6ff, #ff2fd6, #9d5cff);
@@ -1463,6 +1573,57 @@
               <span class="featured-chip">Party up fast</span>
               <span class="featured-chip">Works mid-game</span>
               <span class="featured-chip">app.crcmz.me</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRCMZ Bot -->
+      <div class="loadout-card-featured crcmz-bot" data-aos="fade-up" data-aos-delay="112">
+        <span class="featured-badge" style="background: linear-gradient(90deg, #8cff2b, #22e6ff); color: #0b0f14;">Now Live</span>
+        <div class="featured-inner">
+          <div class="bot-preview" aria-hidden="true">
+            <div class="bot-prev-aurora"></div>
+            <div class="bot-prev-inner">
+              <div class="bot-prev-top">
+                <div class="bot-prev-logo">🤖</div>
+                <div>
+                  <div class="bot-prev-title">CRCMZ BOT</div>
+                  <div class="bot-prev-sub">runs on our own hardware</div>
+                </div>
+                <div class="bot-prev-live">
+                  <div class="bot-prev-live-dot"></div>ON
+                </div>
+              </div>
+              <div class="bot-prev-tabs">
+                <div class="bot-prev-tab">App</div>
+                <div class="bot-prev-tab on">PSN</div>
+                <div class="bot-prev-tab">WhatsApp</div>
+              </div>
+              <div class="bot-prev-chat">
+                <div class="bot-prev-msg them">
+                  <span class="bot-prev-who">killerx096</span>ai who yaps the most?
+                </div>
+                <div class="bot-prev-msg bot">
+                  <span class="bot-prev-who">CRCMZ Bot</span>Mutasif — 2,943 messages. Types more than he plays.
+                </div>
+                <div class="bot-prev-msg them">
+                  <span class="bot-prev-who">TheMoose</span>ai and who's second?
+                </div>
+                <div class="bot-prev-typing"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+          <div class="featured-content">
+            <div class="featured-content-tag lime">CRCMZ Bot</div>
+            <div class="featured-content-title">One bot.<br>Three places to yell at it.</div>
+            <div class="featured-content-desc">Ask it anything about the clan and it answers from our <em>actual</em> data — who talks the most, who's online, what somebody said last month, who's carrying the music library. Type <strong style="color:#b6ff6b;">ai</strong> in front of your message in the <strong style="color:#b6ff6b;">PSN group</strong> or the <strong style="color:#b6ff6b;">WhatsApp group</strong> and it replies right there; on <strong style="color:#22e6ff;">app.crcmz.me</strong> it gets its own Ask AI tab that remembers your conversation. Everyone can teach it too: add a fact about anyone and the bot knows it everywhere, for everyone, from then on. It runs on a machine in the house — nothing gets shipped off to anybody else's cloud.</div>
+            <div class="featured-chips">
+              <span class="featured-chip">Say "ai …" in PSN or WhatsApp</span>
+              <span class="featured-chip">Ask AI tab on app.crcmz.me</span>
+              <span class="featured-chip">Knows the squad's real stats</span>
+              <span class="featured-chip">Teach it facts about each other</span>
+              <span class="featured-chip">Runs on our own hardware</span>
             </div>
           </div>
         </div>
