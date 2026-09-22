@@ -1,499 +1,2229 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>CRCMZ — Quick. Clean. Gone.</title>
-<meta name="description" content="CRCMZ is an AI-powered gaming clan. Clips auto-shared, roasts auto-fired, coaching auto-delivered. Nobody has this." />
-<link rel="icon" href="img/favicon.ico" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-<style>
-:root{
-  color-scheme:dark;
-  --bg:#050507; --bg2:#0b0b10; --panel:#101016; --panel2:#16161e;
-  --text:#f5f5f7; --muted:#a7a7b3; --dim:#6d6d78;
-  --line:rgba(255,255,255,.1);
-  --purple:#8000ff; --cyan:#56d8ff; --magenta:#f055ff; --gold:#ffc44d; --lime:#b7ff42;
-  --r:22px;
-  --font:'Inter Tight',-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-::selection{background:var(--purple);color:#fff}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-
-/* ambient background */
-.ambient{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
-.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;animation:drift 22s ease-in-out infinite alternate}
-.orb.o1{width:56vmax;height:56vmax;left:-14vmax;top:-16vmax;background:radial-gradient(circle,rgba(128,0,255,.5),transparent 65%)}
-.orb.o2{width:48vmax;height:48vmax;right:-12vmax;top:22vh;background:radial-gradient(circle,rgba(86,216,255,.32),transparent 65%);animation-delay:-8s}
-.orb.o3{width:44vmax;height:44vmax;left:22vw;bottom:-18vmax;background:radial-gradient(circle,rgba(240,85,255,.28),transparent 65%);animation-delay:-14s}
-@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(6vmax,4vmax) scale(1.12)}}
-.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
-
-/* progress */
-.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:80;background:rgba(255,255,255,.06)}
-.progress span{display:block;height:100%;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--purple),var(--cyan),var(--lime))}
-
-/* nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:70;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:rgba(5,5,7,.55);border-bottom:1px solid var(--line)}
-.nav-inner{max-width:1240px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:26px}
-.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.06em;font-size:1.02rem}
-.brand img{width:30px;height:30px;border-radius:8px}
-.nav-links{display:flex;gap:22px;margin-left:8px;font-size:.9rem;color:var(--muted);font-weight:500}
-.nav-links a{transition:color .25s}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{margin-left:auto;display:flex;gap:10px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;font-weight:700;font-size:.9rem;border:1px solid var(--line);background:rgba(255,255,255,.05);transition:transform .25s,box-shadow .25s,background .25s,border-color .25s;white-space:nowrap}
-.btn:hover{transform:translateY(-2px)}
-.btn.primary{background:linear-gradient(135deg,var(--purple),#a64dff);border-color:transparent;box-shadow:0 8px 28px rgba(128,0,255,.4)}
-.btn.primary:hover{box-shadow:0 12px 36px rgba(128,0,255,.55)}
-.btn.ghost:hover{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.09)}
-
-/* hero */
-.hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;padding:120px 22px 80px;overflow:hidden}
-.hero-inner{transform:translate3d(0,var(--hy,0px),0) scale(var(--hs,1));opacity:var(--ho,1);will-change:transform,opacity}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:9px 18px;background:rgba(255,255,255,.04);margin-bottom:30px}
-.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime);animation:blink 2.2s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
-.hero h1{font-size:clamp(4.5rem,17vw,15rem);font-weight:900;letter-spacing:-.06em;line-height:.88;margin-bottom:18px}
-.hero h1 .ch{display:inline-block;opacity:0;transform:translateY(.55em) rotate(4deg);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(.35s + var(--i)*.055s);background:linear-gradient(180deg,#fff 30%,var(--cyan) 130%);-webkit-background-clip:text;background-clip:text}
-.hero h1 .ch:last-child{background:linear-gradient(180deg,#fff 20%,var(--purple) 140%);-webkit-background-clip:text;background-clip:text}
-@keyframes rise{to{opacity:1;transform:none}}
-.tagline{font-size:clamp(1.3rem,3.4vw,2.3rem);font-weight:700;letter-spacing:-.02em;background:linear-gradient(100deg,var(--cyan),var(--magenta) 60%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:22px;opacity:0;animation:fadeup .9s ease .9s forwards}
-.hero-dek{max-width:620px;margin:0 auto 38px;color:var(--muted);font-size:clamp(1rem,1.8vw,1.2rem);line-height:1.6;opacity:0;animation:fadeup .9s ease 1.05s forwards}
-@keyframes fadeup{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeup .9s ease 1.2s forwards}
-.hero-ctas .btn{padding:15px 32px;font-size:1rem}
-.scroll-cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:grid;justify-items:center;gap:10px;color:var(--dim);font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
-.scroll-cue::after{content:"";width:1px;height:44px;background:linear-gradient(var(--dim),transparent);animation:cue 1.9s ease-in-out infinite}
-@keyframes cue{0%,100%{transform:scaleY(.6);opacity:.4}50%{transform:scaleY(1);opacity:1}}
-</style>
-<style>
-/* ---------- apple-style pinned story ---------- */
-.pin-wrap{position:relative;height:340vh}
-.pin{position:sticky;top:0;height:100svh;display:grid;place-items:center;overflow:hidden}
-.story-stage{position:relative;width:min(1060px,92vw);text-align:center}
-.beat{position:absolute;inset:0;display:grid;place-content:center;gap:18px;opacity:0;transform:translateY(46px) scale(.96);pointer-events:none}
-.beat .num{font-size:.75rem;font-weight:800;letter-spacing:.24em;color:var(--purple);text-transform:uppercase}
-.beat h2{font-size:clamp(2.4rem,7vw,5.6rem);font-weight:800;letter-spacing:-.045em;line-height:1.02;text-wrap:balance}
-.beat h2 .grad{background:linear-gradient(100deg,var(--cyan),var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent}
-.beat:nth-child(2) h2 .grad{background:linear-gradient(100deg,var(--magenta),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
-.beat:nth-child(3) h2 .grad{background:linear-gradient(100deg,var(--gold),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent}
-.beat p{max-width:560px;margin:0 auto;color:var(--muted);font-size:clamp(1rem,1.9vw,1.25rem);line-height:1.6}
-.story-progress{position:absolute;bottom:8vh;left:50%;transform:translateX(-50%);display:flex;gap:10px}
-.story-progress i{width:34px;height:4px;border-radius:99px;background:rgba(255,255,255,.14);overflow:hidden;position:relative}
-.story-progress i::after{content:"";position:absolute;inset:0;background:var(--purple);transform:scaleX(0);transform-origin:0 50%}
-
-/* ---------- marquee ---------- */
-.marquee{overflow:hidden;border-block:1px solid var(--line);background:rgba(255,255,255,.015);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.mq-track{display:flex;width:max-content;animation:mq 32s linear infinite;padding:20px 0}
-.mq-group{display:flex;align-items:center;gap:3.4rem;padding-right:3.4rem;font-weight:800;font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;color:var(--dim)}
-.mq-group b{color:var(--text)}
-.mq-group .st{color:var(--purple)}
-@keyframes mq{to{transform:translateX(-50%)}}
-
-/* ---------- stats ---------- */
-.stats{max-width:1240px;margin:0 auto;padding:16vh 22px 6vh;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.stat{border:1px solid var(--line);border-radius:var(--r);padding:38px 26px;background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.008));text-align:center}
-.stat b{display:block;font-size:clamp(2.4rem,5vw,4.2rem);font-weight:800;letter-spacing:-.05em;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat:nth-child(2) b{background:linear-gradient(180deg,#fff,var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat:nth-child(3) b{background:linear-gradient(180deg,#fff,var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat:nth-child(4) b{background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat span{display:block;margin-top:10px;color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
-
-/* ---------- reveal ---------- */
-.rv{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
-.rv.in{opacity:1;transform:none}
-
-/* ---------- section headers ---------- */
-.sec{max-width:1240px;margin:0 auto;padding:14vh 22px 8vh}
-.sec-head{text-align:center;max-width:720px;margin:0 auto 60px}
-.sec-head .kicker{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(86,216,255,.3);background:rgba(86,216,255,.07);padding:8px 18px;border-radius:999px;margin-bottom:24px}
-.sec-head h2{font-size:clamp(2.2rem,5.6vw,4.4rem);font-weight:800;letter-spacing:-.045em;line-height:1.02;margin-bottom:18px;text-wrap:balance}
-.sec-head p{color:var(--muted);font-size:clamp(1rem,1.8vw,1.2rem)}
-
-/* ---------- loadout bento ---------- */
-.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
-.card{position:relative;border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.01));overflow:hidden;transition:transform .35s ease,border-color .35s,box-shadow .35s;transform-style:preserve-3d;will-change:transform}
-.card:hover{border-color:rgba(128,0,255,.55);box-shadow:0 18px 60px rgba(128,0,255,.22)}
-.card::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(128,0,255,.14),transparent 65%);opacity:0;transition:opacity .35s;pointer-events:none}
-.card:hover::before{opacity:1}
-.card.span4{grid-column:span 4}.card.span2{grid-column:span 2}.card.span3{grid-column:span 3}
-.pill{display:inline-block;font-size:.64rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:6px 13px;border-radius:999px;margin-bottom:18px}
-.pill.live{background:rgba(183,255,66,.12);color:var(--lime);border:1px solid rgba(183,255,66,.35)}
-.pill.soon{background:rgba(255,196,77,.1);color:var(--gold);border:1px solid rgba(255,196,77,.35)}
-.card h3{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
-.card p{color:var(--muted);font-size:.98rem;line-height:1.6}
-.card .icon{font-size:2.4rem;margin-bottom:18px;display:block;filter:drop-shadow(0 6px 18px rgba(128,0,255,.45))}
-.card.hero-card{background:linear-gradient(150deg,rgba(128,0,255,.16),rgba(86,216,255,.05) 60%,transparent);border-color:rgba(128,0,255,.4)}
-.card.hero-card h3{font-size:clamp(1.7rem,3vw,2.4rem)}
-.ai-scan{position:relative;height:150px;border-radius:14px;margin-bottom:20px;background:linear-gradient(180deg,#0a0a12,#101018);border:1px solid var(--line);overflow:hidden}
-.ai-scan::before{content:"";position:absolute;left:0;right:0;height:2px;top:0;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 18px var(--cyan);animation:scan 3.2s ease-in-out infinite}
-@keyframes scan{0%,100%{top:4%}50%{top:94%}}
-.ai-scan .box{position:absolute;border:2px solid var(--cyan);border-radius:6px;box-shadow:0 0 14px rgba(86,216,255,.5)}
-.ai-scan .tag{position:absolute;font-size:.62rem;font-weight:800;letter-spacing:.1em;color:var(--cyan);text-transform:uppercase}
-.ai-row{display:flex;gap:26px;margin-top:4px}
-.ai-row div b{display:block;font-size:1.5rem;font-weight:800;color:var(--cyan)}
-.ai-row div span{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-</style>
-<style>
-/* ---------- members : pinned horizontal scroll ---------- */
-.h-wrap{position:relative;height:320vh}
-.h-pin{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-.h-head{max-width:1240px;width:100%;margin:0 auto;padding:0 22px 34px}
-.h-head .kicker{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--magenta);border:1px solid rgba(240,85,255,.3);background:rgba(240,85,255,.07);padding:8px 18px;border-radius:999px;margin-bottom:20px}
-.h-head h2{font-size:clamp(2.2rem,5.6vw,4.4rem);font-weight:800;letter-spacing:-.045em;line-height:1.02}
-.h-head p{color:var(--muted);margin-top:12px;font-size:1.05rem}
-.h-track{display:flex;gap:22px;padding:6px max(22px,calc((100vw - 1240px)/2 + 22px));width:max-content;will-change:transform}
-.member{position:relative;width:min(400px,78vw);flex:none;border:1px solid var(--line);border-radius:26px;overflow:hidden;background:var(--panel);transition:border-color .3s,transform .3s}
-.member:hover{border-color:rgba(240,85,255,.5);transform:translateY(-6px)}
-.member .ph{aspect-ratio:1/1;overflow:hidden;background:radial-gradient(circle at 50% 30%,rgba(128,0,255,.25),var(--panel) 75%)}
-.member .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-.member:hover .ph img{transform:scale(1.06)}
-.member .info{padding:24px 26px 28px}
-.member .role{display:inline-block;font-size:.66rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--magenta);margin-bottom:8px}
-.member h3{font-size:1.7rem;font-weight:800;letter-spacing:-.02em}
-.member p{color:var(--muted);font-size:.95rem;margin-top:8px;line-height:1.55}
-.h-hint{max-width:1240px;width:100%;margin:26px auto 0;padding:0 22px;color:var(--dim);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
-.h-hint::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
-
-/* ---------- CTA ---------- */
-.cta{position:relative;text-align:center;padding:22vh 22px;overflow:hidden}
-.cta .big{font-size:clamp(3rem,10vw,8.5rem);font-weight:900;letter-spacing:-.055em;line-height:.95;margin-bottom:24px}
-.cta .big .grad{background:linear-gradient(100deg,var(--purple),var(--magenta) 55%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
-.cta p{color:var(--muted);font-size:clamp(1rem,2vw,1.3rem);max-width:560px;margin:0 auto 40px}
-.cta .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.cta .btn{padding:17px 38px;font-size:1.05rem}
-
-/* ---------- footer ---------- */
-footer{border-top:1px solid var(--line);padding:54px 22px 60px;text-align:center}
-footer .flogo{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:800;letter-spacing:.08em;margin-bottom:16px}
-footer .flogo img{width:26px;height:26px;border-radius:7px}
-footer nav{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;font-size:.9rem;color:var(--muted)}
-footer nav a:hover{color:var(--text)}
-footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase}
-
-/* ---------- responsive ---------- */
-@media(max-width:900px){
-  .nav-links{display:none}
-  .bento{grid-template-columns:1fr 1fr}
-  .card.span4,.card.span3{grid-column:span 2}
-  .card.span2{grid-column:span 1}
-  .stats{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:600px){
-  .bento{grid-template-columns:1fr}
-  .card.span4,.card.span3,.card.span2{grid-column:span 1}
-  .nav-cta .btn.ghost{display:none}
-  .hero{padding-top:110px}
-}
-/* ---------- reduced motion ---------- */
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
-  html{scroll-behavior:auto}
-  .rv{opacity:1;transform:none}
-  .hero h1 .ch,.tagline,.hero-dek,.hero-ctas{opacity:1;animation:none}
-}
-</style>
-</head>
-<body>
-<div class="ambient" aria-hidden="true"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
-<div class="grain" aria-hidden="true"></div>
-<div class="progress" aria-hidden="true"><span id="pbar"></span></div>
-
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="#top"><img src="img/logo2.png" alt="CRCMZ logo" />CRCMZ</a>
-    <div class="nav-links">
-      <a href="#story">Story</a>
-      <a href="#loadout">The Loadout</a>
-      <a href="#members">Members</a>
-      <a href="https://history.crcmz.me" target="_blank" rel="noopener">History ↗</a>
-    </div>
-    <div class="nav-cta">
-      <a class="btn ghost" href="https://discord.gg/BeWdfJkFqr" target="_blank" rel="noopener">Join Discord</a>
-      <a class="btn primary" href="https://app.crcmz.me">Login</a>
-    </div>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <div class="hero-inner" id="heroInner">
-    <span class="eyebrow"><span class="dot"></span>Est. 2023 — Canada + US</span>
-    <h1 id="heroTitle" aria-label="CRCMZ">CRCMZ</h1>
-    <p class="tagline">Quick. Clean. Gone.</p>
-    <p class="hero-dek">An AI-powered gaming clan. Clips auto-shared to your chat, roasts auto-fired at your squad, coaching auto-delivered to your game. Nobody has this.</p>
-    <div class="hero-ctas">
-      <a class="btn primary" href="https://discord.gg/BeWdfJkFqr" target="_blank" rel="noopener">Join the Clan</a>
-      <a class="btn ghost" href="https://app.crcmz.me">Open the App</a>
-    </div>
-  </div>
-  <div class="scroll-cue">Scroll</div>
-</header>
-
-<div class="pin-wrap" id="storyWrap">
-  <div class="pin">
-    <div class="story-stage" id="story">
-      <div class="beat" data-beat="0">
-        <span class="num">01 — The Origin</span>
-        <h2>It started with <span class="grad">vibes.</span></h2>
-        <p>Gamers across Canada and the US. No website, no bots, no automation — just game chat, shits and giggles.</p>
-      </div>
-      <div class="beat" data-beat="1">
-        <span class="num">02 — The Build</span>
-        <h2>Then we built <span class="grad">the machine.</span></h2>
-        <p>PSN bots, WhatsApp relays, clip pipelines, a local AI lab. The clan runs on software we wrote ourselves.</p>
-      </div>
-      <div class="beat" data-beat="2">
-        <span class="num">03 — The North Star</span>
-        <h2>Now the AI <span class="grad">coaches us.</span></h2>
-        <p>Send a clip with “rev” — get strengths, mistakes and coaching tips back. Automatically. The dream is live.</p>
-      </div>
-    </div>
-    <div class="story-progress" aria-hidden="true"><i id="sp0"></i><i id="sp1"></i><i id="sp2"></i></div>
-  </div>
-</div>
-
-<div class="marquee" aria-hidden="true">
-  <div class="mq-track">
-    <div class="mq-group"><span><b>AI Coaching</b> ✦ Clip Pipeline ✦ <span class="st">Roast Button</span> ✦ Watch Party ✦ <b>Slaptastic</b> ✦ Giveaways ✦ <span class="st">MCP Everywhere</span> ✦ Huddle ✦&nbsp;</span></div>
-    <div class="mq-group"><span><b>AI Coaching</b> ✦ Clip Pipeline ✦ <span class="st">Roast Button</span> ✦ Watch Party ✦ <b>Slaptastic</b> ✦ Giveaways ✦ <span class="st">MCP Everywhere</span> ✦ Huddle ✦&nbsp;</span></div>
-  </div>
-</div>
-
-<section class="stats" aria-label="Clan stats">
-  <div class="stat rv"><b data-count="27">0</b><span>Platinums</span></div>
-  <div class="stat rv" style="--d:.1s"><b data-count="77">0</b><span>Clips captured</span></div>
-  <div class="stat rv" style="--d:.2s"><b data-count="10.4" data-suffix="K">0</b><span>WhatsApp messages</span></div>
-  <div class="stat rv" style="--d:.3s"><b data-count="309">0</b><span>Tracks slapped</span></div>
-</section>
-<section class="sec" id="loadout">
-  <div class="sec-head rv">
-    <span class="kicker">VIP — The Loadout</span>
-    <h2>Everything you unlock.</h2>
-    <p>Every perk, day one. Go VIP and unlock the full package — instantly. No grinding, no waiting.</p>
-  </div>
-  <div class="bento">
-    <div class="card hero-card span4 rv tilt">
-      <span class="pill soon">Coming soon</span>
-      <div class="ai-scan" aria-hidden="true">
-        <div class="box" style="top:20%;left:12%;width:26%;height:30%"></div><span class="tag" style="top:14%;left:12%">Squad ×3</span>
-        <div class="box" style="top:52%;left:58%;width:20%;height:32%;border-color:var(--magenta);box-shadow:0 0 14px rgba(240,85,255,.5)"></div><span class="tag" style="top:46%;left:58%;color:var(--magenta)">Target</span>
-      </div>
-      <h3>🤖 AI Gameplay Coach</h3>
-      <p>Send a clip with “rev” and get a full coaching report — strengths, mistakes, tips, grades. The north star, almost here.</p>
-      <div class="ai-row"><div><b>87%</b><span>Accuracy</span></div><div><b>S–D</b><span>Grades</span></div><div><b>24/7</b><span>Reviews</span></div></div>
-    </div>
-    <div class="card span2 rv tilt" style="--d:.08s">
-      <span class="pill live">Live</span>
-      <span class="icon">🎮</span>
-      <h3>The Squad App</h3>
-      <p>Live roster, trophy data, ranks and more at app.crcmz.me — the clan's home base.</p>
-    </div>
-    <div class="card span2 rv tilt">
-      <span class="pill live">Live</span>
-      <span class="icon">⚡</span>
-      <h3>CRCMZ Bot</h3>
-      <p>Runs on our own hardware. One bot across app, PSN and WhatsApp — summaries, roasts, rally calls.</p>
-    </div>
-    <div class="card span2 rv tilt" style="--d:.08s">
-      <span class="pill live">Live</span>
-      <span class="icon">🍿</span>
-      <h3>Watch Party</h3>
-      <p>Movie night in perfect sync, with cameras. Self-hosted, zero lag excuses.</p>
-    </div>
-    <div class="card span2 rv tilt" style="--d:.16s">
-      <span class="pill live">Live</span>
-      <span class="icon">🎵</span>
-      <h3>Slaptastic</h3>
-      <p>Spotify, but for CRCMZ. Drop a song link and it downloads straight to the clan's shared music server.</p>
-    </div>
-    <div class="card span3 rv tilt">
-      <span class="pill live">Live</span>
-      <span class="icon">🛡️</span>
-      <h3>Founders' Bunker</h3>
-      <p>Access to the inner circle's self-hosted Mattermost — where the real planning happens.</p>
-    </div>
-    <div class="card span3 rv tilt" style="--d:.08s">
-      <span class="pill live">Live</span>
-      <span class="icon">🎁</span>
-      <h3>Monthly Giveaways</h3>
-      <p>Real games, given away every month. Battlefield and MW4 already found new homes.</p>
-    </div>
-  </div>
-</section>
-
-<div class="h-wrap" id="membersWrap">
-  <div class="h-pin">
-    <div class="h-head">
-      <span class="kicker">The Roster</span>
-      <h2>Clan members.</h2>
-      <p>Hand-made AI portraits. Real traits. Zero mercy. →</p>
-    </div>
-    <div class="h-track" id="hTrack">
-      <article class="member">
-        <div class="ph"><img src="src/png/moose.png" alt="Moose — CRCMZ clan member portrait" loading="lazy" /></div>
-        <div class="info"><span class="role">The Originator</span><h3>Moose</h3><p>Started it all. Still here, still talking.</p></div>
-      </article>
-      <article class="member">
-        <div class="ph"><img src="src/png/decep.png" alt="Deception — CRCMZ clan member portrait" loading="lazy" /></div>
-        <div class="info"><span class="role">The Finisher</span><h3>Deception</h3><p>Closes out the fight before it starts.</p></div>
-      </article>
-      <article class="member">
-        <div class="ph"><img src="src/png/killer.png" alt="Killer — CRCMZ clan member portrait" loading="lazy" /></div>
-        <div class="info"><span class="role">The Shreaker</span><h3>Killer</h3><p>You'll hear him before you see him.</p></div>
-      </article>
-      <article class="member">
-        <div class="ph"><img src="src/png/samad.png" alt="Samad — CRCMZ clan member portrait" loading="lazy" /></div>
-        <div class="info"><span class="role">The Confused</span><h3>Samad</h3><p>Certified yapper. Most-said word in clan history.</p></div>
-      </article>
-      <article class="member">
-        <div class="ph"><img src="src/png/kap.png" alt="Kap — CRCMZ clan member portrait" loading="lazy" /></div>
-        <div class="info"><span class="role">The Camper</span><h3>Kap</h3><p>Holding angles since 2023. Unmoved, unbothered.</p></div>
-      </article>
-    </div>
-    <div class="h-hint" aria-hidden="true">Keep scrolling</div>
-  </div>
-</div>
-
-<section class="cta">
-  <h2 class="big rv">Ready to run<br /><span class="grad">with us?</span></h2>
-  <p class="rv" style="--d:.1s">Join the Discord, meet the squad, and see what an AI-powered clan actually feels like.</p>
-  <div class="row rv" style="--d:.2s">
-    <a class="btn primary" href="https://discord.gg/BeWdfJkFqr" target="_blank" rel="noopener">Join Discord</a>
-    <a class="btn ghost" href="https://app.crcmz.me">Open the App</a>
-  </div>
-</section>
-
-<footer>
-  <div class="flogo"><img src="img/logo2.png" alt="" />CRCMZ</div>
-  <nav>
-    <a href="#story">Story</a><a href="#loadout">The Loadout</a><a href="#members">Members</a>
-    <a href="https://history.crcmz.me" target="_blank" rel="noopener">Clan History ↗</a>
-    <a href="https://discord.gg/BeWdfJkFqr" target="_blank" rel="noopener">Discord</a>
-    <a href="https://app.crcmz.me">Login</a>
-  </nav>
-  <small>Built by Soup · CRCMZ est. 2023 · Canada + US</small>
-</footer>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E5RP9SVYCH"></script>
 <script>
-(function(){
-  "use strict";
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fine = window.matchMedia('(pointer: fine)').matches;
-  var clamp = function(n,a,b){ return Math.max(a, Math.min(b, n)); };
-  var lerp = function(a,b,t){ return a + (b-a)*t; };
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  /* hero title: split into animated letters */
-  var h1 = document.getElementById('heroTitle');
-  var txt = h1.textContent; h1.textContent = '';
-  txt.split('').forEach(function(c,i){
-    var s = document.createElement('span');
-    s.className = 'ch'; s.style.setProperty('--i', i); s.textContent = c;
-    h1.appendChild(s);
-  });
-
-  var pbar = document.getElementById('pbar');
-  var heroInner = document.getElementById('heroInner');
-  var hero = document.querySelector('.hero');
-  var storyWrap = document.getElementById('storyWrap');
-  var beats = Array.prototype.slice.call(document.querySelectorAll('.beat'));
-  var sps = [document.getElementById('sp0'),document.getElementById('sp1'),document.getElementById('sp2')];
-  var hWrap = document.getElementById('membersWrap');
-  var hTrack = document.getElementById('hTrack');
-
-  sps.forEach(function(sp){
-    var f = document.createElement('b');
-    f.style.cssText = 'display:block;height:100%;background:var(--purple);border-radius:99px;transform:scaleX(0);transform-origin:0 50%';
-    sp.appendChild(f);
-  });
-
-  function draw(){
-    var y = window.scrollY || window.pageYOffset;
-    var vh = window.innerHeight;
-    var max = Math.max(1, document.documentElement.scrollHeight - vh);
-    pbar.style.transform = 'scaleX(' + clamp(y/max,0,1) + ')';
-    if(reduce) return;
-
-    /* hero parallax: sink + shrink + fade, apple-style */
-    var hp = clamp(y / Math.max(1, hero.offsetHeight), 0, 1);
-    heroInner.style.setProperty('--hy', (hp*140)+'px');
-    heroInner.style.setProperty('--hs', (1 - hp*.14).toFixed(3));
-    heroInner.style.setProperty('--ho', clamp(1 - hp*1.35, 0, 1).toFixed(3));
-
-    /* story beats: scrub through 3 stages */
-    var r = storyWrap.getBoundingClientRect();
-    var total = r.height - vh;
-    var p = clamp(-r.top / Math.max(1,total), 0, 1);
-    var seg = 1/3;
-    beats.forEach(function(b,i){
-      var local = clamp((p - i*seg)/seg, 0, 1);          // 0..1 within this beat
-      var fadeIn = clamp(local/0.28, 0, 1);
-      var fadeOut = i < 2 ? clamp((local-0.72)/0.28, 0, 1) : 0;
-      var op = fadeIn * (1 - fadeOut);
-      b.style.opacity = op.toFixed(3);
-      b.style.transform = 'translateY(' + (46*(1-fadeIn) - 34*fadeOut).toFixed(1) + 'px) scale(' + (0.96 + 0.04*fadeIn).toFixed(3) + ')';
-      b.style.pointerEvents = 'none';
-      var fill = i < 2 ? clamp(local/0.72, 0, 1) : local;
-      sps[i].firstChild.style.transform = 'scaleX(' + fill.toFixed(3) + ')';
-    });
-
-    /* members: horizontal scrub */
-    var hr = hWrap.getBoundingClientRect();
-    var hTotal = hr.height - vh;
-    var hq = clamp(-hr.top / Math.max(1,hTotal), 0, 1);
-    var maxX = Math.max(0, hTrack.scrollWidth - window.innerWidth);
-    hTrack.style.transform = 'translate3d(' + (-hq*maxX).toFixed(1) + 'px,0,0)';
-  }
-
-  var ticking = false;
-  function req(){ if(!ticking){ ticking = true; requestAnimationFrame(function(){ ticking=false; draw(); }); } }
-  document.addEventListener('scroll', req, {passive:true});
-  window.addEventListener('resize', req);
-  draw();
-
-  /* reveal on scroll */
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
-  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
-
-  /* count-up stats */
-  var cio = new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(!e.isIntersecting) return;
-      cio.unobserve(e.target);
-      var el = e.target, target = parseFloat(el.dataset.count), suf = el.dataset.suffix || '';
-      var dec = (''+el.dataset.count).indexOf('.') > -1 ? 1 : 0;
-      if(reduce){ el.textContent = target + suf; return; }
-      var t0 = performance.now(), dur = 1400;
-      (function tick(t){
-        var k = clamp((t-t0)/dur, 0, 1), ease = 1-Math.pow(1-k,3);
-        el.textContent = (target*ease).toFixed(dec) + suf;
-        if(k < 1) requestAnimationFrame(tick);
-      })(t0);
-    });
-  }, {threshold:.5});
-  document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
-
-  /* card spotlight tilt */
-  if(fine && !reduce){
-    document.querySelectorAll('.tilt').forEach(function(card){
-      card.addEventListener('mousemove', function(e){
-        var r = card.getBoundingClientRect();
-        var x = (e.clientX - r.left)/r.width, y = (e.clientY - r.top)/r.height;
-        card.style.setProperty('--mx', (x*100)+'%');
-        card.style.setProperty('--my', (y*100)+'%');
-        card.style.transform = 'perspective(900px) rotateX('+((0.5-y)*5).toFixed(2)+'deg) rotateY('+((x-0.5)*7).toFixed(2)+'deg) translateY(-4px)';
-      });
-      card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
-    });
-  }
-})();
+  gtag('config', 'G-E5RP9SVYCH');
 </script>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#000" />
+  <meta name="description"
+    content="CRCMZ | Quick. Clean. Gone." />
+  <meta name="keywords"
+    content="cod, call of duty, gaming, crew, earl morning clan, clan, live streaming, better than faze, TheMooseCompany, InterestingSoup, Epixkiller, DarkSouls, Killerx, Asamad89" />
+  <meta name="author" content="CRCMZ" />
+  <meta property="og:image" content="https://www.crcmz.me/src/png/Preview-card-min.png" />
+  <meta property="og:title" content="CRCMZ | The Clan	" />
+  <meta property="og:description"
+    content="CRCMZ | Quick. Clean. Gone." />
+
+  <meta property="og:url" content="https://crcmz.me" />
+  <meta property="og:site_name" content="CRCMZ" />
+
+  <meta name="twitter:image:src" content="https://www.crcmz.me/src/png/Preview-card-min.png" />
+  <meta name="twitter:site" content="@Portfolio" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="CRCMZ | Quick. Clean. Gone." />
+  <meta name="twitter:description"
+  content="CRCMZ | Quick. Clean. Gone." />
+  <title>CRCMZ | Quick. Clean. Gone.</title>
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+  <!-- aos cdn -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <!-- stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style2.css" />
+  <!-- google fonts-->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Passions+Conflict&family=Orbitron&family=Fira+Code&family=Six+Caps" />
+
+<body class="body">
+  <audio loop="" id="audioPlayer" style="display: none">
+    <source src="src/mp3/preloader.mp3" type="audio/mp3" />
+  </audio>
+  <div id="preloader"></div>
+  <noscript>Allow Javascript</noscript>
+
+  <header>
+    <div class="cursor-inner" id="cursor-inner"></div>
+    <div class="cursor-outer" id="cursor-outer"></div>
+
+    <div class="navbar" id="navbar">
+      <div class="hey">CRCMZ</div>
+      <div class="logo" tabindex="0" aria-label="crcmz logo">
+        <div class="logo-top">
+          <img src="src/png/nav-avatar.png" alt="animation-head" id="nav-avatar"/>
+        </div>
+      </div>
+      <div class="navbar-tabs" id="navbar-tabs">
+        <ul class="navbar-tabs-ul">
+          <li class="home activeThistab" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="100">
+            <a href="#home" tabindex="0" aria-label="Home menu button">
+              Home
+            </a>
+          </li>
+
+          <li class="about" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="300">
+            <a href="#about" aria-label="about menu button">
+              About Us
+            </a>
+          </li>
+
+          <li class="loadout" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="400">
+            <a href="#loadout" aria-label="the loadout menu button">
+              The Loadout
+            </a>
+          </li>
+
+          <li class="skills" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="500">
+            <a href="#projects" aria-label="skills menu button">
+              Clan Members
+            </a>
+          </li>
+
+	  <li class="skills" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="500">
+            <a href="https://discord.gg/BeWdfJkFqr" aria-label="skills menu button">
+             Join Discord
+            </a>
+          </li>
+
+          <li class="navbar-tabs-li nav-login-li" data-aos="fade-down" data-aos-delay="600">
+            <a href="https://app.crcmz.me" class="nav-login-btn" aria-label="Login to CRCMZ">
+              Login
+            </a>
+          </li>
+
+        </ul>
+      </div>
+      <!-- navbar tabs ends -->
+    </div>
+  </header>
+  <!-- header ends here -->
+
+  <main>
+    <!-- hamburger -->
+    <div class="hamburger" id="hamburger" data-aos="fade">
+      <div class="hamburgerbase">
+        <button id="hamburger-button" onclick="hamburgerMenu()" tabindex="0" aria-label="Menu Button">
+          <span class="burger-bar" id="burger-bar1"></span>
+          <span class="burger-bar" id="burger-bar2"></span>
+          <span class="burger-bar" id="burger-bar3"></span>
+        </button>
+      </div>
+    </div>
+    <!-- hamburger -->
+    <div class="mobiletogglemenu" id="mobiletogglemenu">
+      <ul class="mobile-navbar-tabs-ul" id="mobile-ul">
+        <li id="home-mobile-tab" class="mobile-navbar-tabs-li home activeThismobiletab" onclick="hidemenubyli()">
+          <a href="#home" tabindex="0" aria-label="Home menu button">
+            Home
+          </a>
+        </li>
+
+        <li id="aboutme-mobile-tab" class="mobile-navbar-tabs-li about" onclick="hidemenubyli()">
+          <a href="#about" tabindex="0" aria-label="about menu button">
+           About Us
+          </a>
+        </li>
+        <li id="loadout-mobile-tab" class="mobile-navbar-tabs-li loadout" onclick="hidemenubyli()">
+          <a href="#loadout" tabindex="0" aria-label="the loadout menu button">
+            The Loadout
+          </a>
+        </li>
+        <li id="skills-mobile-tab" class="mobile-navbar-tabs-li skills" onclick="hidemenubyli()">
+          <a href="#projects" tabindex="0" aria-label="skills menu button">
+            Clan Members
+          </a>
+        </li>
+
+        <li id="skills-mobile-tab" class="mobile-navbar-tabs-li skills" onclick="hidemenubyli()">
+          <a href="https://discord.gg/BeWdfJkFqr" tabindex="0" aria-label="skills menu button">
+            Join Discord
+          </a>
+        </li>
+
+        <li class="mobile-navbar-tabs-li mobile-login-li" onclick="hidemenubyli()">
+          <a href="https://app.crcmz.me" tabindex="0" aria-label="Login to CRCMZ" class="mobile-login-link">
+            Login
+          </a>
+        </li>
+
+      </ul>
+    </div>
+    <!-- mobile toggle menu ends -->
+
+    <section class="landing-page-container" id="home">
+      <div class="blob"></div>
+
+      <div class="text-content">
+        <article id="hello-friend" data-aos="fade-up" data-aos-delay="0">
+          <p class="jello">W</p>
+          <p class="jello">E</p>
+          <p class="jello">L</p>
+          <p class="jello">C</p>
+          <p class="jello">O</p>
+          <p class="jello">M</p>
+          <p class="jello">E</p>
+&nbsp
+          <p class="jello">T</p>
+          <p class="jello">O</p>
+
+&nbsp
+        </article>
+        <article id="name" data-aos="fade-up" data-aos-delay="200">
+          <p class="jello">C</p>
+          <p class="jello">R</p>
+          <p class="jello">C</p>
+          <p class="jello">M</p>
+          <p class="jello">Z</p>
+          &nbsp;
+          <p class="jello">C</p>
+          <p class="jello">L</p>
+          <p class="jello">A</p>
+          <p class="jello">N</p>
+          <p class="jello">'</p>
+          <p class="jello">S</p>
+        </article>
+
+        <article id="work" data-aos="fade-up" data-aos-delay="400">
+          <div>
+            <p class="jello">O</p>
+            <p class="jello">f</p>
+            <p class="jello">f</p>
+            <p class="jello">i</p>
+            <p class="jello">c</p>
+            <p class="jello">i</p>
+            <p class="jello">a</p>
+            <p class="jello">l</p>
+          </div>
+          <div>
+            <p class="jello">w</p>
+            <p class="jello">e</p>
+            <p class="jello">b</p>
+            <p class="jello">s</p>
+            <p class="jello">i</p>
+            <p class="jello">t</p>
+            <p class="jello">e</p>
+          </div>
+          <div>
+            <p class="jello">&</p>
+          </div>
+          <div>
+            <p class="jello">s</p>
+            <p class="jello">h</p>
+            <p class="jello">i</p>
+            <p class="jello">t</p>
+            <p class="jello">.</p>
+            <p class="jello">.</p>
+            <p class="jello">.</p>
+          </div>
+        </article>
+        <p id="info-para" data-aos="fade-up" data-aos-delay="600">
+          We built CRCMZ because good squads deserve better tools. Not just a Discord server — a real home base. Everything here exists because we wanted it for ourselves first.
+        </p>
+     
+<style>
+  /* Responsive button layout */
+  .contact-btn-div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start; /* left-align on desktop */
+  }
+
+  @media (max-width: 768px) {
+    .contact-btn-div {
+      justify-content: center; /* center-align on mobile */
+    }
+  }
+</style>
+
+<div class="contact-btn-div" data-aos="fade-up" data-aos-delay="800">
+  <!-- Join Clan Button -->
+  <button class="letsTalkBtn" id="join-clan-btn">
+    <p class="letsTalkBtn-text">Join Clan</p>
+    <span class="letsTalkBtn-BG"></span>
+  </button>
+  <br><br>
+  <!-- VIP Member Button -->
+  <button class="letsTalkBtn vip-style" id="vip-clan-btn">
+    <p class="letsTalkBtn-text">Become VIP Member</p>
+    <span class="letsTalkBtn-BG"></span>
+  </button>
+</div>
+
+<!-- Popup Container -->
+<div id="typebot-popup" style="
+  display: none;
+  position: fixed;
+  top: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 700px;
+  height: 95%;
+  background: white;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+">
+  <div style="text-align: right; padding: 5px;">
+    <button onclick="document.getElementById('typebot-popup').style.display='none'" style="background: none; border: none; font-size: 18px; cursor: pointer;">✖</button>
+  </div>
+  <iframe id="typebot-frame" style="border: none; width: 100%; height: 95%"></iframe>
+</div>
+
+<!-- Script to Show Popup -->
+<script>
+  document.getElementById("join-clan-btn").addEventListener("click", function () {
+    document.getElementById("typebot-frame").src = "https://bot.crcmz.me/join";
+    document.getElementById("typebot-popup").style.display = "block";
+  });
+
+  document.getElementById("vip-clan-btn").addEventListener("click", function () {
+    document.getElementById("typebot-frame").src = "https://bot.crcmz.me/vip";
+    document.getElementById("typebot-popup").style.display = "block";
+  });
+</script>
+
+
+<div class="setting-container soundtogglebuttoncontainer soundmodeshow" id="soundtogglebuttoncontainer">
+  <input type="checkbox" id="switchforsound" onclick="playpause()">
+  <label for="switchforsound" id="labelforsound" tabindex="0" aria-label="switch sound" class="needtobeinvert"></label>
+</div>
+
+    </section>
+
+<div class="section-divider"></div>
+
+
+<style>
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(128,0,255,0.3) 30%, rgba(107,197,248,0.4) 50%, rgba(128,0,255,0.3) 70%, transparent 100%);
+    position: relative;
+  }
+  .section-divider::after {
+    content: "";
+    position: absolute;
+    inset: -3px 20%;
+    background: linear-gradient(90deg, transparent, rgba(128,0,255,0.08), rgba(107,197,248,0.1), rgba(128,0,255,0.08), transparent);
+    filter: blur(6px);
+  }
+  .loadout-section-container {
+    padding: 160px 0 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+  }
+  .loadout-section-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 50% 40%, rgba(128,0,255,0.06), transparent 70%);
+    pointer-events: none;
+  }
+  .loadout-section-div {
+    width: 68%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .loadout-subtext {
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 48px;
+    margin-bottom: 60px;
+    padding: 10px 28px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, rgba(176,243,241,0.1), rgba(207,89,230,0.15), rgba(107,197,248,0.1));
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    position: relative;
+    text-align: center;
+  }
+  .loadout-subtext::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    padding: 1px;
+    background: linear-gradient(135deg, #b0f3f1, #cf59e6, #6bc5f8);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.6;
+  }
+  .loadout-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .loadout-card {
+    background: linear-gradient(to bottom right, #1a1a29, rgba(27, 27, 40, 0));
+    border: 1px solid #292929;
+    border-radius: 20px;
+    padding: 28px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .loadout-card:hover {
+    border-color: #8000ff;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(128, 0, 255, 0.15);
+  }
+  .loadout-card-icon { font-size: 2.8rem; line-height: 1; }
+  .loadout-card-title { font-size: 1.7rem; font-weight: 700; color: #fff; line-height: 1.3; }
+  .loadout-card-desc  { font-size: 1.35rem; color: #a0a0b8; line-height: 1.7; }
+  .loadout-cta-div { margin-top: 55px; text-align: center; }
+
+  /* ── Featured cards ── */
+  .loadout-card-featured {
+    grid-column: 1 / -1;
+    background: linear-gradient(140deg, #0e0e1c 0%, #12122a 55%, #0a0a16 100%);
+    border-radius: 26px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .loadout-card-featured::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 26px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, #003087, #6bc5f8, #25d366, #128c7e);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.55;
+    transition: opacity 0.3s;
+  }
+  .loadout-card-featured:hover::before { opacity: 1; }
+  .loadout-card-featured:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 60px rgba(37, 211, 102, 0.1), 0 16px 60px rgba(0, 48, 135, 0.1);
+  }
+  .featured-badge {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 20;
+    background: linear-gradient(90deg, #003087, #25d366);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    padding: 5px 14px;
+    border-radius: 50px;
+    text-transform: uppercase;
+  }
+  .featured-inner {
+    display: flex;
+    align-items: center;
+    padding: 42px 50px;
+    gap: 56px;
+    position: relative;
+    z-index: 1;
+  }
+  .featured-flow {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-shrink: 0;
+  }
+  .featured-platform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .featured-platform-logo {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.2rem;
+  }
+  .featured-platform-logo.psn {
+    background: linear-gradient(135deg, #003087, #0070cc);
+    box-shadow: 0 6px 24px rgba(0, 48, 135, 0.5);
+  }
+  .featured-platform-logo.wa {
+    background: linear-gradient(135deg, #128c7e, #25d366);
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+  }
+  .featured-platform-name {
+    font-size: 1.15rem;
+    color: #888;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .featured-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+  }
+  .featured-arrow-line {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #003087, #25d366);
+    position: relative;
+    border-radius: 2px;
+  }
+  .featured-arrow-line::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: -4px;
+    border-left: 8px solid #25d366;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+  .featured-arrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6bc5f8, #25d366);
+    animation: pulse-dot 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.6); }
+  }
+  .featured-arrow-label {
+    font-size: 1.1rem;
+    color: #888;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .featured-content { flex: 1; }
+  .featured-content-tag {
+    font-size: 1.15rem;
+    color: #25d366;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .featured-content-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .featured-content-desc {
+    font-size: 1.55rem;
+    color: #a0a0b8;
+    line-height: 1.75;
+    max-width: 520px;
+  }
+  .featured-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .featured-chip {
+    font-size: 1.25rem;
+    color: #c8c8e0;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50px;
+    padding: 5px 14px;
+  }
+
+  /* PSN orbit */
+  .psn-orbit-container {
+    position: relative;
+    width: 190px;
+    height: 190px;
+    flex-shrink: 0;
+    overflow: visible;
+  }
+  .psn-orbit-ring {
+    position: absolute;
+    inset: 12px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255,255,255,0.1);
+    pointer-events: none;
+  }
+  .psn-orbit-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+  /* pulsing halo behind PSN icon */
+  .psn-orbit-center::after {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,48,135,0.35), transparent 70%);
+    animation: pulse-dot 2.4s ease-in-out infinite;
+  }
+  /* zero-size orbit anchor at center */
+  .psn-orb {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    z-index: 2;
+  }
+  .psn-orb-wa { animation: psn-spin 13s linear infinite 0s; }
+  .psn-orb-dc { animation: psn-spin 13s linear infinite calc(-13s / 3); }
+  .psn-orb-mm { animation: psn-spin 13s linear infinite calc(-13s * 2 / 3); }
+  @keyframes psn-spin {
+    from { transform: rotate(-90deg); }
+    to   { transform: rotate(270deg); }
+  }
+  /* coloured spoke fading from center to icon */
+  .psn-orb-spoke {
+    position: absolute;
+    width: 1.5px;
+    height: 83px;
+    top: -83px;
+    left: -0.75px;
+    border-radius: 1px;
+  }
+  .psn-orb-wa .psn-orb-spoke { background: linear-gradient(to top, transparent 0%, rgba(37,211,102,0.3) 100%); }
+  .psn-orb-dc .psn-orb-spoke { background: linear-gradient(to top, transparent 0%, rgba(88,101,242,0.35) 100%); }
+  .psn-orb-mm .psn-orb-spoke { background: linear-gradient(to top, transparent 0%, rgba(30,144,214,0.3) 100%); }
+  /* icon counter-rotates to stay upright */
+  .psn-orb-icon {
+    position: absolute;
+    top: -102px;
+    left: -19px;
+  }
+  .psn-orb-wa .psn-orb-icon { animation: psn-counter 13s linear infinite 0s; }
+  .psn-orb-dc .psn-orb-icon { animation: psn-counter 13s linear infinite calc(-13s / 3); }
+  .psn-orb-mm .psn-orb-icon { animation: psn-counter 13s linear infinite calc(-13s * 2 / 3); }
+  @keyframes psn-counter {
+    from { transform: rotate(90deg); }
+    to   { transform: rotate(-270deg); }
+  }
+  .psn-dest-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* AI Gameplay Coach — coming soon card */
+  .loadout-card-featured.ai-coach::before {
+    background: linear-gradient(135deg, #7c3aed, #a78bfa, #f59e0b, #7c3aed);
+    background-size: 300% 300%;
+    animation: border-shift 5s linear infinite;
+    opacity: 0.6;
+  }
+  .loadout-card-featured.ai-coach:hover::before { opacity: 1; }
+  .loadout-card-featured.ai-coach:hover {
+    box-shadow: 0 16px 60px rgba(124, 58, 237, 0.18), 0 16px 60px rgba(245, 158, 11, 0.1);
+  }
+
+  /* Mini game-analysis preview */
+  .ai-preview {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 220px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(167, 139, 250, 0.25);
+    background: #08050f;
+  }
+  .ai-preview-screen {
+    position: relative;
+    width: 100%;
+    height: 130px;
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 40%, rgba(124,58,237,0.22), transparent 65%),
+      radial-gradient(ellipse 60% 50% at 75% 70%, rgba(245,158,11,0.14), transparent 60%),
+      linear-gradient(160deg, #0d0818 0%, #110d1f 100%);
+    overflow: hidden;
+  }
+  /* scrolling scan line */
+  .ai-scan-line {
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(167,139,250,0.6), transparent);
+    animation: ai-scan 2.4s linear infinite;
+    z-index: 3;
+  }
+  @keyframes ai-scan {
+    0%   { top: -2px; opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+  /* detection bounding boxes */
+  .ai-detect-box {
+    position: absolute;
+    border: 1.5px solid;
+    border-radius: 3px;
+    animation: ai-box-pulse 2s ease-in-out infinite alternate;
+    z-index: 2;
+  }
+  @keyframes ai-box-pulse {
+    from { opacity: 0.55; }
+    to   { opacity: 1; }
+  }
+  .ai-detect-label {
+    position: absolute;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    z-index: 2;
+    font-family: system-ui, monospace;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+  /* centre crosshair */
+  .ai-crosshair {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px; height: 18px;
+    border: 1.5px solid rgba(167,139,250,0.4);
+    border-radius: 50%;
+    z-index: 2;
+  }
+  .ai-crosshair::before, .ai-crosshair::after {
+    content: "";
+    position: absolute;
+    background: rgba(167,139,250,0.4);
+  }
+  .ai-crosshair::before { width: 1px; height: 10px; left: 50%; top: -6px; transform: translateX(-50%); }
+  .ai-crosshair::after  { height: 1px; width: 10px; top: 50%; left: -6px; transform: translateY(-50%); }
+  /* corner brackets */
+  .ai-corner {
+    position: absolute;
+    width: 10px; height: 10px;
+    z-index: 2;
+    border-color: rgba(167,139,250,0.5);
+    border-style: solid;
+  }
+  .ai-corner-tl { top: 6px; left: 6px; border-width: 1.5px 0 0 1.5px; }
+  .ai-corner-tr { top: 6px; right: 6px; border-width: 1.5px 1.5px 0 0; }
+  .ai-corner-bl { bottom: 6px; left: 6px; border-width: 0 0 1.5px 1.5px; }
+  .ai-corner-br { bottom: 6px; right: 6px; border-width: 0 1.5px 1.5px 0; }
+  /* stat row below the screen */
+  .ai-stats-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.03);
+    border-top: 1px solid rgba(167,139,250,0.12);
+  }
+  .ai-stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .ai-stat-val { font-size: 1.4rem; font-weight: 800; line-height: 1; font-family: system-ui, monospace; }
+  .ai-stat-lbl { font-size: 0.85rem; color: #7070a0; letter-spacing: 0.04em; }
+  .ai-stat-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.08); }
+  /* analyzing footer */
+  .ai-analyzing {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    font-size: 1.1rem;
+    color: #8888b0;
+    font-family: system-ui, monospace;
+    letter-spacing: 0.04em;
+    border-top: 1px solid rgba(167,139,250,0.08);
+  }
+  .ai-analyzing-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #a78bfa;
+    box-shadow: 0 0 8px #a78bfa;
+    animation: pulse-dot 1.4s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  /* PSN Chat Board card — matches the actual neon arcade palette */
+  .loadout-card-featured.chat-board::before {
+    background: linear-gradient(135deg, #ff2fd6, #22e6ff, #9d5cff, #ff2fd6);
+  }
+  .loadout-card-featured.chat-board:hover {
+    box-shadow: 0 12px 50px rgba(255, 47, 214, 0.18), 0 12px 50px rgba(34, 230, 255, 0.1);
+  }
+  .featured-content-tag.purple { color: #cf59e6; }
+
+  /* Mini dashboard preview */
+  .psn-dash-preview {
+    flex-shrink: 0;
+    width: 230px;
+    background: #05030f;
+    border: 1px solid rgba(255, 47, 214, 0.3);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    font-family: system-ui, sans-serif;
+  }
+  .psn-dash-aurora {
+    position: absolute;
+    inset: -20%;
+    z-index: 0;
+    background:
+      radial-gradient(38% 40% at 18% 12%, rgba(255,47,214,.3), transparent 60%),
+      radial-gradient(40% 40% at 84% 18%, rgba(34,230,255,.25), transparent 60%),
+      radial-gradient(46% 42% at 55% 96%, rgba(157,92,255,.22), transparent 62%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+  .psn-dash-scanlines {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.4;
+    background-image:
+      linear-gradient(rgba(34,230,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,47,214,.025) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .psn-dash-inner { position: relative; z-index: 2; padding: 12px; }
+  .psn-dash-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 47, 214, 0.18);
+    margin-bottom: 10px;
+  }
+  .psn-dash-logo {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: linear-gradient(135deg, #ff2fd6, #9d5cff);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0;
+    box-shadow: 0 0 14px rgba(255, 47, 214, 0.6);
+  }
+  .psn-dash-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.05rem; font-weight: 900; letter-spacing: 1px;
+    background: linear-gradient(90deg, #22e6ff, #ff2fd6);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .psn-dash-sub { font-size: 0.9rem; color: #6650a0; letter-spacing: 0.5px; margin-top: 1px; }
+  .psn-dash-live {
+    margin-left: auto; display: flex; align-items: center; gap: 4px;
+    font-size: 0.85rem; font-weight: 700; color: #8cff2b; letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(140, 255, 43, 0.6);
+  }
+  .psn-live-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #8cff2b;
+    box-shadow: 0 0 8px #8cff2b;
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+
+  .psn-dash-row {
+    display: flex; align-items: center; gap: 9px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.05);
+  }
+  .psn-dash-row:last-of-type { border-bottom: none; }
+  .psn-dash-av {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: linear-gradient(135deg, #1a0830, #2a1050);
+    flex-shrink: 0; position: relative;
+    border: 1px solid rgba(140, 255, 43, 0.5);
+    box-shadow: 0 0 10px rgba(140, 255, 43, 0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .psn-av-online {
+    position: absolute; bottom: -3px; right: -3px;
+    width: 9px; height: 9px; border-radius: 50%; background: #8cff2b;
+    border: 2px solid #05030f; box-shadow: 0 0 6px #8cff2b;
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+  .psn-dash-who { flex: 1; min-width: 0; }
+  .psn-dash-name {
+    font-size: 1.2rem; font-weight: 700; color: #eaffd4; letter-spacing: 0.2px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .psn-dash-state { font-size: 1rem; color: #8cff2b; margin-top: 1px; font-weight: 600;
+    text-shadow: 0 0 6px rgba(140,255,43,.4); }
+  .psn-dash-offline .psn-dash-av { border-color: rgba(255,255,255,.1); box-shadow: none; }
+  .psn-dash-offline .psn-dash-name { color: #9d8fc4; }
+  .psn-dash-offline .psn-dash-state { color: #5a4e7a; }
+
+  .psn-dash-board {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid rgba(255, 47, 214, 0.15);
+  }
+  .psn-snd {
+    border-radius: 8px; padding: 7px 4px; font-size: 0.85rem; font-weight: 700;
+    cursor: default; text-align: center; line-height: 1.2; border: 1px solid;
+    color: #fff;
+  }
+  .psn-snd.c1 {
+    background: linear-gradient(135deg,rgba(34,230,255,.16),rgba(34,230,255,.04));
+    border-color: rgba(34,230,255,.5); color: #c8fbff;
+    box-shadow: 0 0 8px rgba(34,230,255,.2);
+  }
+  .psn-snd.c2 {
+    background: linear-gradient(135deg,rgba(255,47,214,.16),rgba(255,47,214,.04));
+    border-color: rgba(255,47,214,.5); color: #ffd6f6;
+    box-shadow: 0 0 8px rgba(255,47,214,.2);
+  }
+  .psn-snd.c4 {
+    background: linear-gradient(135deg,rgba(140,255,43,.15),rgba(140,255,43,.04));
+    border-color: rgba(140,255,43,.45); color: #e0ffc0;
+    box-shadow: 0 0 8px rgba(140,255,43,.18);
+  }
+
+  .psn-dash-msgbar {
+    display: flex; align-items: center; gap: 6px;
+    margin-top: 8px; padding-top: 8px;
+    border-top: 1px solid rgba(255,47,214,.12);
+  }
+  .psn-dash-msginput {
+    flex: 1; padding: 7px 10px; border-radius: 10px; font-size: 0.78rem;
+    border: 1px solid rgba(34,230,255,.28); background: rgba(6,4,18,.8);
+    color: rgba(243,236,255,.5); pointer-events: none;
+    font-family: inherit; outline: none;
+  }
+  .psn-dash-sendbtn {
+    flex: none; width: 32px; height: 32px; border-radius: 10px; border: none;
+    display: grid; place-items: center; cursor: default;
+    background: linear-gradient(135deg, #22e6ff, #ff2fd6);
+    box-shadow: 0 0 10px rgba(255,47,214,.4);
+    color: #fff;
+  }
+
+  /* CRCMZ Bot card — the assistant that answers on all three surfaces */
+  .loadout-card-featured.crcmz-bot::before {
+    background: linear-gradient(135deg, #8cff2b, #22e6ff, #ff2fd6, #8cff2b);
+  }
+  .loadout-card-featured.crcmz-bot:hover {
+    box-shadow: 0 12px 50px rgba(140, 255, 43, 0.16), 0 12px 50px rgba(34, 230, 255, 0.12);
+  }
+  .featured-content-tag.lime { color: #b6ff6b; }
+
+  .bot-preview {
+    flex-shrink: 0;
+    width: 230px;
+    background: #05030f;
+    border: 1px solid rgba(140, 255, 43, 0.28);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    font-family: system-ui, sans-serif;
+  }
+  .bot-prev-aurora {
+    position: absolute;
+    inset: -20%;
+    z-index: 0;
+    background:
+      radial-gradient(40% 40% at 18% 8%, rgba(140,255,43,.20), transparent 60%),
+      radial-gradient(38% 40% at 88% 24%, rgba(34,230,255,.22), transparent 60%),
+      radial-gradient(44% 40% at 55% 98%, rgba(255,47,214,.16), transparent 62%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+  .bot-prev-inner { position: relative; z-index: 2; padding: 12px; }
+  .bot-prev-top {
+    display: flex; align-items: center; gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(140, 255, 43, 0.18);
+    margin-bottom: 10px;
+  }
+  .bot-prev-logo {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: linear-gradient(135deg, #8cff2b, #22e6ff);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+    box-shadow: 0 0 14px rgba(140, 255, 43, 0.45);
+  }
+  .bot-prev-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.05rem; font-weight: 900; letter-spacing: 1px;
+    background: linear-gradient(90deg, #b6ff6b, #22e6ff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .bot-prev-sub { font-size: 0.9rem; color: #6650a0; letter-spacing: 0.5px; margin-top: 1px; }
+  .bot-prev-live {
+    margin-left: auto; display: flex; align-items: center; gap: 5px;
+    font-size: 0.8rem; font-weight: 700; color: #d8ffc0; letter-spacing: 0.5px;
+    background: rgba(140, 255, 43, 0.1);
+    border: 1px solid rgba(140, 255, 43, 0.3);
+    border-radius: 50px; padding: 3px 9px;
+  }
+  .bot-prev-live-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #8cff2b;
+    box-shadow: 0 0 8px #8cff2b;
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+  /* the three places you can talk to it */
+  .bot-prev-tabs { display: flex; gap: 5px; margin-bottom: 10px; }
+  .bot-prev-tab {
+    flex: 1; text-align: center; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.4px; padding: 4px 2px; border-radius: 7px;
+    color: #6650a0; border: 1px solid rgba(255,255,255,0.07);
+  }
+  .bot-prev-tab.on {
+    color: #0b0f14; border-color: transparent;
+    background: linear-gradient(135deg, #8cff2b, #22e6ff);
+  }
+  .bot-prev-chat { display: flex; flex-direction: column; gap: 7px; }
+  .bot-prev-msg {
+    max-width: 84%; padding: 7px 9px; border-radius: 11px;
+    font-size: 0.86rem; line-height: 1.4;
+  }
+  .bot-prev-msg.them {
+    align-self: flex-start; color: #eae2ff;
+    background: rgba(255, 47, 214, 0.1);
+    border: 1px solid rgba(255, 47, 214, 0.28);
+    border-bottom-left-radius: 4px;
+  }
+  .bot-prev-msg.bot {
+    align-self: flex-end; color: #e9ffe0;
+    background: rgba(140, 255, 43, 0.09);
+    border: 1px solid rgba(140, 255, 43, 0.3);
+    border-bottom-right-radius: 4px;
+  }
+  .bot-prev-who {
+    display: block; font-size: 0.68rem; letter-spacing: 0.8px;
+    text-transform: uppercase; color: #6650a0; margin-bottom: 2px;
+  }
+  .bot-prev-typing {
+    align-self: flex-end; display: flex; gap: 3px; padding: 6px 9px;
+    border-radius: 11px; background: rgba(140, 255, 43, 0.07);
+    border: 1px solid rgba(140, 255, 43, 0.2);
+  }
+  .bot-prev-typing span {
+    width: 4px; height: 4px; border-radius: 50%; background: #8cff2b;
+    animation: pulse-dot 1.2s ease-in-out infinite;
+  }
+  .bot-prev-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .bot-prev-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @media (max-width: 900px) {
+    .bot-preview { width: 100%; }
+  }
+
+  /* Watch Party card — mirrors the Watch tab on app.crcmz.me */
+  .loadout-card-featured.watch-party::before {
+    background: linear-gradient(135deg, #9d5cff, #22e6ff, #ff2fd6, #9d5cff);
+  }
+  .loadout-card-featured.watch-party:hover {
+    box-shadow: 0 12px 50px rgba(157, 92, 255, 0.2), 0 12px 50px rgba(34, 230, 255, 0.1);
+  }
+  .featured-content-tag.violet { color: #b98cff; }
+
+  /* Mini watch-party preview */
+  .wp-preview {
+    flex-shrink: 0;
+    width: 230px;
+    background: #05030f;
+    border: 1px solid rgba(157, 92, 255, 0.32);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    font-family: system-ui, sans-serif;
+  }
+  .wp-prev-aurora {
+    position: absolute;
+    inset: -20%;
+    z-index: 0;
+    background:
+      radial-gradient(40% 40% at 20% 10%, rgba(157,92,255,.32), transparent 60%),
+      radial-gradient(38% 40% at 86% 22%, rgba(34,230,255,.22), transparent 60%),
+      radial-gradient(44% 40% at 55% 98%, rgba(255,47,214,.18), transparent 62%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+  .wp-prev-inner { position: relative; z-index: 2; padding: 12px; }
+  .wp-prev-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(157, 92, 255, 0.2);
+    margin-bottom: 10px;
+  }
+  .wp-prev-logo {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: linear-gradient(135deg, #9d5cff, #22e6ff);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0;
+    box-shadow: 0 0 14px rgba(157, 92, 255, 0.6);
+  }
+  .wp-prev-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.05rem; font-weight: 900; letter-spacing: 1px;
+    background: linear-gradient(90deg, #b98cff, #22e6ff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .wp-prev-sub { font-size: 0.9rem; color: #6650a0; letter-spacing: 0.5px; margin-top: 1px; }
+  .wp-prev-count {
+    margin-left: auto; display: flex; align-items: center; gap: 5px;
+    font-size: 0.85rem; font-weight: 700; color: #c8fbff; letter-spacing: 0.5px;
+    background: rgba(34, 230, 255, 0.1);
+    border: 1px solid rgba(34, 230, 255, 0.35);
+    border-radius: 50px; padding: 3px 9px;
+  }
+  .wp-prev-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #22e6ff;
+    box-shadow: 0 0 8px #22e6ff;
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+  /* 16:9 stage, same shape as the real player */
+  .wp-prev-stage {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(157, 92, 255, 0.28);
+    background:
+      radial-gradient(60% 70% at 50% 45%, rgba(157,92,255,.22), transparent 70%),
+      linear-gradient(160deg, #0b0618, #05030f);
+    display: grid;
+    place-items: center;
+  }
+  .wp-prev-scan {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, transparent 40%, rgba(34,230,255,.14) 50%, transparent 60%);
+    animation: wp-sweep 4.5s ease-in-out infinite;
+  }
+  @keyframes wp-sweep {
+    0%   { transform: translateX(-100%); }
+    60%, 100% { transform: translateX(100%); }
+  }
+  .wp-prev-play {
+    position: relative;
+    width: 34px; height: 34px; border-radius: 50%;
+    display: grid; place-items: center;
+    color: #fff;
+    background: linear-gradient(135deg, #9d5cff, #22e6ff);
+    box-shadow: 0 0 18px rgba(157, 92, 255, 0.65);
+    animation: wp-glow 2.6s ease-in-out infinite;
+  }
+  @keyframes wp-glow {
+    0%, 100% { box-shadow: 0 0 14px rgba(157, 92, 255, 0.5); transform: scale(1); }
+    50%      { box-shadow: 0 0 26px rgba(34, 230, 255, 0.7); transform: scale(1.06); }
+  }
+  .wp-prev-sync {
+    position: absolute;
+    bottom: 7px; left: 8px;
+    display: flex; align-items: center; gap: 4px;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 1px;
+    color: #8cff2b;
+    text-shadow: 0 0 8px rgba(140, 255, 43, 0.6);
+  }
+  .wp-prev-sync-dot {
+    width: 5px; height: 5px; border-radius: 50%; background: #8cff2b;
+    box-shadow: 0 0 6px #8cff2b;
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+  .wp-prev-nowplaying {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .wp-prev-np-title {
+    font-size: 0.9rem; font-weight: 700; color: #e6d9ff;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .wp-prev-np-time {
+    margin-left: auto; flex-shrink: 0;
+    font-size: 0.85rem; color: #6650a0; letter-spacing: 0.5px;
+  }
+  .wp-prev-scrub {
+    height: 4px;
+    border-radius: 3px;
+    margin-top: 7px;
+    background: rgba(255,255,255,.08);
+    overflow: hidden;
+  }
+  .wp-prev-scrub-fill {
+    height: 100%;
+    width: 42%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #9d5cff, #22e6ff);
+    box-shadow: 0 0 8px rgba(34, 230, 255, 0.5);
+    animation: wp-progress 7s ease-in-out infinite alternate;
+  }
+  @keyframes wp-progress {
+    from { width: 22%; }
+    to   { width: 72%; }
+  }
+  .wp-prev-viewers {
+    display: flex; flex-wrap: wrap; gap: 5px;
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid rgba(157, 92, 255, 0.15);
+  }
+  .wp-prev-viewer {
+    font-size: 0.85rem; font-weight: 700;
+    color: #e6d9ff;
+    background: rgba(157, 92, 255, 0.12);
+    border: 1px solid rgba(157, 92, 255, 0.35);
+    border-radius: 50px;
+    padding: 4px 9px;
+  }
+  .wp-prev-viewer.me {
+    color: #c8fbff;
+    background: rgba(34, 230, 255, 0.1);
+    border-color: rgba(34, 230, 255, 0.4);
+  }
+
+  /* Slaptastic card */
+  .loadout-card-featured.slaptastic::before {
+    background: linear-gradient(135deg, #ff4500, #ff6b35, #ffd700, #ff4500);
+  }
+  .loadout-card-featured.slaptastic:hover {
+    box-shadow: 0 12px 50px rgba(255, 69, 0, 0.18), 0 12px 50px rgba(255, 215, 0, 0.08);
+  }
+  .featured-content-tag.orange { color: #ff6b35; }
+  .slap-visual {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .slap-disc {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: conic-gradient(#ff4500, #ffd700, #ff6b35, #ff4500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spin-disc 4s linear infinite;
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.4);
+  }
+  .slap-disc-inner {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #0d0d1a;
+  }
+  @keyframes spin-disc {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .slap-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    height: 30px;
+  }
+  .slap-bar {
+    width: 5px;
+    border-radius: 3px;
+    background: linear-gradient(to top, #ff4500, #ffd700);
+    animation: bar-bounce 1s ease-in-out infinite alternate;
+  }
+  .slap-bar:nth-child(1) { height: 40%; animation-delay: 0s; }
+  .slap-bar:nth-child(2) { height: 80%; animation-delay: 0.15s; }
+  .slap-bar:nth-child(3) { height: 60%; animation-delay: 0.3s; }
+  .slap-bar:nth-child(4) { height: 100%; animation-delay: 0.1s; }
+  .slap-bar:nth-child(5) { height: 50%; animation-delay: 0.25s; }
+  .slap-bar:nth-child(6) { height: 70%; animation-delay: 0.05s; }
+  @keyframes bar-bounce {
+    from { transform: scaleY(0.4); }
+    to   { transform: scaleY(1); }
+  }
+
+  /* And More card */
+  .loadout-card-featured.and-more { overflow: hidden; }
+  .more-aurora {
+    position: absolute;
+    inset: -30%;
+    z-index: 0;
+    background:
+      radial-gradient(40% 35% at 20% 20%, rgba(128,0,255,0.22), transparent 65%),
+      radial-gradient(35% 30% at 80% 15%, rgba(107,197,248,0.18), transparent 60%),
+      radial-gradient(38% 32% at 50% 85%, rgba(255,215,0,0.12), transparent 62%),
+      radial-gradient(30% 28% at 75% 70%, rgba(37,211,102,0.1), transparent 58%);
+    filter: blur(22px);
+    pointer-events: none;
+    animation: aurora-drift 8s ease-in-out infinite alternate;
+  }
+  @keyframes aurora-drift {
+    0%   { transform: translate(0,0) scale(1); }
+    33%  { transform: translate(2%,1%) scale(1.02); }
+    66%  { transform: translate(-1%,2%) scale(0.99); }
+    100% { transform: translate(1%,-1%) scale(1.01); }
+  }
+  .loadout-card-featured.and-more::before {
+    background: linear-gradient(135deg, #8000ff, #6bc5f8, #25d366, #ffd700, #ff4500, #8000ff);
+    background-size: 300% 300%;
+    animation: border-shift 6s linear infinite;
+  }
+  @keyframes border-shift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .loadout-card-featured.and-more:hover {
+    box-shadow: 0 12px 60px rgba(128, 0, 255, 0.15), 0 12px 60px rgba(107, 197, 248, 0.08);
+  }
+  .featured-content-tag.gold { color: #ffd700; }
+  .more-inner {
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "left  grid"
+      "cta   grid";
+    padding: 44px 52px;
+    column-gap: 52px;
+    row-gap: 24px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+  .more-left {
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .more-cta-inline {
+    grid-area: cta;
+  }
+  .more-perks-grid {
+    grid-area: grid;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .more-left .featured-content-title { margin-bottom: 0; }
+  .more-left .featured-content-desc {
+    font-size: 1.45rem;
+    color: #a0a0b8;
+    line-height: 1.7;
+  }
+  .more-perk-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 16px;
+    padding: 16px 18px;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .more-perk-item:hover {
+    border-color: rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.07);
+  }
+  .more-perk-icon { font-size: 2.1rem; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+  .more-perk-text { display: flex; flex-direction: column; gap: 4px; }
+  .more-perk-title { font-size: 1.45rem; font-weight: 700; color: #fff; line-height: 1.2; }
+  .more-perk-desc  { font-size: 1.25rem; color: #9090b0; line-height: 1.55; }
+
+  @media screen and (max-width: 998px) {
+    .psn-dash-preview { width: 100%; }
+    .wp-preview { width: 100%; }
+    .slap-visual { flex-direction: row; }
+    .more-inner {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "left"
+        "grid"
+        "cta";
+      padding: 32px 28px;
+      row-gap: 26px;
+    }
+    .more-perks-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .loadout-grid { grid-template-columns: 1fr; }
+    .loadout-section-div { width: 82%; }
+    .featured-inner {
+      flex-direction: column;
+      padding: 34px 30px;
+      gap: 30px;
+    }
+    .featured-flow { justify-content: center; }
+    .featured-content-title { font-size: 2.2rem; }
+  }
+  @media screen and (max-width: 600px) {
+    .loadout-section-div { width: 88%; }
+    .featured-inner { padding: 28px 22px; gap: 26px; }
+    .featured-arrow-line { width: 42px; }
+    .featured-content-title { font-size: 1.95rem; }
+    .featured-content-desc { font-size: 1.4rem; }
+    .more-inner { padding: 26px 20px; row-gap: 22px; }
+  }
+  @media screen and (max-width: 500px) {
+    .more-perks-grid { grid-template-columns: 1fr; }
+    .more-perk-item { padding: 14px 15px; }
+  }
+</style>
+
+<section class="loadout-section-container" id="loadout">
+  <div class="loadout-section-div">
+    <div class="section-heading" data-aos="fade-up">
+      <h2 class="section-heading-article" tabindex="0" aria-label="VIP member perks">
+        The Loadout
+      </h2>
+      <p class="sectionHeadingP"></p>
+    </div>
+    <p class="loadout-subtext" data-aos="fade-up" data-aos-delay="100">Everything you unlock as a VIP member.</p>
+    <div class="loadout-grid">
+
+      <!-- AI Gameplay Coach — Coming Soon -->
+      <div class="loadout-card-featured ai-coach" data-aos="fade-up" data-aos-delay="60">
+        <span class="featured-badge" style="background: linear-gradient(90deg, #7c3aed, #f59e0b);">Coming Soon</span>
+        <div class="featured-inner">
+
+          <!-- Mini analysis preview -->
+          <div class="ai-preview" aria-hidden="true">
+            <div class="ai-preview-screen">
+              <div class="ai-scan-line"></div>
+              <div class="ai-detect-box" style="top:18%;left:14%;width:28%;height:26%;border-color:#a78bfa;"></div>
+              <div class="ai-detect-label" style="top:15%;left:14%;color:#a78bfa;">Player ×2</div>
+              <div class="ai-detect-box" style="top:52%;left:54%;width:22%;height:30%;border-color:#f59e0b;"></div>
+              <div class="ai-detect-label" style="top:49%;left:54%;color:#f59e0b;">Target</div>
+              <div class="ai-crosshair"></div>
+              <div class="ai-corner ai-corner-tl"></div>
+              <div class="ai-corner ai-corner-tr"></div>
+              <div class="ai-corner ai-corner-bl"></div>
+              <div class="ai-corner ai-corner-br"></div>
+            </div>
+            <div class="ai-stats-row">
+              <div class="ai-stat">
+                <span class="ai-stat-val" style="color:#a78bfa;">87%</span>
+                <span class="ai-stat-lbl">Accuracy</span>
+              </div>
+              <div class="ai-stat-divider"></div>
+              <div class="ai-stat">
+                <span class="ai-stat-val" style="color:#f59e0b;">2.4</span>
+                <span class="ai-stat-lbl">K/D</span>
+              </div>
+              <div class="ai-stat-divider"></div>
+              <div class="ai-stat">
+                <span class="ai-stat-val" style="color:#34d399;">71%</span>
+                <span class="ai-stat-lbl">Win Rate</span>
+              </div>
+            </div>
+            <div class="ai-analyzing">
+              <div class="ai-analyzing-dot"></div>
+              <span>Analyzing clip…</span>
+            </div>
+          </div>
+
+          <div class="featured-content">
+            <div class="featured-content-tag" style="color:#a78bfa;">AI Gameplay Coach</div>
+            <div class="featured-content-title">Drop a clip.<br>Get smarter.</div>
+            <div class="featured-content-desc">Share a clip or go live and our AI breaks down your gameplay — positioning, aim, decision-making — tailored to the specific game you're playing. No generic tips. Just your mistakes, your patterns, your edge.</div>
+            <div class="featured-chips">
+              <span class="featured-chip">Clip analysis</span>
+              <span class="featured-chip">Live stream review</span>
+              <span class="featured-chip">Per-game coaching</span>
+              <span class="featured-chip">VIP early access</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PSN Messenger Featured Card -->
+      <div class="loadout-card-featured" data-aos="fade-up" data-aos-delay="80">
+        <span class="featured-badge">Exclusive</span>
+        <div class="featured-inner">
+
+          <!-- PSN centre, three platforms in orbit -->
+          <div class="psn-orbit-container" aria-label="PSN sends to WhatsApp, Discord, Mattermost">
+            <div class="psn-orbit-ring"></div>
+            <div class="psn-orbit-center">
+              <div class="featured-platform-logo psn">
+                <img src="src/webp/psn-icon.png" alt="PSN" style="width:42px;height:42px;object-fit:contain;" />
+              </div>
+            </div>
+            <!-- WhatsApp -->
+            <div class="psn-orb psn-orb-wa">
+              <div class="psn-orb-spoke"></div>
+              <div class="psn-orb-icon">
+                <div class="psn-dest-logo" style="background:linear-gradient(135deg,#128c7e,#25d366);box-shadow:0 4px 16px rgba(37,211,102,0.4);">
+                  <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><path d="M50 14C30.1 14 14 30.1 14 50c0 6.4 1.7 12.4 4.7 17.6L14 86l19-4.6C37.8 84.3 43.8 86 50 86c19.9 0 36-16.1 36-36S69.9 14 50 14z" fill="white"/><path d="M36 38c0-1.5 1-2.5 2-2.5s5 4 5.5 5.5c.5 1.5-2 3.5-2 5s5 9 11 11c1.5.5 3.5-2 5-2s5.5 4 5.5 5.5-2 3.5-4 4.5c-2 1-15-4-19-12C36.5 47 36 39.5 36 38z" fill="#25d366"/></svg>
+                </div>
+              </div>
+            </div>
+            <!-- Discord -->
+            <div class="psn-orb psn-orb-dc">
+              <div class="psn-orb-spoke"></div>
+              <div class="psn-orb-icon">
+                <div class="psn-dest-logo" style="background:linear-gradient(135deg,#4752c4,#5865f2);box-shadow:0 4px 16px rgba(88,101,242,0.45);">
+                  <svg width="22" height="22" viewBox="0 0 127.14 96.36" fill="white"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+                </div>
+              </div>
+            </div>
+            <!-- Mattermost -->
+            <div class="psn-orb psn-orb-mm">
+              <div class="psn-orb-spoke"></div>
+              <div class="psn-orb-icon">
+                <div class="psn-dest-logo" style="background:linear-gradient(135deg,#1c4f9c,#1e90d6);box-shadow:0 4px 16px rgba(30,144,214,0.4);">
+                  <img src="src/webp/mattermost-icon.png" alt="Mattermost" style="width:26px;height:26px;object-fit:contain;" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="featured-content">
+            <div class="featured-content-tag">PSN Messenger</div>
+            <div class="featured-content-title">Share on PSN.<br>Lands everywhere.</div>
+            <div class="featured-content-desc">Videos and clips shared on PlayStation automatically forward to your clan's WhatsApp, Discord, and Mattermost. One share on console — the whole squad sees it instantly, wherever they're hanging. At the end of every month, all the clips get cut into a clan montage.</div>
+            <div class="featured-chips">
+              <span class="featured-chip">Auto-forwarding</span>
+              <span class="featured-chip">WhatsApp · Discord · Mattermost</span>
+              <span class="featured-chip">Real-time delivery</span>
+              <span class="featured-chip">Monthly montage</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PSN Chat Board -->
+      <div class="loadout-card-featured chat-board" data-aos="fade-up" data-aos-delay="110">
+        <span class="featured-badge" style="background: linear-gradient(90deg, #ff2fd6, #9d5cff);">Live Tool</span>
+        <div class="featured-inner">
+          <div class="psn-dash-preview">
+            <div class="psn-dash-aurora"></div>
+            <div class="psn-dash-scanlines"></div>
+            <div class="psn-dash-inner">
+              <div class="psn-dash-top">
+                <div class="psn-dash-logo">🎮</div>
+                <div>
+                  <div class="psn-dash-title">THE SQUAD</div>
+                  <div class="psn-dash-sub">app.crcmz.me</div>
+                </div>
+                <div class="psn-dash-live"><div class="psn-live-dot"></div>LIVE</div>
+              </div>
+              <div class="psn-dash-row">
+                <div class="psn-dash-av">🐦<div class="psn-av-online"></div></div>
+                <div class="psn-dash-who">
+                  <div class="psn-dash-name">TheMooseCompany</div>
+                  <div class="psn-dash-state">Call of Duty</div>
+                </div>
+              </div>
+              <div class="psn-dash-row">
+                <div class="psn-dash-av" style="font-size:1.1rem;">💀<div class="psn-av-online"></div></div>
+                <div class="psn-dash-who">
+                  <div class="psn-dash-name">killerx096</div>
+                  <div class="psn-dash-state">Call of Duty</div>
+                </div>
+              </div>
+              <div class="psn-dash-row psn-dash-offline">
+                <div class="psn-dash-av" style="border-color:rgba(255,255,255,.1);box-shadow:none;font-size:1.1rem;">😴</div>
+                <div class="psn-dash-who">
+                  <div class="psn-dash-name" style="color:#9d8fc4;">Asamad89</div>
+                  <div class="psn-dash-state" style="color:#5a4e7a;">Offline</div>
+                </div>
+              </div>
+              <div class="psn-dash-board">
+                <div class="psn-snd c1">💀 Clutch or Kick</div>
+                <div class="psn-snd c2">🎬 Clip It!</div>
+                <div class="psn-snd c4">🎮 Squad Up</div>
+              </div>
+              <div class="psn-dash-msgbar">
+                <input class="psn-dash-msginput" type="text" placeholder="Send a message…" readonly>
+                <button class="psn-dash-sendbtn" tabindex="-1">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="featured-content">
+            <div class="featured-content-tag purple">PSN Chat Board</div>
+            <div class="featured-content-title">The whole clan,<br>one screen.</div>
+            <div class="featured-content-desc">Head to <strong style="color:#cf59e6;">app.crcmz.me</strong> during any game and drop into the clan board — party up, call for backup, or just send the funniest message mid-match. No app install. Just open it and go.</div>
+            <div class="featured-chips">
+              <span class="featured-chip">Group messaging</span>
+              <span class="featured-chip">Party up fast</span>
+              <span class="featured-chip">Works mid-game</span>
+              <span class="featured-chip">app.crcmz.me</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRCMZ Bot -->
+      <div class="loadout-card-featured crcmz-bot" data-aos="fade-up" data-aos-delay="112">
+        <span class="featured-badge" style="background: linear-gradient(90deg, #8cff2b, #22e6ff); color: #0b0f14;">Now Live</span>
+        <div class="featured-inner">
+          <div class="bot-preview" aria-hidden="true">
+            <div class="bot-prev-aurora"></div>
+            <div class="bot-prev-inner">
+              <div class="bot-prev-top">
+                <div class="bot-prev-logo">🤖</div>
+                <div>
+                  <div class="bot-prev-title">CRCMZ BOT</div>
+                  <div class="bot-prev-sub">runs on our own hardware</div>
+                </div>
+                <div class="bot-prev-live">
+                  <div class="bot-prev-live-dot"></div>ON
+                </div>
+              </div>
+              <div class="bot-prev-tabs">
+                <div class="bot-prev-tab">App</div>
+                <div class="bot-prev-tab on">PSN</div>
+                <div class="bot-prev-tab">WhatsApp</div>
+              </div>
+              <div class="bot-prev-chat">
+                <div class="bot-prev-msg them">
+                  <span class="bot-prev-who">killerx096</span>ai who yaps the most?
+                </div>
+                <div class="bot-prev-msg bot">
+                  <span class="bot-prev-who">CRCMZ Bot</span>Mutasif — 2,943 messages. Types more than he plays.
+                </div>
+                <div class="bot-prev-msg them">
+                  <span class="bot-prev-who">TheMoose</span>ai and who's second?
+                </div>
+                <div class="bot-prev-typing"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+          <div class="featured-content">
+            <div class="featured-content-tag lime">CRCMZ Bot</div>
+            <div class="featured-content-title">One bot.<br>Three places to yell at it.</div>
+            <div class="featured-content-desc">Ask it anything about the clan and it answers from our <em>actual</em> data — who talks the most, who's online, what somebody said last month, who's carrying the music library. Type <strong style="color:#b6ff6b;">ai</strong> in front of your message in the <strong style="color:#b6ff6b;">PSN group</strong> or the <strong style="color:#b6ff6b;">WhatsApp group</strong> and it replies right there; on <strong style="color:#22e6ff;">app.crcmz.me</strong> it gets its own Ask AI tab that remembers your conversation. Everyone can teach it too: add a fact about anyone and the bot knows it everywhere, for everyone, from then on. It runs on a machine in the house — nothing gets shipped off to anybody else's cloud.</div>
+            <div class="featured-chips">
+              <span class="featured-chip">Say "ai …" in PSN or WhatsApp</span>
+              <span class="featured-chip">Ask AI tab on app.crcmz.me</span>
+              <span class="featured-chip">Knows the squad's real stats</span>
+              <span class="featured-chip">Teach it facts about each other</span>
+              <span class="featured-chip">Runs on our own hardware</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Watch Party -->
+      <div class="loadout-card-featured watch-party" data-aos="fade-up" data-aos-delay="115">
+        <span class="featured-badge" style="background: linear-gradient(90deg, #9d5cff, #22e6ff);">Now Live</span>
+        <div class="featured-inner">
+          <div class="wp-preview" aria-hidden="true">
+            <div class="wp-prev-aurora"></div>
+            <div class="wp-prev-inner">
+              <div class="wp-prev-top">
+                <div class="wp-prev-logo">🍿</div>
+                <div>
+                  <div class="wp-prev-title">WATCH PARTY</div>
+                  <div class="wp-prev-sub">app.crcmz.me</div>
+                </div>
+                <div class="wp-prev-count">
+                  <div class="wp-prev-dot"></div>3
+                </div>
+              </div>
+              <div class="wp-prev-stage">
+                <div class="wp-prev-scan"></div>
+                <div class="wp-prev-play">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <div class="wp-prev-sync">
+                  <div class="wp-prev-sync-dot"></div>IN SYNC
+                </div>
+              </div>
+              <div class="wp-prev-nowplaying">
+                <div class="wp-prev-np-title">Squad Wipe</div>
+                <div class="wp-prev-np-time">02:14 / 05:08</div>
+              </div>
+              <div class="wp-prev-scrub">
+                <div class="wp-prev-scrub-fill"></div>
+              </div>
+              <div class="wp-prev-viewers">
+                <span class="wp-prev-viewer">TheMoose</span>
+                <span class="wp-prev-viewer">killerx096</span>
+                <span class="wp-prev-viewer me">You</span>
+              </div>
+            </div>
+          </div>
+          <div class="featured-content">
+            <div class="featured-content-tag violet">Watch Party</div>
+            <div class="featured-content-title">One play button.<br>Everybody's screen.</div>
+            <div class="featured-content-desc">Drop a link on <strong style="color:#b98cff;">app.crcmz.me</strong> and the whole clan watches together. Play, pause and skip stay locked in sync for everyone in the room — trailers, clan clips, full match VODs, whatever's on. Chat runs right next to it, and you're already signed in, so there's nothing new to install or log into.</div>
+            <div class="featured-chips">
+              <span class="featured-chip">Synced play, pause &amp; skip</span>
+              <span class="featured-chip">Chat while you watch</span>
+              <span class="featured-chip">See who's watching</span>
+              <span class="featured-chip">No extra login</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slaptastic -->
+      <div class="loadout-card-featured slaptastic" data-aos="fade-up" data-aos-delay="120">
+        <span class="featured-badge" style="background: linear-gradient(90deg, #ff4500, #ffd700); color: #000;">Shared Music</span>
+        <div class="featured-inner">
+          <div class="slap-visual">
+            <div class="slap-disc">
+              <div class="slap-disc-inner"></div>
+            </div>
+            <div class="slap-bars">
+              <div class="slap-bar"></div>
+              <div class="slap-bar"></div>
+              <div class="slap-bar"></div>
+              <div class="slap-bar"></div>
+              <div class="slap-bar"></div>
+              <div class="slap-bar"></div>
+            </div>
+          </div>
+          <div class="featured-content">
+            <div class="featured-content-tag orange">Slaptastic</div>
+            <div class="featured-content-title">Spotify.<br>But for CRCMZ.</div>
+            <div class="featured-content-desc">Slaptastic is the clan's own music server. Drop a song link and it downloads straight to the shared server, then streams to everyone in the clan. Connect your Spotify or Apple Music and it automatically shares the tracks you love most. Everyone in the clan gets access to the same growing library, built by the squad.</div>
+            <div class="featured-chips">
+              <span class="featured-chip">Paste a link, it's added</span>
+              <span class="featured-chip">Auto-shares your favourites</span>
+              <span class="featured-chip">Spotify & Apple Music</span>
+              <span class="featured-chip">Shared local library</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- And More -->
+      <div class="loadout-card-featured and-more" data-aos="fade-up" data-aos-delay="130">
+        <div class="more-aurora" aria-hidden="true"></div>
+        <span class="featured-badge" style="background: linear-gradient(90deg, #8000ff, #6bc5f8);">VIP Membership</span>
+        <div class="more-inner">
+          <div class="more-left">
+            <div class="featured-content-tag gold">And so much more.</div>
+            <div class="featured-content-title" style="font-size:2.2rem;">Every perk,<br>day one.</div>
+            <div class="more-left featured-content-desc">Go VIP and unlock the full package — instantly. No grinding, no waiting.</div>
+          </div>
+          <div class="more-perks-grid">
+            <div class="more-perk-item">
+              <div class="more-perk-icon">⚡</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">Instant Clan Member</div>
+                <div class="more-perk-desc">Skip tryouts. Get in immediately.</div>
+              </div>
+            </div>
+            <div class="more-perk-item">
+              <div class="more-perk-icon">❇️</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">VIP Clan Role</div>
+                <div class="more-perk-desc">Access exclusive Discord channels.</div>
+              </div>
+            </div>
+            <div class="more-perk-item">
+              <div class="more-perk-icon">🌐</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">Website Recognition</div>
+                <div class="more-perk-desc">Listed on crcmz.me with a custom AI avatar.</div>
+              </div>
+            </div>
+            <div class="more-perk-item">
+              <div class="more-perk-icon">🧠</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">Lobby Priority & Voting</div>
+                <div class="more-perk-desc">Influence strategies and team decisions.</div>
+              </div>
+            </div>
+            <div class="more-perk-item">
+              <div class="more-perk-icon">🔔</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">Online Status Highlights</div>
+                <div class="more-perk-desc">Auto-broadcast presence with a unique AI image.</div>
+              </div>
+            </div>
+            <div class="more-perk-item">
+              <div class="more-perk-icon">🤖</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">Meta Loadout Tools</div>
+                <div class="more-perk-desc">Bots that serve the best guns and builds instantly.</div>
+              </div>
+            </div>
+            <div class="more-perk-item">
+              <div class="more-perk-icon">🎁</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">Monthly Giveaways</div>
+                <div class="more-perk-desc">Auto-entered to win COD skins and digital loot.</div>
+              </div>
+            </div>
+            <div class="more-perk-item">
+              <div class="more-perk-icon">💬</div>
+              <div class="more-perk-text">
+                <div class="more-perk-title">Mattermost Access</div>
+                <div class="more-perk-desc">Join the clan's private comms hub — channels, threads, and squad chats all in one place.</div>
+              </div>
+            </div>
+          </div>
+          <div class="more-cta-inline">
+            <button class="letsTalkBtn vip-style" id="vip-loadout-btn">
+              <p class="letsTalkBtn-text">Unlock VIP Access</p>
+              <span class="letsTalkBtn-BG"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById("vip-loadout-btn").addEventListener("click", function () {
+    document.getElementById("typebot-frame").src = "https://bot.crcmz.me/vip";
+    document.getElementById("typebot-popup").style.display = "block";
+  });
+</script>
+
+    <!-- landing page ends here -->
+    <div class="section-divider"></div>
+    <section class="about-section-container" id="about" data-aos="fade-up">
+      <div class="about-section">
+        <div class="section-heading">
+          <h2 class="section-heading-article" tabindex="0" aria-label="About me heading">
+            About Us
+          </h2>
+          <p class="sectionHeadingP"></p>
+        </div>
+
+        <div class="info-dp-section">
+          <div class="about-info">
+            <p tabindex="0">
+              Step into a world where brilliance meets ambition, and success is the norm. Our clan is a melting pot of talent, comprising individuals who not only excel in gaming but also in their fields across various industries.
+            </p>
+            <p tabindex="0" style="margin-top: 20px;">
+	Established in 2023 by visionary minds from both Canada and the United States, CRCMZ brings together individuals who share a passion for excellence and the thrill of precision. 🎮 🔪 🎯
+            </p>
+             <!-- Clan History link -->
+      <a href="https://history.crcmz.me" target="_blank" class="history-link" aria-label="View Clan History">
+        <span class="history-link-inner">
+          <svg class="history-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span class="history-label">Clan History</span>
+          <svg class="history-arrow" viewBox="0 0 13 10" height="10px" width="15px">
+            <path d="M1,5 L11,5"/>
+            <polyline points="8 1 12 5 8 9"/>
+          </svg>
+        </span>
+      </a>
+      <style>
+        .history-link {
+          display: inline-flex;
+          align-items: center;
+          margin-top: 28px;
+          text-decoration: none;
+          border: 1px solid rgba(255,255,255,0.15);
+          border-radius: 40px;
+          padding: 10px 22px;
+          background: rgba(255,255,255,0.04);
+          color: #e0e0e0;
+          font-size: 0.85rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          transition: all 0.35s ease;
+          box-shadow: 0 0 0 0 rgba(255,255,255,0.08);
+          position: relative;
+          overflow: hidden;
+        }
+        .history-link::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 40px;
+          background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.06) 50%, transparent 70%);
+          background-size: 200% 100%;
+          background-position: 200% 0;
+          transition: background-position 0.6s ease;
+        }
+        .history-link:hover::before { background-position: -200% 0; }
+        .history-link:hover {
+          border-color: rgba(255,255,255,0.4);
+          color: #fff;
+          box-shadow: 0 0 18px rgba(255,255,255,0.08), 0 0 40px rgba(255,255,255,0.04);
+          transform: translateY(-1px);
+        }
+        .history-link-inner {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .history-icon { width: 16px; height: 16px; opacity: 0.7; flex-shrink: 0; }
+        .history-arrow { opacity: 0.5; transition: transform 0.3s ease, opacity 0.3s ease; flex-shrink: 0; }
+        .history-link:hover .history-arrow { transform: translateX(3px); opacity: 1; }
+      </style>
+
+             <!-- Resume button -->
+      <button class="resume-btn" id="resume-btn" onclick="">
+        <div class="sign">
+          <svg viewBox="0 0 640 512">
+            <path
+              d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-167l80 80c9.4 9.4 24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-39 39V184c0-13.3-10.7-24-24-24s-24 10.7-24 24V318.1l-39-39c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9z" />
+          </svg>
+        </div>
+
+        <div class="text">Quick. Clean. Gone.</div>
+      </button>
+          </div>
+
+          <div class="dp" data-aos="fade-up" style="margin-bottom: 40px;">
+            <img src="img/logo2.png" alt="CRCMZ" tabindex="0" aria-label="image of crcmz" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- about section ends  -->
+    <div class="section-divider"></div>
+    <section class="projects-section-container" id="projects">
+      <div class="projects-section-div">
+        <div class="section-heading" data-aos="fade-up">
+          <h2 class="section-heading-article" tabindex="0" aria-label="My projects starts from here">
+            Clan Members
+          </h2>
+          <p class="sectionHeadingP"></p>
+        </div>
+        <div class="project-boxes-div">
+          <div data-aos="fade-up" class="project-box-wrapper">
+            <div class="project-box project-box2" id="project-box2">
+              <div class="info-div">
+                <img src="src/webp/psn.png" alt="pexelicon website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">TheMooseCompany</article>
+                <p class="ProjectDescription">
+                  The originator.
+                </p>
+		                <div class="project-buttons">
+                  <a href="https://comickaze.in" target="_blank" class="cta" aria-label="Visit Comickaze live">
+                    <span>Add player</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/png/moose.png" alt="Pexelicon website preview image" />
+              </div>
+            </div>
+          </div>
+
+          <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box5" id="project-box5">
+              <div class="info-div">
+                <img src="src/webp/xbox.png" alt="comickaze website favicon"
+                  class="faviconforProject" />
+                <article class="ProjectHeading">Deception</article>
+                <p class="ProjectDescription">
+                  The finisher.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://comickaze.in" target="_blank" class="cta" aria-label="Visit Comickaze live">
+                    <span>Add player</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/png/decep.png" alt="comickaze website preview image" />
+              </div>
+            </div>
+          </div>
+
+          <!-- ---------------------- -->
+          <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box4" id="project-box4">
+              <div class="info-div">
+                <img src="src/webp/psn.png" alt="Qr generator website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">killerx096</article>
+                <p class="ProjectDescription">
+                  The shreaker.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://comickaze.in" target="_blank" class="cta" aria-label="Visit Comickaze live">
+                    <span>Add player</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/png/killer.png" alt="qr generator website preview image" />
+              </div>
+            </div>
+          </div>
+
+          <!-- ---------------------- -->
+          <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box3" id="project-box3">
+              <div class="info-div">
+                <img src="src/webp/psn.png" alt="netflix website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">Asamad89</article>
+                <p class="ProjectDescription">
+                  The confused.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://comickaze.in" target="_blank" class="cta" aria-label="Visit Comickaze live">
+                    <span>Add player</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/png/samad.png" alt="netflix clone website preview image" />
+              </div>
+            </div>
+          </div>
+
+          <!-- ---------------------- -->
+
+          <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box1" id="project-box1">
+              <div class="info-div">
+                <img src="src/webp/psn.png" alt="Axocean website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">Kaptaan</article>
+                <p class="ProjectDescription">
+                  The camper.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://comickaze.in" target="_blank" class="cta" aria-label="Visit Comickaze live">
+                    <span>Add player</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/png/kap.png" alt="Axocean website preview image" />
+              </div>
+            </div>
+          </div>	
+
+   <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box1" id="project-box1">
+              <div class="info-div">
+                <img src="src/webp/psn.png" alt="Axocean website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">InterestingSoup</article>
+                <p class="ProjectDescription">
+                  The comedian.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://comickaze.in" target="_blank" class="cta" aria-label="Visit Comickaze live">
+                    <span>Add player</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/png/soup.png" alt="Axocean website preview image" />
+              </div>
+            </div>
+          </div>
+
+
+          <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box2" id="project-box2">
+              <div class="info-div">
+               <img src="src/webp/psn.png" alt="pexelicon website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">ItsToxic</article>
+                <p class="ProjectDescription">
+                  Always there... in 40min.
+                </p>
+                <div class="project-buttons">
+                  <a href="https://comickaze.in" target="_blank" class="cta" aria-label="Visit Comickaze live">
+                    <span>Add player</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/png/toxic.png" alt="Aquaregia website preview image" />
+              </div>
+            </div>
+          </div>
+          <!-- ---------------------- -->
+
+
+
+   <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box1" id="project-box1">
+              <div class="info-div">
+                <img src="src/webp/psn.png" alt="Axocean website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">Manzino</article>
+                <p class="ProjectDescription">
+                  Only Manzino Nose...
+                </p>
+                <div class="project-buttons">
+                  <a href="https://comickaze.in" target="_blank" class="cta" aria-label="Visit Comickaze live">
+                    <span>Add player</span>
+                    <svg viewBox="0 0 13 10" height="10px" width="15px">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="image-div">
+                <img src="src/png/mazino.png" alt="Axocean website preview image" />
+              </div>
+            </div>
+          </div>
+
+   <div class="project-box-wrapper" data-aos="fade-up">
+            <div class="project-box project-box1" id="project-box1">
+              <div class="info-div">
+                <img src="src/webp/awol.png" alt="Axocean website favicon" class="faviconforProject" />
+                <article class="ProjectHeading">AWOL</article>
+                <p class="ProjectDescription">
+                  - DarkSouls701
+<br>
+- AlphaQ
+<br>
+- EpixKiller
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- ---------------------- -->
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- main ends here -->
+
+  <footer id="footer">
+    <button class="fas" id="backtotopbutton" onclick="scrolltoTopfunction()">
+      <article aria-label="Back to top">&#8592;BACK TO TOP</article>
+    </button>
+    <div class="footer-background">
+      <div class="footer-blob"></div>
+    </div>
+    <div class="footer-foreground">
+      <div class="footercontainer">
+        <div class="two-words">
+          <article tabindex="0" aria-label="Quick. Clean. Gone.">
+            "Quick. Clean. Gone."
+          </article>
+        </div>
+        <div class="social-media-container">
+          <div class="getintouch-heading">
+            <article>Party Up!</article>
+          </div>
+          <div class="logos">
+            <a href="mailto:contact@crcmz.me" target="_blank" aria-label="My G mail"><svg id="GmailLogo"
+                viewBox="0 0 512 512">
+                <path
+                  d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
+              </svg></a>
+          </div>
+        </div>
+        <div class="footer-avatar-container">
+          <img src="src/png/footer-avatar.png" alt="animation-head" class="footer-avatar-img" id="footer-wala-avatar"/>
+        </div>
+        <div class="footer-bottom">
+          <article>
+            CRCMZ
+            &#169; 2024
+          </article>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- footer ends here -->
+
+  <script src="main.js"></script>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+  <script>
+    function openURL() {
+      var url = "";
+
+      window.open(url, "_blank");
+    }
+  </script>
+
+  <script>
+    const cursorInner = document.getElementById("cursor-inner");
+    const cursorOuter = document.getElementById("cursor-outer");
+    const links = document.querySelectorAll("a,label,button");
+
+    document.addEventListener("mousemove", function (e) {
+      const posX = e.clientX;
+      const posY = e.clientY;
+
+      cursorInner.style.left = `${posX}px`;
+      cursorInner.style.top = `${posY}px`;
+
+      // cursorOuter.style.left = `${posX}px`;
+      // cursorOuter.style.top = `${posY}px`;
+
+      cursorOuter.animate(
+        {
+          left: `${posX}px`,
+          top: `${posY}px`,
+        },
+        { duration: 500, fill: "forwards" }
+      );
+
+      links.forEach((link) => {
+        link.addEventListener("mouseenter", () => {
+          cursorInner.classList.add("hover");
+          cursorOuter.classList.add("hover");
+        });
+        link.addEventListener("mouseleave", () => {
+          cursorInner.classList.remove("hover");
+          cursorOuter.classList.remove("hover");
+        });
+      });
+    });
+  </script>
 </body>
+
 </html>
