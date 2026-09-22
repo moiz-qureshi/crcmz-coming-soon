@@ -4,11 +4,11 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>CRCMZ — Quick. Clean. Gone.</title>
-<meta name="description" content="CRCMZ is an AI-powered gaming clan. Clips auto-shared, roasts auto-fired, coaching auto-delivered. Nobody has this." />
+<meta name="description" content="Nine players across Canada and the US, running on software we built ourselves. PSN clips in WhatsApp in minutes, AI coaching on every rev, reels posted while we sleep. Nobody has this." />
 <link rel="icon" href="img/favicon.ico" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <style>
 :root{
   color-scheme:dark;
@@ -18,6 +18,7 @@
   --purple:#8000ff; --cyan:#56d8ff; --magenta:#f055ff; --gold:#ffc44d; --lime:#b7ff42;
   --r:22px;
   --font:'Inter Tight',-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -41,9 +42,9 @@ img{max-width:100%;display:block}
 
 /* nav */
 .nav{position:fixed;top:0;left:0;right:0;z-index:70;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:rgba(5,5,7,.55);border-bottom:1px solid var(--line)}
-.nav-inner{max-width:1240px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:26px}
-.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.06em;font-size:1.02rem}
-.brand img{width:30px;height:30px;border-radius:8px}
+.nav-inner{max-width:1240px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:26px}
+.brand{display:flex;align-items:center}
+.brand img{height:36px;width:auto;border-radius:9px;box-shadow:0 4px 18px rgba(128,0,255,.35)}
 .nav-links{display:flex;gap:22px;margin-left:8px;font-size:.9rem;color:var(--muted);font-weight:500}
 .nav-links a{transition:color .25s}
 .nav-links a:hover{color:var(--text)}
@@ -57,17 +58,19 @@ img{max-width:100%;display:block}
 /* hero */
 .hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;padding:120px 22px 80px;overflow:hidden}
 .hero-inner{transform:translate3d(0,var(--hy,0px),0) scale(var(--hs,1));opacity:var(--ho,1);will-change:transform,opacity}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:9px 18px;background:rgba(255,255,255,.04);margin-bottom:30px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:9px 18px;background:rgba(255,255,255,.04);margin-bottom:34px}
 .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime);animation:blink 2.2s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
-.hero h1{font-size:clamp(4.5rem,17vw,15rem);font-weight:900;letter-spacing:-.06em;line-height:.88;margin-bottom:18px}
-.hero h1 .ch{display:inline-block;opacity:0;transform:translateY(.55em) rotate(4deg);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(.35s + var(--i)*.055s);background:linear-gradient(180deg,#fff 30%,var(--cyan) 130%);-webkit-background-clip:text;background-clip:text}
-.hero h1 .ch:last-child{background:linear-gradient(180deg,#fff 20%,var(--purple) 140%);-webkit-background-clip:text;background-clip:text}
-@keyframes rise{to{opacity:1;transform:none}}
-.tagline{font-size:clamp(1.3rem,3.4vw,2.3rem);font-weight:700;letter-spacing:-.02em;background:linear-gradient(100deg,var(--cyan),var(--magenta) 60%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:22px;opacity:0;animation:fadeup .9s ease .9s forwards}
-.hero-dek{max-width:620px;margin:0 auto 38px;color:var(--muted);font-size:clamp(1rem,1.8vw,1.2rem);line-height:1.6;opacity:0;animation:fadeup .9s ease 1.05s forwards}
+.hero-logo{width:clamp(300px,54vw,600px);margin:0 auto 30px;position:relative;border-radius:20px;overflow:hidden;box-shadow:0 30px 100px rgba(128,0,255,.4),0 0 0 1px rgba(255,255,255,.09);opacity:0;animation:logoin 1.1s cubic-bezier(.2,.7,.2,1) .4s forwards}
+.hero-logo img{width:100%}
+.hero-logo::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.16) 50%,transparent 58%);transform:translateX(-130%);animation:shine 6.5s ease-in-out 2.2s infinite;pointer-events:none}
+@keyframes logoin{from{opacity:0;transform:scale(.84) translateY(34px)}to{opacity:1;transform:none}}
+@keyframes shine{0%,52%{transform:translateX(-130%)}88%,100%{transform:translateX(130%)}}
+.tagline{font-size:clamp(1.6rem,4.4vw,2.9rem);font-weight:800;letter-spacing:-.02em;background:linear-gradient(100deg,var(--cyan),var(--magenta) 60%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:24px;opacity:0;animation:fadeup .9s ease .95s forwards}
+.hero-dek{max-width:660px;margin:0 auto 40px;color:var(--muted);font-size:clamp(1rem,1.9vw,1.22rem);line-height:1.65;opacity:0;animation:fadeup .9s ease 1.1s forwards}
+.hero-dek b{color:var(--text);font-weight:700}
 @keyframes fadeup{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeup .9s ease 1.2s forwards}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeup .9s ease 1.25s forwards}
 .hero-ctas .btn{padding:15px 32px;font-size:1rem}
 .scroll-cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:grid;justify-items:center;gap:10px;color:var(--dim);font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
 .scroll-cue::after{content:"";width:1px;height:44px;background:linear-gradient(var(--dim),transparent);animation:cue 1.9s ease-in-out infinite}
@@ -84,7 +87,7 @@ img{max-width:100%;display:block}
 .beat h2 .grad{background:linear-gradient(100deg,var(--cyan),var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent}
 .beat:nth-child(2) h2 .grad{background:linear-gradient(100deg,var(--magenta),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
 .beat:nth-child(3) h2 .grad{background:linear-gradient(100deg,var(--gold),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent}
-.beat p{max-width:560px;margin:0 auto;color:var(--muted);font-size:clamp(1rem,1.9vw,1.25rem);line-height:1.6}
+.beat p{max-width:600px;margin:0 auto;color:var(--muted);font-size:clamp(1rem,1.9vw,1.25rem);line-height:1.65}
 .story-progress{position:absolute;bottom:8vh;left:50%;transform:translateX(-50%);display:flex;gap:10px}
 .story-progress i{width:34px;height:4px;border-radius:99px;background:rgba(255,255,255,.14);overflow:hidden;position:relative}
 .story-progress i::after{content:"";position:absolute;inset:0;background:var(--purple);transform:scaleX(0);transform-origin:0 50%}
@@ -97,57 +100,88 @@ img{max-width:100%;display:block}
 .mq-group .st{color:var(--purple)}
 @keyframes mq{to{transform:translateX(-50%)}}
 
-/* ---------- stats ---------- */
-.stats{max-width:1240px;margin:0 auto;padding:16vh 22px 6vh;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.stat{border:1px solid var(--line);border-radius:var(--r);padding:38px 26px;background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.008));text-align:center}
-.stat b{display:block;font-size:clamp(2.4rem,5vw,4.2rem);font-weight:800;letter-spacing:-.05em;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat:nth-child(2) b{background:linear-gradient(180deg,#fff,var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat:nth-child(3) b{background:linear-gradient(180deg,#fff,var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat:nth-child(4) b{background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat span{display:block;margin-top:10px;color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
-
+/* ---------- the machine : animated pipeline ---------- */
+.machine{max-width:1240px;margin:0 auto;padding:14vh 22px 10vh}
+.machine .sec-head{text-align:center;max-width:720px;margin:0 auto 54px}
+.machine .kicker{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);border:1px solid rgba(183,255,66,.3);background:rgba(183,255,66,.07);padding:8px 18px;border-radius:999px;margin-bottom:24px}
+.machine h2{font-size:clamp(2.2rem,5.6vw,4.4rem);font-weight:800;letter-spacing:-.045em;line-height:1.02;margin-bottom:18px;text-wrap:balance}
+.machine h2 .grad{background:linear-gradient(100deg,var(--lime),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.machine .sec-head p{color:var(--muted);font-size:clamp(1rem,1.8vw,1.2rem)}
+.pipe{border:1px solid var(--line);border-radius:28px;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.008));padding:44px 34px 34px;position:relative;overflow:hidden}
+.pipe-track{position:relative;display:flex;justify-content:space-between;align-items:flex-start;margin:8px 0 36px}
+.pipe-track::before{content:"";position:absolute;left:11%;right:11%;top:31px;height:2px;background:rgba(255,255,255,.1);border-radius:2px}
+.pipe-flow{position:absolute;left:11%;right:11%;top:31px;height:2px;pointer-events:none}
+.pulse{position:absolute;top:0;width:9px;height:9px;margin:-3.5px 0 0 -4.5px;border-radius:50%;animation:flow 3.8s linear infinite}
+.pulse.p1{background:var(--cyan);box-shadow:0 0 14px var(--cyan)}
+.pulse.p2{background:var(--magenta);box-shadow:0 0 14px var(--magenta);animation-delay:1.25s}
+.pulse.p3{background:var(--lime);box-shadow:0 0 14px var(--lime);animation-delay:2.5s}
+@keyframes flow{from{left:0;opacity:0}8%{opacity:1}92%{opacity:1}to{left:100%;opacity:0}}
+.pnode{position:relative;z-index:1;text-align:center;width:23%}
+.pnode .pic{width:62px;height:62px;margin:0 auto 14px;border-radius:20px;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid var(--line);box-shadow:0 8px 26px rgba(0,0,0,.4)}
+.pnode:nth-child(1) .pic{color:var(--cyan);border-color:rgba(86,216,255,.4);box-shadow:0 8px 26px rgba(86,216,255,.18)}
+.pnode:nth-child(2) .pic{color:var(--lime);border-color:rgba(183,255,66,.4);box-shadow:0 8px 26px rgba(183,255,66,.16)}
+.pnode:nth-child(3) .pic{color:var(--purple);border-color:rgba(128,0,255,.55);box-shadow:0 8px 26px rgba(128,0,255,.3)}
+.pnode:nth-child(4) .pic{color:var(--magenta);border-color:rgba(240,85,255,.4);box-shadow:0 8px 26px rgba(240,85,255,.18)}
+.pnode .pic svg{width:30px;height:30px}
+.pnode b{display:block;font-size:1.02rem;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}
+.pnode span{font-size:.78rem;color:var(--muted);line-height:1.45;display:block}
+.term{background:#07070d;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:inset 0 0 60px rgba(128,0,255,.05)}
+.term-bar{display:flex;align-items:center;gap:7px;padding:13px 18px;border-bottom:1px solid var(--line)}
+.term-bar i{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.14)}
+.term-bar i:first-child{background:rgba(255,95,86,.7)}
+.term-bar i:nth-child(2){background:rgba(255,189,46,.7)}
+.term-bar i:nth-child(3){background:rgba(39,201,63,.7)}
+.term-bar em{margin-left:10px;font-style:normal;font-family:var(--mono);font-size:.72rem;color:var(--dim);letter-spacing:.06em}
+.term-bar .live{margin-left:auto;display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.68rem;color:var(--lime);letter-spacing:.14em}
+.term-bar .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime);animation:blink 1.6s infinite}
+.term-log{padding:20px 22px;font-family:var(--mono);font-size:.8rem;line-height:2;min-height:208px;color:#a9e6ff}
+.term-log .t{color:var(--dim)}
+.term-log .ok{color:var(--lime)}
+.term-log .cy{color:var(--cyan)}
+.term-log b{color:#fff;font-weight:600}
+.term-log .cursor{display:inline-block;width:8px;height:15px;background:var(--lime);vertical-align:-2px;animation:blink 1s steps(1) infinite;margin-left:2px}
+</style>
+<style>
 /* ---------- reveal ---------- */
 .rv{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
 .rv.in{opacity:1;transform:none}
 
-/* ---------- section headers ---------- */
-.sec{max-width:1240px;margin:0 auto;padding:14vh 22px 8vh}
-.sec-head{text-align:center;max-width:720px;margin:0 auto 60px}
-.sec-head .kicker{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(86,216,255,.3);background:rgba(86,216,255,.07);padding:8px 18px;border-radius:999px;margin-bottom:24px}
-.sec-head h2{font-size:clamp(2.2rem,5.6vw,4.4rem);font-weight:800;letter-spacing:-.045em;line-height:1.02;margin-bottom:18px;text-wrap:balance}
-.sec-head p{color:var(--muted);font-size:clamp(1rem,1.8vw,1.2rem)}
-
-/* ---------- loadout bento ---------- */
-.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
-.card{position:relative;border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.01));overflow:hidden;transition:transform .35s ease,border-color .35s,box-shadow .35s;transform-style:preserve-3d;will-change:transform}
-.card:hover{border-color:rgba(128,0,255,.55);box-shadow:0 18px 60px rgba(128,0,255,.22)}
-.card::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(128,0,255,.14),transparent 65%);opacity:0;transition:opacity .35s;pointer-events:none}
-.card:hover::before{opacity:1}
-.card.span4{grid-column:span 4}.card.span2{grid-column:span 2}.card.span3{grid-column:span 3}
-.pill{display:inline-block;font-size:.64rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:6px 13px;border-radius:999px;margin-bottom:18px}
-.pill.live{background:rgba(183,255,66,.12);color:var(--lime);border:1px solid rgba(183,255,66,.35)}
-.pill.soon{background:rgba(255,196,77,.1);color:var(--gold);border:1px solid rgba(255,196,77,.35)}
-.card h3{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
-.card p{color:var(--muted);font-size:.98rem;line-height:1.6}
-.card .icon{font-size:2.4rem;margin-bottom:18px;display:block;filter:drop-shadow(0 6px 18px rgba(128,0,255,.45))}
-.card.hero-card{background:linear-gradient(150deg,rgba(128,0,255,.16),rgba(86,216,255,.05) 60%,transparent);border-color:rgba(128,0,255,.4)}
-.card.hero-card h3{font-size:clamp(1.7rem,3vw,2.4rem)}
-.ai-scan{position:relative;height:150px;border-radius:14px;margin-bottom:20px;background:linear-gradient(180deg,#0a0a12,#101018);border:1px solid var(--line);overflow:hidden}
-.ai-scan::before{content:"";position:absolute;left:0;right:0;height:2px;top:0;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 18px var(--cyan);animation:scan 3.2s ease-in-out infinite}
-@keyframes scan{0%,100%{top:4%}50%{top:94%}}
-.ai-scan .box{position:absolute;border:2px solid var(--cyan);border-radius:6px;box-shadow:0 0 14px rgba(86,216,255,.5)}
-.ai-scan .tag{position:absolute;font-size:.62rem;font-weight:800;letter-spacing:.1em;color:var(--cyan);text-transform:uppercase}
-.ai-row{display:flex;gap:26px;margin-top:4px}
-.ai-row div b{display:block;font-size:1.5rem;font-weight:800;color:var(--cyan)}
-.ai-row div span{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+/* ---------- loadout : gravity drop ---------- */
+.g-wrap{position:relative;height:430vh}
+.g-pin{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;overflow:hidden;padding-top:70px}
+.g-top{text-align:center;padding:14px 22px 0;position:relative;z-index:2}
+.g-top .kicker{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(86,216,255,.3);background:rgba(86,216,255,.07);padding:7px 16px;border-radius:999px;margin-bottom:14px}
+.g-top h2{font-size:clamp(1.9rem,4.6vw,3.4rem);font-weight:800;letter-spacing:-.045em;line-height:1.02;margin-bottom:8px}
+.g-top h2 .grad{background:linear-gradient(100deg,var(--cyan),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent}
+.g-top p{color:var(--muted);font-size:clamp(.92rem,1.6vw,1.08rem)}
+.g-stage{position:relative;flex:1;width:100%;max-width:1240px;margin:0 auto}
+.g-floor{position:absolute;left:6%;right:6%;bottom:2%;height:150px;background:radial-gradient(ellipse at 50% 60%,rgba(128,0,255,.17),rgba(86,216,255,.05) 55%,transparent 75%);pointer-events:none}
+.g-item{position:absolute;left:var(--lx);top:var(--ly);width:clamp(150px,20vw,224px);z-index:1}
+.g-card{position:relative;border:1px solid var(--line);border-radius:18px;padding:20px 18px 18px;background:linear-gradient(165deg,rgba(22,22,30,.96),rgba(12,12,18,.96));box-shadow:0 18px 50px rgba(0,0,0,.5);opacity:0;will-change:transform,opacity;backdrop-filter:blur(6px)}
+.g-card .pill{display:inline-block;font-size:.58rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:12px}
+.g-card .pill.live{background:rgba(183,255,66,.12);color:var(--lime);border:1px solid rgba(183,255,66,.35)}
+.g-card .pic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;margin-bottom:12px;background:rgba(128,0,255,.1);border:1px solid rgba(128,0,255,.35);color:var(--cyan)}
+.g-card .pic svg{width:24px;height:24px}
+.g-card h3{font-size:1rem;font-weight:800;letter-spacing:-.015em;margin-bottom:6px}
+.g-card p{color:var(--muted);font-size:.78rem;line-height:1.55}
+.g-item:nth-child(2) .pic{color:var(--magenta);background:rgba(240,85,255,.09);border-color:rgba(240,85,255,.35)}
+.g-item:nth-child(3) .pic{color:var(--cyan)}
+.g-item:nth-child(4) .pic{color:var(--gold);background:rgba(255,196,77,.09);border-color:rgba(255,196,77,.35)}
+.g-item:nth-child(5) .pic{color:var(--lime);background:rgba(183,255,66,.09);border-color:rgba(183,255,66,.35)}
+.g-item:nth-child(6) .pic{color:var(--magenta);background:rgba(240,85,255,.09);border-color:rgba(240,85,255,.35)}
+.g-item:nth-child(7) .pic{color:var(--cyan)}
+.g-item:nth-child(8) .pic{color:var(--gold);background:rgba(255,196,77,.09);border-color:rgba(255,196,77,.35)}
+.g-shadow{position:absolute;left:14%;right:14%;bottom:-15px;height:16px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.6),transparent 70%);opacity:0;pointer-events:none}
+.g-hint{text-align:center;color:var(--dim);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;padding:0 22px 18px;position:relative;z-index:2}
 </style>
 <style>
 /* ---------- members : pinned horizontal scroll ---------- */
-.h-wrap{position:relative;height:320vh}
+.h-wrap{position:relative;height:340vh}
 .h-pin{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .h-head{max-width:1240px;width:100%;margin:0 auto;padding:0 22px 34px}
 .h-head .kicker{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--magenta);border:1px solid rgba(240,85,255,.3);background:rgba(240,85,255,.07);padding:8px 18px;border-radius:999px;margin-bottom:20px}
 .h-head h2{font-size:clamp(2.2rem,5.6vw,4.4rem);font-weight:800;letter-spacing:-.045em;line-height:1.02}
+.h-head h2 .n{background:linear-gradient(100deg,var(--magenta),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
 .h-head p{color:var(--muted);margin-top:12px;font-size:1.05rem}
 .h-track{display:flex;gap:22px;padding:6px max(22px,calc((100vw - 1240px)/2 + 22px));width:max-content;will-change:transform}
 .member{position:relative;width:min(400px,78vw);flex:none;border:1px solid var(--line);border-radius:26px;overflow:hidden;background:var(--panel);transition:border-color .3s,transform .3s}
@@ -165,15 +199,16 @@ img{max-width:100%;display:block}
 /* ---------- CTA ---------- */
 .cta{position:relative;text-align:center;padding:22vh 22px;overflow:hidden}
 .cta .big{font-size:clamp(3rem,10vw,8.5rem);font-weight:900;letter-spacing:-.055em;line-height:.95;margin-bottom:24px}
-.cta .big .grad{background:linear-gradient(100deg,var(--purple),var(--magenta) 55%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.cta .big .grad{background:linear-gradient(100deg,var(--purple),var(--magenta) 30%,var(--gold) 55%,var(--magenta) 80%,var(--purple));background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradpan 7s linear infinite}
+@keyframes gradpan{to{background-position:220% center}}
 .cta p{color:var(--muted);font-size:clamp(1rem,2vw,1.3rem);max-width:560px;margin:0 auto 40px}
 .cta .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .cta .btn{padding:17px 38px;font-size:1.05rem}
 
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--line);padding:54px 22px 60px;text-align:center}
-footer .flogo{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:800;letter-spacing:.08em;margin-bottom:16px}
-footer .flogo img{width:26px;height:26px;border-radius:7px}
+footer .flogo{display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+footer .flogo img{height:44px;width:auto;border-radius:10px;box-shadow:0 6px 24px rgba(128,0,255,.35)}
 footer nav{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;font-size:.9rem;color:var(--muted)}
 footer nav a:hover{color:var(--text)}
 footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase}
@@ -181,23 +216,43 @@ footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transfor
 /* ---------- responsive ---------- */
 @media(max-width:900px){
   .nav-links{display:none}
-  .bento{grid-template-columns:1fr 1fr}
-  .card.span4,.card.span3{grid-column:span 2}
-  .card.span2{grid-column:span 1}
-  .stats{grid-template-columns:repeat(2,1fr)}
+  .pipe{padding:32px 20px 24px}
+  .pnode b{font-size:.86rem}
+  .pnode span{font-size:.68rem}
+  .pnode .pic{width:52px;height:52px;border-radius:16px}
+  .pnode .pic svg{width:25px;height:25px}
 }
-@media(max-width:600px){
-  .bento{grid-template-columns:1fr}
-  .card.span4,.card.span3,.card.span2{grid-column:span 1}
+@media(max-width:640px){
   .nav-cta .btn.ghost{display:none}
   .hero{padding-top:110px}
+  .term-log{font-size:.68rem;min-height:196px;padding:16px}
+  .g-item{width:132px}
+  .g-card{padding:14px 12px 12px;border-radius:14px}
+  .g-card .pic{width:36px;height:36px;border-radius:11px;margin-bottom:9px}
+  .g-card .pic svg{width:20px;height:20px}
+  .g-card h3{font-size:.86rem}
+  .g-card p{font-size:.68rem}
+  .g-item:nth-child(1){--lx:3%!important;--ly:1%!important}
+  .g-item:nth-child(2){--lx:55%!important;--ly:3%!important}
+  .g-item:nth-child(3){--lx:6%!important;--ly:27%!important}
+  .g-item:nth-child(4){--lx:52%!important;--ly:30%!important}
+  .g-item:nth-child(5){--lx:4%!important;--ly:53%!important}
+  .g-item:nth-child(6){--lx:50%!important;--ly:56%!important}
+  .g-item:nth-child(7){--lx:26%!important;--ly:76%!important}
+  .g-item:nth-child(8){--lx:2%!important;--ly:74%!important}
 }
 /* ---------- reduced motion ---------- */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
   html{scroll-behavior:auto}
   .rv{opacity:1;transform:none}
-  .hero h1 .ch,.tagline,.hero-dek,.hero-ctas{opacity:1;animation:none}
+  .hero-logo,.tagline,.hero-dek,.hero-ctas{opacity:1;animation:none}
+  .g-wrap{height:auto}
+  .g-pin{position:static;height:auto;display:block;padding-top:90px}
+  .g-stage{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;padding:26px 18px 40px}
+  .g-item{position:static;width:min(224px,calc(50% - 14px))}
+  .g-card{opacity:1!important;transform:none!important}
+  .g-shadow,.g-floor,.g-hint{display:none}
 }
 </style>
 </head>
@@ -208,9 +263,10 @@ footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transfor
 
 <nav class="nav">
   <div class="nav-inner">
-    <a class="brand" href="#top"><img src="img/logo2.png" alt="CRCMZ logo" />CRCMZ</a>
+    <a class="brand" href="#top" aria-label="CRCMZ home"><img src="img/logo2.png" alt="CRCMZ logo" /></a>
     <div class="nav-links">
       <a href="#story">Story</a>
+      <a href="#machine">Machine</a>
       <a href="#loadout">The Loadout</a>
       <a href="#members">Members</a>
       <a href="https://history.crcmz.me" target="_blank" rel="noopener">History ↗</a>
@@ -225,9 +281,9 @@ footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transfor
 <header class="hero" id="top">
   <div class="hero-inner" id="heroInner">
     <span class="eyebrow"><span class="dot"></span>Est. 2023 — Canada + US</span>
-    <h1 id="heroTitle" aria-label="CRCMZ">CRCMZ</h1>
+    <div class="hero-logo"><img src="img/logo2.png" alt="CRCMZ — Quick. Clean. Gone." /></div>
     <p class="tagline">Quick. Clean. Gone.</p>
-    <p class="hero-dek">An AI-powered gaming clan. Clips auto-shared to your chat, roasts auto-fired at your squad, coaching auto-delivered to your game. Nobody has this.</p>
+    <p class="hero-dek"><b>Nine players</b> across Canada and the US, running on <b>software we built ourselves</b>. Our bots pull every PSN clip into WhatsApp in minutes. Tag one with “rev” and the <b>AI coach</b> grades your game — mistakes, tips, and your squad's own voice comms. Every night the best moments get cut into a reel and posted to <b>@crcmzclan</b>. Nobody has this.</p>
     <div class="hero-ctas">
       <a class="btn primary" href="https://discord.gg/BeWdfJkFqr" target="_blank" rel="noopener">Join the Clan</a>
       <a class="btn ghost" href="https://app.crcmz.me">Open the App</a>
@@ -247,12 +303,12 @@ footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transfor
       <div class="beat" data-beat="1">
         <span class="num">02 — The Build</span>
         <h2>Then we built <span class="grad">the machine.</span></h2>
-        <p>PSN bots, WhatsApp relays, clip pipelines, a local AI lab. The clan runs on software we wrote ourselves.</p>
+        <p>PSN bots that never miss a clip. WhatsApp relays that deliver them in minutes. A pipeline that cuts reels and posts them to Instagram while we sleep. A local AI lab on our own hardware that transcribes our comms and coaches our game. The clan runs on software we wrote ourselves… and AI, of course.</p>
       </div>
       <div class="beat" data-beat="2">
-        <span class="num">03 — The North Star</span>
-        <h2>Now the AI <span class="grad">coaches us.</span></h2>
-        <p>Send a clip with “rev” — get strengths, mistakes and coaching tips back. Automatically. The dream is live.</p>
+        <span class="num">03 — The Coach</span>
+        <h2>The coach <span class="grad">never sleeps.</span></h2>
+        <p>Send any clip back with “rev” and the machine takes over — it watches every frame, transcribes your squad's voice comms, and hands you a graded report with what you did right, what you did wrong, and how to fix it. Private to you. Ruthless when it has to be.</p>
       </div>
     </div>
     <div class="story-progress" aria-hidden="true"><i id="sp0"></i><i id="sp1"></i><i id="sp2"></i></div>
@@ -266,73 +322,123 @@ footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transfor
   </div>
 </div>
 
-<section class="stats" aria-label="Clan stats">
-  <div class="stat rv"><b data-count="27">0</b><span>Platinums</span></div>
-  <div class="stat rv" style="--d:.1s"><b data-count="77">0</b><span>Clips captured</span></div>
-  <div class="stat rv" style="--d:.2s"><b data-count="10.4" data-suffix="K">0</b><span>WhatsApp messages</span></div>
-  <div class="stat rv" style="--d:.3s"><b data-count="309">0</b><span>Tracks slapped</span></div>
-</section>
-<section class="sec" id="loadout">
+<section class="machine" id="machine">
   <div class="sec-head rv">
-    <span class="kicker">VIP — The Loadout</span>
-    <h2>Everything you unlock.</h2>
-    <p>Every perk, day one. Go VIP and unlock the full package — instantly. No grinding, no waiting.</p>
+    <span class="kicker">Under the hood</span>
+    <h2>One clip in. <span class="grad">Everything out.</span></h2>
+    <p>This is the machine the clan runs on. A clip captured on PlayStation travels the whole loop — no human hands.</p>
   </div>
-  <div class="bento">
-    <div class="card hero-card span4 rv tilt">
-      <span class="pill soon">Coming soon</span>
-      <div class="ai-scan" aria-hidden="true">
-        <div class="box" style="top:20%;left:12%;width:26%;height:30%"></div><span class="tag" style="top:14%;left:12%">Squad ×3</span>
-        <div class="box" style="top:52%;left:58%;width:20%;height:32%;border-color:var(--magenta);box-shadow:0 0 14px rgba(240,85,255,.5)"></div><span class="tag" style="top:46%;left:58%;color:var(--magenta)">Target</span>
+  <div class="pipe rv">
+    <div class="pipe-track" aria-hidden="true">
+      <div class="pipe-flow">
+        <span class="pulse p1"></span><span class="pulse p2"></span><span class="pulse p3"></span>
       </div>
-      <h3>🤖 AI Gameplay Coach</h3>
-      <p>Send a clip with “rev” and get a full coaching report — strengths, mistakes, tips, grades. The north star, almost here.</p>
-      <div class="ai-row"><div><b>87%</b><span>Accuracy</span></div><div><b>S–D</b><span>Grades</span></div><div><b>24/7</b><span>Reviews</span></div></div>
+      <div class="pnode">
+        <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h4M8 7v4"/><circle cx="15.5" cy="10" r="1.3" fill="currentColor" stroke="none"/><circle cx="18" cy="12.5" r="1.3" fill="currentColor" stroke="none"/><path d="M17.3 5H6.7a4 4 0 0 0-4 3.6C2.3 12 4 15 6 16.2c.8.5 1.9.1 2.2-.8l.7-2h6.2l.7 2c.3.9 1.4 1.3 2.2.8C20 15 21.7 12 21.3 8.6A4 4 0 0 0 17.3 5z"/></svg></div>
+        <b>PSN</b><span>Clip captured.<br />The bot never misses.</span>
+      </div>
+      <div class="pnode">
+        <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg></div>
+        <b>WhatsApp</b><span>Shared in minutes.<br />Straight to the squad.</span>
+      </div>
+      <div class="pnode">
+        <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
+        <b>AI Lab</b><span>Coached &amp; cut.<br />Rev reports + reels.</span>
+      </div>
+      <div class="pnode">
+        <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"/></svg></div>
+        <b>Instagram</b><span>@crcmzclan.<br />Posted while we sleep.</span>
+      </div>
     </div>
-    <div class="card span2 rv tilt" style="--d:.08s">
-      <span class="pill live">Live</span>
-      <span class="icon">🎮</span>
-      <h3>The Squad App</h3>
-      <p>Live roster, trophy data, ranks and more at app.crcmz.me — the clan's home base.</p>
-    </div>
-    <div class="card span2 rv tilt">
-      <span class="pill live">Live</span>
-      <span class="icon">⚡</span>
-      <h3>CRCMZ Bot</h3>
-      <p>Runs on our own hardware. One bot across app, PSN and WhatsApp — summaries, roasts, rally calls.</p>
-    </div>
-    <div class="card span2 rv tilt" style="--d:.08s">
-      <span class="pill live">Live</span>
-      <span class="icon">🍿</span>
-      <h3>Watch Party</h3>
-      <p>Movie night in perfect sync, with cameras. Self-hosted, zero lag excuses.</p>
-    </div>
-    <div class="card span2 rv tilt" style="--d:.16s">
-      <span class="pill live">Live</span>
-      <span class="icon">🎵</span>
-      <h3>Slaptastic</h3>
-      <p>Spotify, but for CRCMZ. Drop a song link and it downloads straight to the clan's shared music server.</p>
-    </div>
-    <div class="card span3 rv tilt">
-      <span class="pill live">Live</span>
-      <span class="icon">🛡️</span>
-      <h3>Founders' Bunker</h3>
-      <p>Access to the inner circle's self-hosted Mattermost — where the real planning happens.</p>
-    </div>
-    <div class="card span3 rv tilt" style="--d:.08s">
-      <span class="pill live">Live</span>
-      <span class="icon">🎁</span>
-      <h3>Monthly Giveaways</h3>
-      <p>Real games, given away every month. Battlefield and MW4 already found new homes.</p>
+    <div class="term" aria-label="Live pipeline log">
+      <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><em>machine — live</em><span class="live">LIVE</span></div>
+      <div class="term-log" id="termLog"></div>
     </div>
   </div>
 </section>
+
+<div class="g-wrap" id="loadout">
+  <div class="g-pin" id="gPin">
+    <div class="g-top">
+      <span class="kicker">The Loadout</span>
+      <h2>Everything you <span class="grad">unlock.</span></h2>
+      <p>Seven perks. One clan. Watch them drop in.</p>
+    </div>
+    <div class="g-stage" id="gStage">
+      <div class="g-item" style="--lx:2%;--ly:4%" data-rot="-8">
+        <div class="g-card">
+          <span class="pill live">Live</span>
+          <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.6z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></svg></div>
+          <h3>AI Gameplay Coach</h3>
+          <p>Send “rev”, get a graded report — mistakes, tips, your squad's voice comms.</p>
+        </div>
+        <div class="g-shadow"></div>
+      </div>
+      <div class="g-item" style="--lx:27%;--ly:32%" data-rot="5">
+        <div class="g-card">
+          <span class="pill live">Live</span>
+          <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></div>
+          <h3>The Squad App</h3>
+          <p>Roster, trophies and ranks at app.crcmz.me — the clan's home base.</p>
+        </div>
+        <div class="g-shadow"></div>
+      </div>
+      <div class="g-item" style="--lx:52%;--ly:2%" data-rot="-4">
+        <div class="g-card">
+          <span class="pill live">Live</span>
+          <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="9" width="14" height="10" rx="3"/><path d="M12 9V6"/><circle cx="12" cy="4.5" r="1"/><circle cx="9.6" cy="13.4" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.4" cy="13.4" r="1.1" fill="currentColor" stroke="none"/><path d="M9.5 16.4h5"/></svg></div>
+          <h3>CRCMZ Bot</h3>
+          <p>One bot across app, PSN and WhatsApp. It knows everything.</p>
+        </div>
+        <div class="g-shadow"></div>
+      </div>
+      <div class="g-item" style="--lx:75%;--ly:28%" data-rot="7">
+        <div class="g-card">
+          <span class="pill live">Live</span>
+          <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3.5"/><path d="M10.3 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></svg></div>
+          <h3>Watch Party</h3>
+          <p>Movie night in perfect sync, with cameras. Zero lag excuses.</p>
+        </div>
+        <div class="g-shadow"></div>
+      </div>
+      <div class="g-item" style="--lx:6%;--ly:60%" data-rot="4">
+        <div class="g-card">
+          <span class="pill live">Live</span>
+          <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l10-2.5V14"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="14" r="2.5"/></svg></div>
+          <h3>Slaptastic</h3>
+          <p>Drop a song link — it lands on the clan's shared music server.</p>
+        </div>
+        <div class="g-shadow"></div>
+      </div>
+      <div class="g-item" style="--lx:34%;--ly:64%" data-rot="-6">
+        <div class="g-card">
+          <span class="pill live">Live</span>
+          <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 2.8v6.1c0 4.4-2.9 7.3-7 8.6-4.1-1.3-7-4.2-7-8.6V5.8z"/><path d="M9.3 11.8l2 2 3.6-4.2"/></svg></div>
+          <h3>Founders' Bunker</h3>
+          <p>The inner circle's self-hosted Mattermost. Real planning happens here.</p>
+        </div>
+        <div class="g-shadow"></div>
+      </div>
+      <div class="g-item" style="--lx:62%;--ly:62%" data-rot="3">
+        <div class="g-card">
+          <span class="pill live">Live</span>
+          <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9.5" width="16" height="10.5" rx="1.5"/><path d="M12 9.5V20M4 13.5h16"/><path d="M12 9.5C8 9.5 6.6 8 6.6 6 6.6 4.6 8 4 9 5c1 1 3 4.5 3 4.5zm0 0c4 0 5.4-1.5 5.4-3.5 0-1.4-1.4-2-2.4-1-1 1-3 4.5-3 4.5z"/></svg></div>
+          <h3>Monthly Giveaways</h3>
+          <p>Real games, every month. Battlefield and MW4 already found new homes.</p>
+        </div>
+        <div class="g-shadow"></div>
+      </div>
+      <div class="g-floor" aria-hidden="true"></div>
+    </div>
+    <div class="g-hint" aria-hidden="true">Keep scrolling — gravity does the rest</div>
+  </div>
+</div>
 
 <div class="h-wrap" id="membersWrap">
   <div class="h-pin">
     <div class="h-head">
       <span class="kicker">The Roster</span>
-      <h2>Clan members.</h2>
+      <h2>Clan <span class="n">members.</span></h2>
       <p>Hand-made AI portraits. Real traits. Zero mercy. →</p>
     </div>
     <div class="h-track" id="hTrack">
@@ -356,6 +462,22 @@ footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transfor
         <div class="ph"><img src="src/png/kap.png" alt="Kap — CRCMZ clan member portrait" loading="lazy" /></div>
         <div class="info"><span class="role">The Camper</span><h3>Kap</h3><p>Holding angles since 2023. Unmoved, unbothered.</p></div>
       </article>
+      <article class="member">
+        <div class="ph"><img src="src/png/soup.png" alt="Soup — CRCMZ clan member portrait" loading="lazy" /></div>
+        <div class="info"><span class="role">The Comedian</span><h3>Soup</h3><p>Funniest in the lobby. It's not close.</p></div>
+      </article>
+      <article class="member">
+        <div class="ph"><img src="src/png/toxic.png" alt="Toxic — CRCMZ clan member portrait" loading="lazy" /></div>
+        <div class="info"><span class="role">The Ghost</span><h3>Toxic</h3><p>Always there… in 40min.</p></div>
+      </article>
+      <article class="member">
+        <div class="ph"><img src="src/png/mazino.png" alt="Manzino — CRCMZ clan member portrait" loading="lazy" /></div>
+        <div class="info"><span class="role">The Wildcard</span><h3>Manzino</h3><p>Only Manzino Nose…</p></div>
+      </article>
+      <article class="member">
+        <div class="ph"><img src="src/webp/awol.png" alt="AWOL — CRCMZ clan member portrait" loading="lazy" /></div>
+        <div class="info"><span class="role">The Many Faces</span><h3>AWOL</h3><p>DarkSouls701. AlphaQ. EpixKiller. Pick one.</p></div>
+      </article>
     </div>
     <div class="h-hint" aria-hidden="true">Keep scrolling</div>
   </div>
@@ -371,9 +493,9 @@ footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transfor
 </section>
 
 <footer>
-  <div class="flogo"><img src="img/logo2.png" alt="" />CRCMZ</div>
+  <div class="flogo"><img src="img/logo2.png" alt="CRCMZ logo" /></div>
   <nav>
-    <a href="#story">Story</a><a href="#loadout">The Loadout</a><a href="#members">Members</a>
+    <a href="#story">Story</a><a href="#machine">Machine</a><a href="#loadout">The Loadout</a><a href="#members">Members</a>
     <a href="https://history.crcmz.me" target="_blank" rel="noopener">Clan History ↗</a>
     <a href="https://discord.gg/BeWdfJkFqr" target="_blank" rel="noopener">Discord</a>
     <a href="https://app.crcmz.me">Login</a>
@@ -384,18 +506,7 @@ footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transfor
 (function(){
   "use strict";
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fine = window.matchMedia('(pointer: fine)').matches;
   var clamp = function(n,a,b){ return Math.max(a, Math.min(b, n)); };
-  var lerp = function(a,b,t){ return a + (b-a)*t; };
-
-  /* hero title: split into animated letters */
-  var h1 = document.getElementById('heroTitle');
-  var txt = h1.textContent; h1.textContent = '';
-  txt.split('').forEach(function(c,i){
-    var s = document.createElement('span');
-    s.className = 'ch'; s.style.setProperty('--i', i); s.textContent = c;
-    h1.appendChild(s);
-  });
 
   var pbar = document.getElementById('pbar');
   var heroInner = document.getElementById('heroInner');
@@ -405,12 +516,50 @@ footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transfor
   var sps = [document.getElementById('sp0'),document.getElementById('sp1'),document.getElementById('sp2')];
   var hWrap = document.getElementById('membersWrap');
   var hTrack = document.getElementById('hTrack');
+  var gWrap = document.getElementById('loadout');
+  var gItems = Array.prototype.slice.call(document.querySelectorAll('.g-item'));
 
   sps.forEach(function(sp){
     var f = document.createElement('b');
     f.style.cssText = 'display:block;height:100%;background:var(--purple);border-radius:99px;transform:scaleX(0);transform-origin:0 50%';
     sp.appendChild(f);
   });
+
+  /* gravity: per-card scroll windows */
+  var gState = gItems.map(function(it, i){
+    return {
+      card: it.querySelector('.g-card'),
+      shadow: it.querySelector('.g-shadow'),
+      rot: parseFloat(it.getAttribute('data-rot') || '0'),
+      start: i * 0.075,
+      dur: 0.17
+    };
+  });
+
+  function drawGravity(gp){
+    gState.forEach(function(g){
+      var local = clamp((gp - g.start) / g.dur, 0, 1);
+      if(local <= 0){
+        g.card.style.opacity = '0';
+        g.card.style.transform = 'translate3d(0,-115vh,0) rotate(' + (g.rot * 2.5).toFixed(1) + 'deg)';
+        g.shadow.style.opacity = '0';
+        return;
+      }
+      /* fall with gravity: accelerating (ease-in) */
+      var k1 = clamp(local / 0.75, 0, 1);
+      var y = -115 * (1 - k1 * k1);
+      /* landing bounce: one hop, decaying */
+      var k2 = clamp((local - 0.75) / 0.25, 0, 1);
+      var bounce = -Math.sin(k2 * Math.PI) * 5 * (1 - k2);
+      var rot = g.rot * (2.5 - 1.5 * local);
+      g.card.style.transform = 'translate3d(0,' + (y + bounce).toFixed(2) + 'vh,0) rotate(' + rot.toFixed(2) + 'deg)';
+      g.card.style.opacity = clamp(local / 0.15, 0, 1).toFixed(2);
+      /* floor shadow grows as the card lands */
+      var prox = clamp(local * 1.15, 0, 1);
+      g.shadow.style.opacity = (0.55 * prox).toFixed(2);
+      g.shadow.style.transform = 'scaleX(' + (0.5 + 0.5 * prox).toFixed(2) + ')';
+    });
+  }
 
   function draw(){
     var y = window.scrollY || window.pageYOffset;
@@ -431,7 +580,7 @@ footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transfor
     var p = clamp(-r.top / Math.max(1,total), 0, 1);
     var seg = 1/3;
     beats.forEach(function(b,i){
-      var local = clamp((p - i*seg)/seg, 0, 1);          // 0..1 within this beat
+      var local = clamp((p - i*seg)/seg, 0, 1);
       var fadeIn = clamp(local/0.28, 0, 1);
       var fadeOut = i < 2 ? clamp((local-0.72)/0.28, 0, 1) : 0;
       var op = fadeIn * (1 - fadeOut);
@@ -441,6 +590,11 @@ footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transfor
       var fill = i < 2 ? clamp(local/0.72, 0, 1) : local;
       sps[i].firstChild.style.transform = 'scaleX(' + fill.toFixed(3) + ')';
     });
+
+    /* loadout: gravity drop */
+    var gr = gWrap.getBoundingClientRect();
+    var gp = clamp(-gr.top / Math.max(1, gr.height - vh), 0, 1);
+    drawGravity(gp);
 
     /* members: horizontal scrub */
     var hr = hWrap.getBoundingClientRect();
@@ -462,36 +616,37 @@ footer small{color:var(--dim);font-size:.76rem;letter-spacing:.1em;text-transfor
   }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
 
-  /* count-up stats */
-  var cio = new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(!e.isIntersecting) return;
-      cio.unobserve(e.target);
-      var el = e.target, target = parseFloat(el.dataset.count), suf = el.dataset.suffix || '';
-      var dec = (''+el.dataset.count).indexOf('.') > -1 ? 1 : 0;
-      if(reduce){ el.textContent = target + suf; return; }
-      var t0 = performance.now(), dur = 1400;
-      (function tick(t){
-        var k = clamp((t-t0)/dur, 0, 1), ease = 1-Math.pow(1-k,3);
-        el.textContent = (target*ease).toFixed(dec) + suf;
-        if(k < 1) requestAnimationFrame(tick);
-      })(t0);
-    });
-  }, {threshold:.5});
-  document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
-
-  /* card spotlight tilt */
-  if(fine && !reduce){
-    document.querySelectorAll('.tilt').forEach(function(card){
-      card.addEventListener('mousemove', function(e){
-        var r = card.getBoundingClientRect();
-        var x = (e.clientX - r.left)/r.width, y = (e.clientY - r.top)/r.height;
-        card.style.setProperty('--mx', (x*100)+'%');
-        card.style.setProperty('--my', (y*100)+'%');
-        card.style.transform = 'perspective(900px) rotateX('+((0.5-y)*5).toFixed(2)+'deg) rotateY('+((x-0.5)*7).toFixed(2)+'deg) translateY(-4px)';
-      });
-      card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
-    });
+  /* live pipeline terminal */
+  var termLines = [
+    '<span class="t">12:04:11</span> psn-bot ▸ clip <b>13#458257071810852</b> archived <span class="ok">✓</span>',
+    '<span class="t">12:04:52</span> relay ▸ WhatsApp → squad group <span class="ok">· 41s after capture</span>',
+    '<span class="t">12:07:03</span> rev ▸ “rev” detected — <span class="cy">coaching started</span>',
+    '<span class="t">12:08:44</span> whisper ▸ voice comms transcribed <span class="ok">· 214 lines</span>',
+    '<span class="t">12:09:31</span> coach ▸ report ready — <b>grade B</b> <span class="ok">· DM sent</span>',
+    '<span class="t">12:11:02</span> reel ▸ 60s vertical cut rendered <span class="ok">✓</span>',
+    '<span class="t">12:11:20</span> ig ▸ posted to <b>@crcmzclan</b> <span class="ok">✓</span>',
+    '<span class="t">mon 09:11</span> digest ▸ weekly feedback digest written <span class="ok">✓</span>'
+  ];
+  var termLog = document.getElementById('termLog');
+  var li = 0, termVisible = false;
+  function pushLine(){
+    var d = document.createElement('div');
+    d.innerHTML = termLines[li % termLines.length] + (li % termLines.length === termLines.length - 1 ? '<span class="cursor"></span>' : '');
+    termLog.appendChild(d);
+    while(termLog.children.length > 7) termLog.removeChild(termLog.firstChild);
+    li++;
+  }
+  if(reduce){
+    termLines.forEach(function(){ pushLine(); });
+  } else {
+    new IntersectionObserver(function(es){
+      termVisible = es[0].isIntersecting;
+    }, {threshold:.15}).observe(termLog);
+    setInterval(function(){
+      if(termVisible) pushLine();
+    }, 1600);
+    /* seed two lines so it never looks empty */
+    pushLine(); pushLine();
   }
 })();
 </script>
