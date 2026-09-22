@@ -1821,64 +1821,152 @@
             <p tabindex="0" style="margin-top: 20px;">
 	Established in 2023 by visionary minds from both Canada and the United States, CRCMZ brings together individuals who share a passion for excellence and the thrill of precision. 🎮 🔪 🎯
             </p>
-             <!-- Clan History link -->
-      <a href="https://history.crcmz.me" target="_blank" class="history-link" aria-label="View Clan History">
-        <span class="history-link-inner">
-          <svg class="history-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-          <span class="history-label">Clan History</span>
-          <svg class="history-arrow" viewBox="0 0 13 10" height="10px" width="15px">
-            <path d="M1,5 L11,5"/>
-            <polyline points="8 1 12 5 8 9"/>
-          </svg>
+             <!-- Clan History — animated pressable section -->
+      <a href="https://history.crcmz.me" target="_blank" rel="noopener" class="history-card" aria-label="Open the CRCMZ clan history timeline">
+        <span class="history-card-beam" aria-hidden="true"></span>
+        <span class="history-card-glow" aria-hidden="true"></span>
+        <span class="history-card-content">
+          <span class="history-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </span>
+          <span class="history-card-text">
+            <span class="history-card-kicker">From 2023 to today</span>
+            <span class="history-card-title">The Build Story</span>
+            <span class="history-card-sub">8 chapters · 31 moments · the interactive timeline of how this clan was built</span>
+          </span>
+          <span class="history-card-cta">
+            <span>Open history</span>
+            <svg viewBox="0 0 13 10" height="10px" width="15px" aria-hidden="true">
+              <path d="M1,5 L11,5"/>
+              <polyline points="8 1 12 5 8 9"/>
+            </svg>
+          </span>
         </span>
       </a>
       <style>
-        .history-link {
-          display: inline-flex;
-          align-items: center;
-          margin-top: 28px;
-          text-decoration: none;
-          border: 1px solid rgba(255,255,255,0.15);
-          border-radius: 40px;
-          padding: 10px 22px;
-          background: rgba(255,255,255,0.04);
-          color: #e0e0e0;
-          font-size: 0.85rem;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          transition: all 0.35s ease;
-          box-shadow: 0 0 0 0 rgba(255,255,255,0.08);
+        .history-card {
+          --hc-accent1: #8000ff;
+          --hc-accent2: #cf59e6;
+          --hc-accent3: #6bc5f8;
+          display: block;
           position: relative;
+          margin-top: 30px;
+          border-radius: 22px;
+          text-decoration: none;
+          color: #fff;
           overflow: hidden;
+          isolation: isolate;
+          background: linear-gradient(135deg, rgba(30,20,50,0.92), rgba(15,12,28,0.96));
+          transition: transform 0.25s ease, box-shadow 0.35s ease;
+          cursor: pointer;
         }
-        .history-link::before {
+        /* animated rotating beam border */
+        .history-card::before {
           content: '';
           position: absolute;
+          inset: -60%;
+          z-index: -2;
+          background: conic-gradient(from 0deg,
+            transparent 0deg, transparent 300deg,
+            var(--hc-accent1) 330deg, var(--hc-accent3) 350deg, transparent 360deg);
+          animation: hc-spin 5s linear infinite;
+          opacity: 0.85;
+        }
+        .history-card::after {
+          content: '';
+          position: absolute;
+          inset: 1.5px;
+          z-index: -1;
+          border-radius: 20.5px;
+          background: linear-gradient(135deg, #171226 0%, #0f0b1c 60%, #120e22 100%);
+        }
+        @keyframes hc-spin { to { transform: rotate(360deg); } }
+        /* soft ambient glow that breathes */
+        .history-card-glow {
+          position: absolute;
           inset: 0;
-          border-radius: 40px;
-          background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.06) 50%, transparent 70%);
-          background-size: 200% 100%;
-          background-position: 200% 0;
-          transition: background-position 0.6s ease;
+          z-index: 0;
+          background: radial-gradient(120% 90% at 15% 10%, rgba(128,0,255,0.22), transparent 55%),
+                      radial-gradient(120% 90% at 85% 90%, rgba(107,197,248,0.14), transparent 55%);
+          animation: hc-breathe 4.5s ease-in-out infinite alternate;
+          pointer-events: none;
         }
-        .history-link:hover::before { background-position: -200% 0; }
-        .history-link:hover {
-          border-color: rgba(255,255,255,0.4);
-          color: #fff;
-          box-shadow: 0 0 18px rgba(255,255,255,0.08), 0 0 40px rgba(255,255,255,0.04);
-          transform: translateY(-1px);
-        }
-        .history-link-inner {
+        @keyframes hc-breathe { from { opacity: 0.55; } to { opacity: 1; } }
+        .history-card-content {
+          position: relative;
+          z-index: 1;
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 20px;
+          padding: 26px 28px;
         }
-        .history-icon { width: 16px; height: 16px; opacity: 0.7; flex-shrink: 0; }
-        .history-arrow { opacity: 0.5; transition: transform 0.3s ease, opacity 0.3s ease; flex-shrink: 0; }
-        .history-link:hover .history-arrow { transform: translateX(3px); opacity: 1; }
+        .history-card-icon {
+          flex-shrink: 0;
+          width: 58px;
+          height: 58px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background: radial-gradient(circle at 30% 30%, rgba(207,89,230,0.35), rgba(128,0,255,0.12));
+          border: 1px solid rgba(207,89,230,0.45);
+          box-shadow: 0 0 24px rgba(128,0,255,0.35), inset 0 0 12px rgba(128,0,255,0.25);
+          animation: hc-float 3.6s ease-in-out infinite;
+        }
+        .history-card-icon svg { width: 28px; height: 28px; color: #e9d5ff; }
+        @keyframes hc-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .history-card-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+        .history-card-kicker {
+          font-size: 1.1rem;
+          letter-spacing: 0.28em;
+          text-transform: uppercase;
+          color: var(--hc-accent3);
+          font-weight: 600;
+        }
+        .history-card-title {
+          font-size: 2.6rem;
+          font-weight: 800;
+          letter-spacing: 0.01em;
+          background: linear-gradient(90deg, #fff, #e9d5ff 55%, #b0f3f1);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          line-height: 1.15;
+        }
+        .history-card-sub { font-size: 1.35rem; color: #a7a7c4; line-height: 1.5; }
+        .history-card-cta {
+          margin-left: auto;
+          flex-shrink: 0;
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 22px;
+          border-radius: 50px;
+          font-size: 1.4rem;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          color: #fff;
+          background: linear-gradient(135deg, var(--hc-accent2), var(--hc-accent1));
+          box-shadow: 0 6px 22px rgba(128,0,255,0.45);
+          transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .history-card-cta svg { stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.25s ease; }
+        .history-card:hover { transform: translateY(-3px); box-shadow: 0 18px 50px rgba(128,0,255,0.28); }
+        .history-card:hover .history-card-cta { transform: translateX(2px); box-shadow: 0 8px 30px rgba(128,0,255,0.6); }
+        .history-card:hover .history-card-cta svg { transform: translateX(4px); }
+        .history-card:active { transform: translateY(0) scale(0.985); }
+        .history-card:active .history-card-cta { transform: scale(0.96); }
+        @media (max-width: 600px) {
+          .history-card-content { flex-wrap: wrap; gap: 14px; padding: 22px 20px; }
+          .history-card-title { font-size: 2.3rem; }
+          .history-card-cta { margin-left: 0; width: 100%; justify-content: center; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .history-card::before, .history-card-glow, .history-card-icon { animation: none; }
+        }
       </style>
 
              <!-- Resume button -->
@@ -1910,7 +1998,10 @@
           </h2>
           <p class="sectionHeadingP"></p>
         </div>
-        <div class="project-boxes-div">
+        <!-- Mobile: vertical scroll drives a pinned horizontal member rail (desktop unchanged) -->
+        <div class="members-hwrap" id="members-hwrap">
+          <div class="members-hsticky">
+            <div class="project-boxes-div members-htrack" id="members-htrack">
           <div data-aos="fade-up" class="project-box-wrapper">
             <div class="project-box project-box2" id="project-box2">
               <div class="info-div">
@@ -2128,9 +2219,157 @@
             </div>
           </div>
           <!-- ---------------------- -->
-        </div>
+            </div><!-- /.members-htrack -->
+          </div><!-- /.members-hsticky -->
+        </div><!-- /.members-hwrap -->
       </div>
     </section>
+
+    <style>
+      /* Desktop / default: wrappers are invisible, layout unchanged */
+      .members-hwrap, .members-hsticky { display: contents; }
+
+      /* Mobile only: pinned vertical-scroll-driven horizontal member rail */
+      @media (max-width: 768px) {
+        .members-hwrap {
+          display: block;
+          position: relative;
+          width: 100vw;
+          margin-left: calc(-50vw + 50%);
+        }
+        .members-hsticky {
+          display: block;
+          position: sticky;
+          top: 0;
+          height: 100vh;
+          height: 100svh;
+          overflow: hidden;
+        }
+        .members-htrack {
+          flex-direction: row !important;
+          align-items: center;
+          gap: 5vw;
+          width: max-content;
+          height: 100%;
+          padding: 0 8vw;
+          will-change: transform;
+        }
+        .members-htrack .project-box-wrapper {
+          flex: 0 0 84vw;
+          width: 84vw;
+        }
+        .members-htrack .project-box {
+          height: 76vh;
+          height: 76svh;
+        }
+        /* Neutralize AOS inside the rail so cards never sit invisible/off-transform */
+        .members-htrack [data-aos] {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+        .members-progress {
+          position: absolute;
+          left: 12vw;
+          right: 12vw;
+          bottom: calc(4vh + env(safe-area-inset-bottom, 0px));
+          height: 3px;
+          border-radius: 3px;
+          background: rgba(255,255,255,0.12);
+          overflow: hidden;
+        }
+        .members-progress > span {
+          display: block;
+          height: 100%;
+          width: 0%;
+          border-radius: 3px;
+          background: linear-gradient(90deg, #8000ff, #cf59e6, #6bc5f8);
+        }
+        .members-hint {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: calc(7vh + env(safe-area-inset-bottom, 0px));
+          text-align: center;
+          font-size: 1.2rem;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.45);
+          transition: opacity 0.4s ease;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .members-htrack { transform: none !important; }
+      }
+    </style>
+    <script>
+      (function () {
+        var mq = window.matchMedia('(max-width: 768px)');
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        var wrap = document.getElementById('members-hwrap');
+        var track = document.getElementById('members-htrack');
+        if (!wrap || !track) return;
+
+        /* progress bar + hint, created only for the mobile rail */
+        var progress = null, progressFill = null, hint = null;
+        function ensureChrome() {
+          if (progress || !mq.matches) return;
+          var sticky = wrap.querySelector('.members-hsticky');
+          progress = document.createElement('div');
+          progress.className = 'members-progress';
+          progressFill = document.createElement('span');
+          progress.appendChild(progressFill);
+          hint = document.createElement('div');
+          hint.className = 'members-hint';
+          hint.textContent = 'Keep scrolling';
+          sticky.appendChild(progress);
+          sticky.appendChild(hint);
+        }
+        function removeChrome() {
+          if (progress) { progress.remove(); progress = null; progressFill = null; }
+          if (hint) { hint.remove(); hint = null; }
+        }
+
+        function layout() {
+          if (!mq.matches || reduceMotion.matches) {
+            wrap.style.height = '';
+            track.style.transform = '';
+            removeChrome();
+            return;
+          }
+          ensureChrome();
+          /* scroll distance = horizontal overflow + one viewport of vertical travel */
+          var dist = Math.max(0, track.scrollWidth - window.innerWidth);
+          wrap.style.height = (dist + window.innerHeight) + 'px';
+          update();
+        }
+
+        var ticking = false;
+        function update() {
+          ticking = false;
+          if (!mq.matches || reduceMotion.matches) return;
+          var total = wrap.offsetHeight - window.innerHeight;
+          if (total <= 0) return;
+          var p = Math.min(1, Math.max(0, -wrap.getBoundingClientRect().top / total));
+          var dist = Math.max(0, track.scrollWidth - window.innerWidth);
+          track.style.transform = 'translate3d(' + (-p * dist).toFixed(1) + 'px,0,0)';
+          if (progressFill) progressFill.style.width = (p * 100).toFixed(1) + '%';
+          if (hint) hint.style.opacity = p > 0.04 ? '0' : '1';
+        }
+        function onScroll() {
+          if (!ticking) { ticking = true; requestAnimationFrame(update); }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', layout);
+        window.addEventListener('orientationchange', function () { setTimeout(layout, 300); });
+        if (mq.addEventListener) mq.addEventListener('change', layout);
+        /* images can change track width once loaded */
+        window.addEventListener('load', layout);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
+        layout();
+      })();
+    </script>
   </main>
   <!-- main ends here -->
 
