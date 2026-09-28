@@ -1846,6 +1846,31 @@
           </span>
         </span>
       </a>
+      <!-- AI Factory — animated pressable section (reuses .history-card) -->
+      <a href="factory.html" class="history-card factory-card" aria-label="Open Our AI Factory: how clips become reels">
+        <span class="history-card-beam" aria-hidden="true"></span>
+        <span class="history-card-glow" aria-hidden="true"></span>
+        <span class="history-card-content">
+          <span class="history-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </span>
+          <span class="history-card-text">
+            <span class="history-card-kicker">You play. It ships.</span>
+            <span class="history-card-title">Our AI Factory</span>
+            <span class="history-card-sub">The machine that turns squad clips into reels · watched, cut and posted while we sleep</span>
+          </span>
+          <span class="history-card-cta">
+            <span>Open factory</span>
+            <svg viewBox="0 0 13 10" height="10px" width="15px" aria-hidden="true">
+              <path d="M1,5 L11,5"/>
+              <polyline points="8 1 12 5 8 9"/>
+            </svg>
+          </span>
+        </span>
+      </a>
       <style>
         .history-card {
           --hc-accent1: #8000ff;
@@ -1959,13 +1984,30 @@
         .history-card:hover .history-card-cta svg { transform: translateX(4px); }
         .history-card:active { transform: translateY(0) scale(0.985); }
         .history-card:active .history-card-cta { transform: scale(0.96); }
+        /* AI Factory variant: hot-magenta/gold beam, gear spins slowly */
+        .factory-card { --hc-accent1: #ff2fd6; --hc-accent2: #ff7a3d; --hc-accent3: #ffc44d; margin-top: 18px; }
+        .factory-card .history-card-glow {
+          background: radial-gradient(120% 90% at 15% 10%, rgba(255,47,214,0.2), transparent 55%),
+                      radial-gradient(120% 90% at 85% 90%, rgba(255,196,77,0.14), transparent 55%);
+        }
+        .factory-card .history-card-icon {
+          background: radial-gradient(circle at 30% 30%, rgba(255,122,61,0.35), rgba(255,47,214,0.12));
+          border-color: rgba(255,122,61,0.5);
+          box-shadow: 0 0 24px rgba(255,47,214,0.35), inset 0 0 12px rgba(255,47,214,0.25);
+        }
+        .factory-card .history-card-icon svg { color: #ffe3c2; animation: hc-gear 9s linear infinite; }
+        @keyframes hc-gear { to { transform: rotate(360deg); } }
+        .factory-card .history-card-title { background: linear-gradient(90deg, #fff, #ffd9f5 55%, #ffe08a); -webkit-background-clip: text; background-clip: text; }
+        .factory-card:hover { box-shadow: 0 18px 50px rgba(255,47,214,0.26); }
+        .factory-card:hover .history-card-cta { box-shadow: 0 8px 30px rgba(255,47,214,0.55); }
+        .factory-card .history-card-cta { box-shadow: 0 6px 22px rgba(255,47,214,0.4); }
         @media (max-width: 600px) {
           .history-card-content { flex-wrap: wrap; gap: 14px; padding: 22px 20px; }
           .history-card-title { font-size: 2.3rem; }
           .history-card-cta { margin-left: 0; width: 100%; justify-content: center; }
         }
         @media (prefers-reduced-motion: reduce) {
-          .history-card::before, .history-card-glow, .history-card-icon { animation: none; }
+          .history-card::before, .history-card-glow, .history-card-icon, .factory-card .history-card-icon svg { animation: none; }
         }
       </style>
 
