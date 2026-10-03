@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls", "delegate_permission/common.get_login_creds"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "me.crcmz.app",
+    "sha256_cert_fingerprints": ["9F:99:EC:CA:62:F7:5B:C2:B2:FB:67:CE:D5:AE:72:02:7A:B5:77:85:AF:9C:59:6C:96:CE:00:5D:F2:1E:A9:29"]
+  }
+}]
