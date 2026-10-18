@@ -1264,6 +1264,51 @@
     to   { transform: scaleY(1); }
   }
 
+  /* Tournaments card */
+  .loadout-card-featured.tourney::before {
+    background: linear-gradient(135deg, #00e08a, #ffd700, #00b4ff, #00e08a);
+  }
+  .loadout-card-featured.tourney:hover {
+    box-shadow: 0 12px 50px rgba(0, 224, 138, 0.16), 0 12px 50px rgba(255, 215, 0, 0.08);
+  }
+  .featured-content-tag.green { color: #00e08a; }
+  .tn-visual {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .tn-col { display: flex; flex-direction: column; gap: 10px; }
+  .tn-col.final { justify-content: center; }
+  .tn-slot {
+    width: 108px;
+    padding: 6px 9px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.1rem;
+    color: #cfd6e4;
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .tn-slot b { font-variant-numeric: tabular-nums; color: #8a93a6; font-weight: 600; }
+  .tn-slot.win { border-color: rgba(0, 224, 138, 0.5); color: #e8fff4; }
+  .tn-slot.win b { color: #00e08a; }
+  .tn-slot.champ {
+    border-color: rgba(255, 215, 0, 0.6);
+    background: rgba(255, 215, 0, 0.08);
+    color: #fff3c4;
+    animation: tn-glow 2.4s ease-in-out infinite;
+  }
+  .tn-pair { display: flex; flex-direction: column; gap: 4px; }
+  .tn-link { width: 14px; height: 2px; background: rgba(255, 255, 255, 0.18); }
+  @keyframes tn-glow {
+    0%, 100% { box-shadow: 0 0 0 rgba(255, 215, 0, 0); }
+    50%      { box-shadow: 0 0 18px rgba(255, 215, 0, 0.35); }
+  }
+  @media (prefers-reduced-motion: reduce) { .tn-slot.champ { animation: none; } }
+
   /* And More card */
   .loadout-card-featured.and-more { overflow: hidden; }
   .more-aurora {
@@ -1709,6 +1754,40 @@
               <span class="featured-chip">Auto-shares your favourites</span>
               <span class="featured-chip">Spotify & Apple Music</span>
               <span class="featured-chip">Shared local library</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tournaments -->
+      <div class="loadout-card-featured tourney" data-aos="fade-up" data-aos-delay="125">
+        <span class="featured-badge" style="background: linear-gradient(90deg, #00e08a, #ffd700); color: #000;">Now Live</span>
+        <div class="featured-inner">
+          <div class="tn-visual" aria-hidden="true">
+            <div class="tn-col">
+              <div class="tn-pair">
+                <div class="tn-slot win">Tiny <b>3</b></div>
+                <div class="tn-slot">Lund <b>1</b></div>
+              </div>
+              <div class="tn-pair">
+                <div class="tn-slot">Bund <b>0</b></div>
+                <div class="tn-slot win">Gagary <b>3</b></div>
+              </div>
+            </div>
+            <div class="tn-link"></div>
+            <div class="tn-col final">
+              <div class="tn-slot champ">🏆 Tiny <b>3</b></div>
+            </div>
+          </div>
+          <div class="featured-content">
+            <div class="featured-content-tag green">Tournaments</div>
+            <div class="featured-content-title">Post the screenshot.<br>The bracket does the rest.</div>
+            <div class="featured-content-desc">Run clan tournaments on <strong style="color:#00e08a;">app.crcmz.me</strong>: brackets, leagues, best-of series, Search &amp; Destroy and Cutthroat. Post your end-of-match screenshot in the PSN group and AI reads it: the map, who won, and every player's kills and deaths. Scores land on the live chart by themselves, and the winner gets announced in WhatsApp.</div>
+            <div class="featured-chips">
+              <span class="featured-chip">AI reads your screenshots</span>
+              <span class="featured-chip">Live brackets &amp; standings</span>
+              <span class="featured-chip">Per-player K/D</span>
+              <span class="featured-chip">WhatsApp announcements</span>
             </div>
           </div>
         </div>
