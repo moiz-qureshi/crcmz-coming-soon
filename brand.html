@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#090A0E" />
+  <meta name="description" content="CRCMZ Brand Kit — logos, colors, typography, and assets." />
+  <meta property="og:title" content="CRCMZ Brand Kit" />
+  <meta property="og:description" content="Official logos, color palette, typography, and downloadable assets." />
+  <meta property="og:image" content="https://crcmz.me/img/brand/CRCMZ-open-graph.png" />
+  <meta property="og:url" content="https://crcmz.me/brand" />
+  <title>CRCMZ Brand Kit</title>
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Fira+Code&display=swap" />
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink:      #090A0E;
+      --graphite: #171922;
+      --card:     #1a1c26;
+      --border:   rgba(255,255,255,0.08);
+      --violet:   #A855F7;
+      --violet-dim: rgba(168,85,247,0.15);
+      --silver:   #D9DEE6;
+      --white:    #F4F5F7;
+      --muted:    #A7A4B2;
+      --font-display: 'Orbitron', sans-serif;
+      --font-body:    system-ui, -apple-system, sans-serif;
+      --font-mono:    'Fira Code', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Nav ── */
+    .topnav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9,10,14,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .topnav-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .topnav-logo span { color: var(--violet); }
+    .topnav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .topnav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .topnav-link:hover { color: var(--white); }
+    .topnav-btn {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ink);
+      background: var(--violet);
+      border: none;
+      border-radius: 6px;
+      padding: 7px 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .topnav-btn:hover { opacity: 0.85; }
+
+    /* ── Page layout ── */
+    .page-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 5% 80px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+    .hero-crest {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 28px;
+      display: block;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .hero-title span { color: var(--violet); }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 32px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink);
+      background: var(--violet);
+      border: none;
+      border-radius: 8px;
+      padding: 11px 22px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--silver);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 22px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--violet); color: var(--white); }
+
+    /* ── Section ── */
+    .section {
+      margin-top: 64px;
+    }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .section-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(168,85,247,0.4), transparent);
+      margin: 64px 0 0;
+    }
+
+    /* ── Color palette ── */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 14px;
+    }
+    .swatch {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .swatch:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .swatch-color {
+      height: 80px;
+      width: 100%;
+    }
+    .swatch-info {
+      background: var(--card);
+      padding: 10px 12px;
+    }
+    .swatch-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--silver);
+      margin-bottom: 3px;
+    }
+    .swatch-hex {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .swatch-copy-hint {
+      font-size: 0.7rem;
+      color: var(--violet);
+      margin-top: 4px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .swatch:hover .swatch-copy-hint { opacity: 1; }
+
+    /* copied flash */
+    .swatch.copied .swatch-hex { color: var(--violet); }
+
+    /* ── Typography ── */
+    .type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 600px) { .type-grid { grid-template-columns: 1fr; } }
+    .type-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 22px;
+    }
+    .type-card-role {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 8px;
+    }
+    .type-sample-display {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .type-sample-body {
+      font-family: var(--font-body);
+      font-size: 1.5rem;
+      color: var(--silver);
+      line-height: 1.5;
+    }
+    .type-sample-mono {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+    .type-meta {
+      margin-top: 10px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .type-meta strong { color: var(--silver); }
+
+    /* ── Asset grid ── */
+    .asset-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .asset-grid-2  { grid-template-columns: repeat(2, 1fr); }
+    .asset-grid-3  { grid-template-columns: repeat(3, 1fr); }
+    .asset-grid-4  { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 800px) {
+      .asset-grid-3, .asset-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+      .asset-grid-2, .asset-grid-3, .asset-grid-4 { grid-template-columns: 1fr; }
+    }
+
+    .asset-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.15s;
+      display: flex;
+      flex-direction: column;
+    }
+    .asset-card:hover {
+      border-color: rgba(168,85,247,0.45);
+      transform: translateY(-2px);
+    }
+    .asset-preview {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #0d0e14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 16px;
+    }
+    .asset-preview.square { aspect-ratio: 1; }
+    .asset-preview.tall   { aspect-ratio: 9 / 16; }
+    .asset-preview.wide   { aspect-ratio: 3 / 1; }
+    .asset-preview img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .asset-preview.dark-bg { background: #f4f5f7; }
+
+    .asset-info {
+      padding: 12px 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .asset-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--silver);
+    }
+    .asset-meta {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .asset-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .asset-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 10px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .asset-btn:hover {
+      background: var(--violet-dim);
+      border-color: rgba(168,85,247,0.5);
+      color: var(--white);
+    }
+    .asset-btn svg { flex-shrink: 0; }
+
+    /* ── Copy bank ── */
+    .copy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 700px) { .copy-grid { grid-template-columns: 1fr; } }
+    .copy-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 18px;
+      position: relative;
+    }
+    .copy-card-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 8px;
+    }
+    .copy-card-text {
+      font-size: 0.92rem;
+      color: var(--silver);
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+    .copy-card-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .copy-card-btn:hover { color: var(--violet); border-color: rgba(168,85,247,0.5); }
+    .copy-card-btn.done { color: #4ade80; border-color: #4ade80; }
+
+    /* ── Voice pill list ── */
+    .voice-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .voice-pill {
+      font-size: 0.85rem;
+      color: var(--silver);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 5px 14px;
+    }
+
+    /* ── Download CTA ── */
+    .cta-box {
+      margin-top: 64px;
+      background: linear-gradient(135deg, rgba(168,85,247,0.12), rgba(168,85,247,0.04));
+      border: 1px solid rgba(168,85,247,0.35);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+    }
+    .cta-box-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    .cta-box-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .cta-box-files {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .file-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 12px;
+    }
+
+    /* ── Footer ── */
+    .brand-footer {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .brand-footer-logo {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .brand-footer-logo span { color: var(--violet); }
+    .brand-footer-copy {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .brand-footer-links {
+      display: flex;
+      gap: 16px;
+    }
+    .brand-footer-links a {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .brand-footer-links a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="topnav" aria-label="Brand site navigation">
+    <a href="/" class="topnav-logo">CRCM<span>Z</span></a>
+    <div class="topnav-right">
+      <a href="/" class="topnav-link">Home</a>
+      <a href="https://app.crcmz.me" class="topnav-link">App</a>
+      <a href="https://discord.gg/BeWdfJkFqr" class="topnav-btn">Join Discord</a>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- Hero -->
+    <section class="hero">
+      <img src="img/brand/CRCMZ-crest-transparent-512.png" alt="CRCMZ Crest" class="hero-crest" />
+      <h1 class="hero-title">CRCMZ <span>Brand Kit</span></h1>
+      <p class="hero-sub">Logos, colors, typography, and assets — everything you need to represent the clan.</p>
+      <div class="hero-actions">
+        <a href="https://files.qureshi.io/s/JRAxCSecdQzVxYc" target="_blank" rel="noopener" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Full Kit
+        </a>
+        <a href="mailto:contact@crcmz.me" class="btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Partnership Enquiry
+        </a>
+      </div>
+    </section>
+
+    <!-- Colors -->
+    <div class="divider"></div>
+    <section class="section" id="colors">
+      <p class="section-label">01 — Colors</p>
+      <h2 class="section-title">Color Palette</h2>
+      <p class="section-desc">Click a swatch to copy the hex value to your clipboard.</p>
+      <div class="palette-grid">
+        <div class="swatch" onclick="copyHex(this, '#090A0E')">
+          <div class="swatch-color" style="background:#090A0E;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Ink</div>
+            <div class="swatch-hex">#090A0E</div>
+            <div class="swatch-copy-hint">Click to copy</div>
+          </div>
+        </div>
+        <div class="swatch" onclick="copyHex(this, '#171922')">
+          <div class="swatch-color" style="background:#171922;border-bottom:1px solid rgba(255,255,255,0.08);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Graphite</div>
+            <div class="swatch-hex">#171922</div>
+            <div class="swatch-copy-hint">Click to copy</div>
+          </div>
+        </div>
+        <div class="swatch" onclick="copyHex(this, '#A855F7')">
+          <div class="swatch-color" style="background:#A855F7;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Violet</div>
+            <div class="swatch-hex">#A855F7</div>
+            <div class="swatch-copy-hint">Click to copy</div>
+          </div>
+        </div>
+        <div class="swatch" onclick="copyHex(this, '#D9DEE6')">
+          <div class="swatch-color" style="background:#D9DEE6;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Silver</div>
+            <div class="swatch-hex">#D9DEE6</div>
+            <div class="swatch-copy-hint">Click to copy</div>
+          </div>
+        </div>
+        <div class="swatch" onclick="copyHex(this, '#F4F5F7')">
+          <div class="swatch-color" style="background:#F4F5F7;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">White</div>
+            <div class="swatch-hex">#F4F5F7</div>
+            <div class="swatch-copy-hint">Click to copy</div>
+          </div>
+        </div>
+        <div class="swatch" onclick="copyHex(this, '#A7A4B2')">
+          <div class="swatch-color" style="background:#A7A4B2;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Muted</div>
+            <div class="swatch-hex">#A7A4B2</div>
+            <div class="swatch-copy-hint">Click to copy</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CSS variables snippet -->
+      <div style="margin-top:20px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;position:relative;">
+        <div style="font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--violet);margin-bottom:10px;">CSS Design Tokens</div>
+        <pre style="font-family:var(--font-mono);font-size:0.82rem;color:var(--silver);white-space:pre-wrap;line-height:1.7;">:root {
+  --crcmz-ink:      #090A0E;
+  --crcmz-graphite: #171922;
+  --crcmz-violet:   #A855F7;
+  --crcmz-silver:   #D9DEE6;
+  --crcmz-white:    #F4F5F7;
+  --crcmz-muted:    #A7A4B2;
+}</pre>
+        <button class="asset-btn" style="position:absolute;top:14px;right:14px;" onclick="copySnippet(this, ':root {\n  --crcmz-ink:      #090A0E;\n  --crcmz-graphite: #171922;\n  --crcmz-violet:   #A855F7;\n  --crcmz-silver:   #D9DEE6;\n  --crcmz-white:    #F4F5F7;\n  --crcmz-muted:    #A7A4B2;\n}')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy
+        </button>
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <div class="divider"></div>
+    <section class="section" id="typography">
+      <p class="section-label">02 — Typography</p>
+      <h2 class="section-title">Typography</h2>
+      <p class="section-desc">Three type roles used across all CRCMZ touchpoints.</p>
+      <div class="type-grid">
+        <div class="type-card">
+          <div class="type-card-role">Display / Headlines</div>
+          <div class="type-sample-display">CRCMZ</div>
+          <div class="type-meta"><strong>Orbitron</strong> · Bold / Black · All caps where possible</div>
+        </div>
+        <div class="type-card">
+          <div class="type-card-role">Body / UI</div>
+          <div class="type-sample-body">Quick. Clean. Gone.</div>
+          <div class="type-meta"><strong>System UI</strong> (San Francisco · Segoe UI · Roboto)<br>Regular · 400 / 600 weights</div>
+        </div>
+        <div class="type-card" style="grid-column: 1 / -1;">
+          <div class="type-card-role">Labels / Code / Monospace</div>
+          <div class="type-sample-mono">Squad ID: CRCMZ-2023 · v7.4.0 · crcmz.me</div>
+          <div class="type-meta"><strong>Fira Code</strong> (or DejaVu Sans Mono included in kit) · stats, tags, badges, code blocks</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logos -->
+    <div class="divider"></div>
+    <section class="section" id="logos">
+      <p class="section-label">03 — Logos</p>
+      <h2 class="section-title">Logos & Marks</h2>
+      <p class="section-desc">Use the crest on dark backgrounds. Lockup (crest + wordmark) preferred for full branding contexts.</p>
+      <div class="asset-grid asset-grid-2" style="margin-bottom:16px;">
+        <div class="asset-card">
+          <div class="asset-preview square">
+            <img src="img/brand/CRCMZ-crest-transparent-512.png" alt="CRCMZ Crest" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Crest (Transparent)</div>
+              <div class="asset-meta">PNG · 512 × 512 · 116 KB</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-crest-transparent-512.png" download class="asset-btn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                PNG 512
+              </a>
+              <a href="img/brand/CRCMZ-crest-transparent-1024.png" download class="asset-btn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                PNG 1024
+              </a>
+              <a href="img/brand/CRCMZ-crest-transparent-2048.png" download class="asset-btn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                PNG 2048
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview square">
+            <img src="img/brand/CRCMZ-avatar.png" alt="CRCMZ Avatar" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Avatar</div>
+              <div class="asset-meta">PNG · 1024 × 1024 · 308 KB</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-avatar.png" download class="asset-btn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                PNG 1024
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="asset-grid asset-grid-2">
+        <div class="asset-card">
+          <div class="asset-preview wide" style="background:#0d0e14;">
+            <img src="img/brand/CRCMZ-lockup-light.png" alt="CRCMZ Lockup Light" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Lockup — Light (for dark BG)</div>
+              <div class="asset-meta">PNG · 2400 × 700 · SVG included</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-lockup-light.png" download class="asset-btn">PNG</a>
+              <a href="img/brand/CRCMZ-lockup-light.svg" download class="asset-btn">SVG</a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview wide dark-bg">
+            <img src="img/brand/CRCMZ-lockup-dark.png" alt="CRCMZ Lockup Dark" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Lockup — Dark (for light BG)</div>
+              <div class="asset-meta">PNG · 2400 × 700 · SVG included</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-lockup-dark.png" download class="asset-btn">PNG</a>
+              <a href="img/brand/CRCMZ-lockup-dark.svg" download class="asset-btn">SVG</a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview wide" style="background:#0d0e14;">
+            <img src="img/brand/CRCMZ-wordmark-light.png" alt="CRCMZ Wordmark Light" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Wordmark — Light</div>
+              <div class="asset-meta">PNG · 2400 × 500 · SVG included</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-wordmark-light.png" download class="asset-btn">PNG</a>
+              <a href="img/brand/CRCMZ-wordmark-light.svg" download class="asset-btn">SVG</a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview wide dark-bg">
+            <img src="img/brand/CRCMZ-wordmark-dark.png" alt="CRCMZ Wordmark Dark" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Wordmark — Dark</div>
+              <div class="asset-meta">PNG · 2400 × 500 · SVG included</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-wordmark-dark.png" download class="asset-btn">PNG</a>
+              <a href="img/brand/CRCMZ-wordmark-dark.svg" download class="asset-btn">SVG</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Assets -->
+    <div class="divider"></div>
+    <section class="section" id="social">
+      <p class="section-label">04 — Social</p>
+      <h2 class="section-title">Social Assets</h2>
+      <p class="section-desc">Ready-to-use for YouTube, Twitch, Instagram, Twitter/X, and Discord.</p>
+      <div class="asset-grid asset-grid-3">
+        <div class="asset-card">
+          <div class="asset-preview">
+            <img src="img/brand/CRCMZ-open-graph.png" alt="Open Graph" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Open Graph / Link Preview</div>
+              <div class="asset-meta">PNG · 1200 × 630</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-open-graph.png" download class="asset-btn">Download</a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview">
+            <img src="img/brand/CRCMZ-campaign-landscape.png" alt="Campaign Landscape" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Campaign Landscape</div>
+              <div class="asset-meta">PNG · 1920 × 1080</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-campaign-landscape.png" download class="asset-btn">Download</a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview">
+            <img src="img/brand/CRCMZ-thumbnail.png" alt="Thumbnail" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">YouTube Thumbnail</div>
+              <div class="asset-meta">PNG · 1280 × 720</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-thumbnail.png" download class="asset-btn">Download</a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview" style="aspect-ratio:4/5;">
+            <img src="img/brand/CRCMZ-social-square.png" alt="Social Square" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Social Square</div>
+              <div class="asset-meta">PNG · 1080 × 1080</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-social-square.png" download class="asset-btn">Download</a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview" style="aspect-ratio:4/5;">
+            <img src="img/brand/CRCMZ-social-portrait.png" alt="Social Portrait" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Social Portrait</div>
+              <div class="asset-meta">PNG · 1080 × 1350</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-social-portrait.png" download class="asset-btn">Download</a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview" style="aspect-ratio:4/5;">
+            <img src="img/brand/CRCMZ-story-reel-cover.png" alt="Story / Reel Cover" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Story / Reel Cover</div>
+              <div class="asset-meta">PNG · 1080 × 1920</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-story-reel-cover.png" download class="asset-btn">Download</a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card" style="grid-column: 1 / -1;">
+          <div class="asset-preview" style="aspect-ratio:16/5;">
+            <img src="img/brand/CRCMZ-header-wide.png" alt="Header Wide" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Header Wide (Twitter/X · GitHub)</div>
+              <div class="asset-meta">PNG · 1500 × 500</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-header-wide.png" download class="asset-btn">Download</a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card" style="grid-column: 1 / -1;">
+          <div class="asset-preview" style="aspect-ratio:16/9;">
+            <img src="img/brand/CRCMZ-channel-banner.png" alt="Channel Banner" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Channel Banner (YouTube)</div>
+              <div class="asset-meta">PNG · 2560 × 1440</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-channel-banner.png" download class="asset-btn">Download</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stream overlays -->
+    <div class="divider"></div>
+    <section class="section" id="stream">
+      <p class="section-label">05 — Stream</p>
+      <h2 class="section-title">Stream Overlays</h2>
+      <p class="section-desc">OBS / Streamlabs scene assets for Twitch and YouTube Live.</p>
+      <div class="asset-grid asset-grid-2">
+        <div class="asset-card">
+          <div class="asset-preview">
+            <img src="img/brand/CRCMZ-starting-soon.png" alt="Starting Soon" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Starting Soon</div>
+              <div class="asset-meta">PNG · 1920 × 1080</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-starting-soon.png" download class="asset-btn">Download</a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview">
+            <img src="img/brand/CRCMZ-be-right-back.png" alt="Be Right Back" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Be Right Back</div>
+              <div class="asset-meta">PNG · 1920 × 1080</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-be-right-back.png" download class="asset-btn">Download</a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview">
+            <img src="img/brand/CRCMZ-stream-ended.png" alt="Stream Ended" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Stream Ended</div>
+              <div class="asset-meta">PNG · 1920 × 1080</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-stream-ended.png" download class="asset-btn">Download</a>
+            </div>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview">
+            <img src="img/brand/CRCMZ-gameplay-overlay.png" alt="Gameplay Overlay" />
+          </div>
+          <div class="asset-info">
+            <div>
+              <div class="asset-name">Gameplay Overlay</div>
+              <div class="asset-meta">PNG · 1920 × 1080 · transparent elements</div>
+            </div>
+            <div class="asset-actions">
+              <a href="img/brand/CRCMZ-gameplay-overlay.png" download class="asset-btn">Download</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Copy bank -->
+    <div class="divider"></div>
+    <section class="section" id="copy">
+      <p class="section-label">06 — Copy</p>
+      <h2 class="section-title">Copy Bank</h2>
+      <p class="section-desc">Ready-to-use text for profiles, bios, and posts. Click to copy.</p>
+      <div class="copy-grid">
+        <div class="copy-card">
+          <div class="copy-card-label">Tagline</div>
+          <div class="copy-card-text">Quick. Clean. Gone.</div>
+          <button class="copy-card-btn" onclick="copyCardText(this, 'Quick. Clean. Gone.')">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <div class="copy-card">
+          <div class="copy-card-label">One Line</div>
+          <div class="copy-card-text">A gaming clan building a better home base for its squad.</div>
+          <button class="copy-card-btn" onclick="copyCardText(this, 'A gaming clan building a better home base for its squad.')">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <div class="copy-card">
+          <div class="copy-card-label">Short Bio</div>
+          <div class="copy-card-text">Squad first. Clips worth keeping. A home base built by the people who play here. Quick. Clean. Gone. crcmz.me</div>
+          <button class="copy-card-btn" onclick="copyCardText(this, 'Squad first. Clips worth keeping. A home base built by the people who play here. Quick. Clean. Gone. crcmz.me')">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <div class="copy-card">
+          <div class="copy-card-label">About CRCMZ</div>
+          <div class="copy-card-text">CRCMZ is a gaming clan established in 2023, bringing together players from Canada and the United States. It started with a squad and grew into a home base for the people behind the handles. From shared clips to community-built tools, CRCMZ is shaped by what its members want to use, watch, and play together.</div>
+          <button class="copy-card-btn" onclick="copyCardText(this, 'CRCMZ is a gaming clan established in 2023, bringing together players from Canada and the United States. It started with a squad and grew into a home base for the people behind the handles. From shared clips to community-built tools, CRCMZ is shaped by what its members want to use, watch, and play together.')">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <div class="copy-card" style="grid-column: 1 / -1;">
+          <div class="copy-card-label">Campaign Lines</div>
+          <div class="copy-card-text">Squad first.
+Good games. Better company.
+Keep the clip. Keep the memory.
+The lobby is better with your people.
+Built by the squad. For the squad.
+GG. Run it back.</div>
+          <button class="copy-card-btn" onclick="copyCardText(this, 'Squad first.\nGood games. Better company.\nKeep the clip. Keep the memory.\nThe lobby is better with your people.\nBuilt by the squad. For the squad.\nGG. Run it back.')">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy all
+          </button>
+        </div>
+      </div>
+
+      <!-- Voice -->
+      <div style="margin-top:28px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 20px;">
+        <div class="copy-card-label" style="margin-bottom:10px;">Brand Voice</div>
+        <p style="font-size:0.9rem;color:var(--muted);margin-bottom:12px;">Confident, direct, playful, welcoming. Write like a squad member — not a corporate esports press release. Short active sentences. Celebrate shared moments.</p>
+        <div class="voice-pills">
+          <span class="voice-pill">Confident</span>
+          <span class="voice-pill">Direct</span>
+          <span class="voice-pill">Playful</span>
+          <span class="voice-pill">Welcoming</span>
+          <span class="voice-pill">No hype fluff</span>
+          <span class="voice-pill">Squad perspective</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / Download CTA -->
+    <div class="divider"></div>
+    <div class="cta-box">
+      <h2 class="cta-box-title">Download the Full Kit</h2>
+      <p class="cta-box-sub">All PNGs, SVGs, editable files, fonts, wallpaper, and the brand guide PDF in one zip.</p>
+      <div class="cta-box-files">
+        <span class="file-chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          PNG logos (4 sizes)
+        </span>
+        <span class="file-chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          SVG editables
+        </span>
+        <span class="file-chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Stream overlays
+        </span>
+        <span class="file-chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Social templates
+        </span>
+        <span class="file-chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          4K wallpaper
+        </span>
+        <span class="file-chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Brand guide PDF
+        </span>
+        <span class="file-chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Fonts (DejaVu)
+        </span>
+      </div>
+      <a href="https://files.qureshi.io/s/JRAxCSecdQzVxYc" target="_blank" rel="noopener" class="btn-primary" style="font-size:1rem;padding:13px 28px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download CRCMZ-Media-Kit.zip
+      </a>
+      <p style="margin-top:14px;font-size:0.8rem;color:var(--muted);">Password-protected · email <a href="mailto:contact@crcmz.me?subject=CRCMZ%20media%20kit" style="color:var(--violet);">contact@crcmz.me</a> for the password · 45 MB</p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="brand-footer">
+      <a href="/" class="brand-footer-logo">CRCM<span>Z</span></a>
+      <span class="brand-footer-copy">© 2026 CRCMZ Clan. All rights reserved.</span>
+      <div class="brand-footer-links">
+        <a href="/">Home</a>
+        <a href="https://app.crcmz.me">App</a>
+        <a href="mailto:contact@crcmz.me">Contact</a>
+        <a href="https://discord.gg/BeWdfJkFqr">Discord</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    function copyHex(el, hex) {
+      navigator.clipboard.writeText(hex).then(() => {
+        el.classList.add('copied');
+        const hexEl = el.querySelector('.swatch-hex');
+        const orig = hexEl.textContent;
+        hexEl.textContent = 'Copied!';
+        setTimeout(() => {
+          hexEl.textContent = orig;
+          el.classList.remove('copied');
+        }, 1400);
+      });
+    }
+
+    function copySnippet(btn, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        btn.style.color = '#4ade80';
+        setTimeout(() => {
+          btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy';
+          btn.style.color = '';
+        }, 1600);
+      });
+    }
+
+    function copyCardText(btn, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.classList.add('done');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '✓ Copied';
+        setTimeout(() => {
+          btn.innerHTML = orig;
+          btn.classList.remove('done');
+        }, 1600);
+      });
+    }
+  </script>
+</body>
+</html>
