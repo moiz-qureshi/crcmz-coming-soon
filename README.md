@@ -1,3 +1,9 @@
+# CRCMZ — Command Ready Clan Management Zone
+
+The coming-soon and home site for CRCMZ at [crcmz.me](https://crcmz.me): a gaming clan from Canada and the US, est. 2023.
+
+---
+
 # <a href="https://vinodjangid07.github.io/" target="_blank">My Portfolio</a>
 <p align="justify">This website displays my Projects, Web presence, Story, Work experience, and contact information.</p>
 
