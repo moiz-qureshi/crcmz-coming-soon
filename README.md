@@ -1,46 +1,103 @@
-# CRCMZ — Command Ready Clan Management Zone
+<div align="center">
 
-The coming-soon and home site for CRCMZ at [crcmz.me](https://crcmz.me): a gaming clan from Canada and the US, est. 2023.
+<a href="https://crcmz.me">
+  <img src="img/brand/CRCMZ-crest-transparent-512.png" alt="CRCMZ crest" width="180">
+</a>
+
+# CRCMZ
+
+### Command Ready Clan Management Zone
+
+**Quick. Clean. Gone.**
+
+Nine players. Two countries. One squad running on software it built itself.
+
+[![Live](https://img.shields.io/badge/LIVE-crcmz.me-00d26a?style=for-the-badge&logo=googlechrome&logoColor=white)](https://crcmz.me)
+[![App](https://img.shields.io/badge/APP-app.crcmz.me-7c3aed?style=for-the-badge&logo=playstation&logoColor=white)](https://app.crcmz.me)
+[![VIP](https://img.shields.io/badge/GO-VIP-f5b800?style=for-the-badge&logo=starship&logoColor=black)](https://bot.crcmz.me/vip)
+[![Discord](https://img.shields.io/badge/Discord-join-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/BeWdfJkFqr)
+
+🇨🇦 🇺🇸 &nbsp;·&nbsp; est. 2023 &nbsp;·&nbsp; Call of Duty on PlayStation
+
+<img src="img/og-home.jpg" alt="crcmz.me" width="100%">
+
+</div>
 
 ---
 
-# <a href="https://vinodjangid07.github.io/" target="_blank">My Portfolio</a>
-<p align="justify">This website displays my Projects, Web presence, Story, Work experience, and contact information.</p>
+## 🎯 What this is
 
-[![Repository Status](https://img.shields.io/badge/Repository%20Status-Maintained-dark%20green.svg)](https://github.com/vinodjangid07/vinodjangid07.github.io)
-[![Website Status](https://img.shields.io/badge/Website%20Status-Online-green)](https://vinodjangid07.github.io/)
-[![Author](https://img.shields.io/badge/Author-Vinod%20Jangid-purple.svg)](https://www.instagram.com/its_.me._vinod?igshid=YmMyMTA2MsY%3D)
-[![Latest Release](https://img.shields.io/badge/Latest%20Release-11%20Jan%202024-yellow.svg)](https://github.com/vinodjangid07/vinodjangid07.github.io)
-<a href="https://github.com/vinodjangid07/vinodjangid07.github.io/blob/master/LICENSE"><img alt="License" src="http://img.shields.io/:license-mit-blue.svg?style=flat-square?style=flat-square" /></a>
+This repo is **[crcmz.me](https://crcmz.me)**, home base for the CRCMZ clan. Most clans have a Discord and a logo. We have an AI coach, a clip factory, a bot that knows everyone's K/D, and a bracket that fills itself in from screenshots. This site is where all of that lives.
 
-<img width="100%" alt="Portfolio Screenshot" src="https://github.com/vinodjangid07/vinodjangid07.github.io/assets/86096184/fd0d70b2-1505-4adf-8b0c-427df58607e3">
+## 🧰 The Loadout
 
+Everything a CRCMZ member gets:
 
-:star: Star me on GitHub — it helps!
+| | Perk | What it does |
+|---|---|---|
+| 🧠 | **AI Gameplay Coach** `beta` | Drop a clip and get coached on it. Clip analysis, live stream review, coaching for each game. |
+| 📨 | **PSN Messenger** | Share on PSN and it shows up everywhere: WhatsApp, Discord and Mattermost, in real time. A montage comes out every month. |
+| 🎮 | **PSN Chat Board** | The whole clan on one screen at [app.crcmz.me](https://app.crcmz.me). Group chat, quick party-ups, works mid-game. |
+| 🤖 | **CRCMZ Bot** | One bot, three places to yell at it. Say `ai …` in PSN or WhatsApp, or use the Ask AI tab. It knows the squad's real stats, and you can teach it facts about each other. Runs on our own hardware. |
+| 🍿 | **Watch Party** | Watch together, in sync, on app.crcmz.me. |
+| 🏆 | **Tournaments** | Post the screenshot, the bracket does the rest. AI reads results into live brackets, standings and K/D for each player, then announces them in WhatsApp. |
+| 🏭 | **[The AI Factory](https://crcmz.me/factory.html)** | *We play. The Factory ships.* Drop a PlayStation clip in the squad chat and it gets cut, captioned, coached and posted to Instagram, TikTok and YouTube. No editing, no exporting. |
 
-# Sections 📚
+### 👑 VIP, every perk on day one
 
-✔️ Mini intro\
-✔️ About me \
-✔️ Skills\
-✔️ Projects\
-✔️ Contact me
+> Instant membership (skip tryouts) · VIP Discord role · listed on crcmz.me with a custom AI avatar · lobby priority & voting · online-status highlights · meta loadout bots · monthly COD giveaways · Mattermost access
+>
+> **[→ Unlock VIP](https://bot.crcmz.me/vip)**
 
-## Installation & Deployment 📦
-- Clone the repository and modify the content of <b>index.html</b> according to your requirement.
-- ⚠️ Remove my Bitmoji <img src="https://github.com/vinodjangid07/vinodjangid07.github.io/assets/86096184/05e5b2d6-8b38-4cf9-a5a3-eb63e81aab1d" width="20px"> from the navbar and use yours instead.⚠️
-- Add or remove images from `https://www.vinodjangid.me/src/` directory as per your requirement.
-- Push the generated code to the `master` branch of this repository.
-- ⚠️<b>NOTE:</b> Make sure to remove `analyticsId` & `google search console Id` from `<head>` tag, and set yours, if you want to use your own Google Analytics & search console account.⚠️
+## 🗺️ Pages
 
+| Route | What's there |
+|---|---|
+| [`/`](https://crcmz.me) | The main site: hero, The Loadout, About Us, Clan Members |
+| [`/factory.html`](https://crcmz.me/factory.html) | The AI Factory, the clip-to-socials pipeline |
+| [`/brand`](https://crcmz.me/brand) | Official brand kit (Media Kit Edition 01): crest, wordmarks, palette, banners, stream overlays |
+| [`/beta.html`](https://crcmz.me/beta.html) | The animated scroll redesign in progress |
+| `/success.html` · `/cancel.html` | VIP checkout result pages |
+| [`history.crcmz.me`](https://history.crcmz.me) | Clan History |
 
-## License 📄
-This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE) file for details.
+## ⚙️ Under the hood
 
-## Tools Used 🛠️
-* [<b>GitHub</b>](https://github.com/) - To host my static website (HTML, CSS, JS).
-* [<b>Animate on scroll library</b>](https://github.com/michalsnik/aos) - To animate my website while scrolling.
-* [<b>Animista</b>](https://animista.net/) - To use Interactive animations
+No framework and no build step. Plain HTML, CSS and JS, served by **GitHub Pages** behind Cloudflare.
 
+```
+index.html            main site
+factory.html          The AI Factory
+brand.html            brand kit  (served at /brand)
+beta.html             redesign in progress
+css/ js/ style.css    styles + scripts
+img/brand/            official CRCMZ assets (crests, banners, overlays)
+img/og-*.{jpg,png}    social share cards
+.well-known/          passkey links for the CRCMZ iOS + Android apps
+CNAME                 crcmz.me
+```
 
-Please contact me at infovinodjangid@gmail.com if you have any feedback for the website. :star: Star it, if you like it!
+The `.well-known/` files (`apple-app-site-association` and `assetlinks.json`) let crcmz.me passkeys work inside the CRCMZ iPhone and Android apps. Don't move them.
+
+## 🚀 Run it / ship it
+
+```bash
+git clone https://github.com/moiz-qureshi/crcmz-coming-soon.git
+cd crcmz-coming-soon
+python3 -m http.server 8080      # → http://localhost:8080
+```
+
+To deploy, push to `main`. GitHub Pages publishes it to crcmz.me within a minute or two.
+
+## 🙏 Credits
+
+Built by the squad, for the squad. The site started from [Vinod Jangid's portfolio template](https://github.com/vinodjangid07/vinodjangid07.github.io) (MIT) and has since been rebuilt for CRCMZ. Scroll animations by [AOS](https://github.com/michalsnik/aos).
+
+<div align="center">
+
+---
+
+**CRCMZ** · Command Ready Clan Management Zone · 🇨🇦🇺🇸
+
+*Quick. Clean. Gone.*
+
+</div>
